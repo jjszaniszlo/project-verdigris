@@ -1,0 +1,137 @@
+name: "godot-ci export"
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  GODOT_VERSION: 4.4.1
+  EXPORT_NAME: ProjectVerdigris
+  PROJECT_PATH: .
+  ITCH_USERNAME: jjszaniszlo
+  ITCH_GAME_ID: project-verdigris
+
+jobs:
+  export-windows:
+    name: Windows Export
+    runs-on: ubuntu-24.04
+    container:
+      image: barichello/godot-ci:mono-4.4.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mkdir -v -p ~/.config/
+          mv /root/.config/godot ~/.config/godot
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono
+      - name: Windows Build
+        run: |
+          mkdir -v -p build/windows
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "Windows Desktop" "$EXPORT_DIR/windows/$EXPORT_NAME.exe"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: build/windows
+
+  export-linux:
+    name: Linux Export
+    runs-on: ubuntu-24.04
+    container:
+      image: barichello/godot-ci:mono-4.4.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono
+      - name: Linux Build
+        run: |
+          mkdir -v -p build/linux
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "Linux" "$EXPORT_DIR/linux/$EXPORT_NAME.x86_64"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux
+          path: build/linux
+
+  # release:
+  #   needs: [ export-linux, export-windows ]
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: write
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
+
+  #     - name: Set up GitVersion
+  #       uses: gittools/actions/gitversion/setup@v0.9.15
+  #       with:
+  #         versionSpec: '5.x'
+
+  #     - name: Execute GitVersion
+  #       uses: gittools/actions/gitversion/execute@v0.9.15
+  #       with:
+  #         useConfigFile: true
+  #         configFilePath: GitVersion.yml
+
+  #     - name: Get branch name
+  #       id: get_branch
+  #       run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
+
+  #     - name: Download Linux artifacts
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: linux
+
+  #     - name: Download Windows artifacts
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: windows
+
+  #     - name: Create Release
+  #       id: create_release
+  #       uses: actions/create-release@v1
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       with:
+  #         tag_name: ${{env.GitVersion_MajorMinorPatch}}
+  #         release_name: ${{env.GitVersion_MajorMinorPatch}}
+  #         body: |
+  #           Release notes for ${{env.GitVersion_MajorMinorPatch}}
+  #         draft: false
+  #         prerelease: false
+
+  #     - name: Upload Linux Release Asset
+  #       id: upload-linux-release-asset
+  #       uses: actions/upload-release-asset@v1
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       with:
+  #         upload_url: ${{ steps.create_release.outputs.upload_url }}
+  #         asset_path: linux.zip
+  #         asset_name: ${{ env.EXPORT_NAME }}_linux_x86_64.zip
+  #         asset_content_type: application/zip
+
+  #     - name: Upload Windows Release Asset
+  #       id: upload-windows-release-asset
+  #       uses: actions/upload-release-asset@v1
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       with:
+  #         upload_url: ${{ steps.create_release.outputs.upload_url }}
+  #         asset_path: windows.zip
+  #         asset_name: ${{ env.EXPORT_NAME }}_windows_x86_64.zip
+  #         asset_content_type: application/zip
