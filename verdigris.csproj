@@ -6,4 +6,7 @@
   <ItemGroup>
     <Folder Include="gamescripts/" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Firebelley.GodotUtilities" Version="5.0.0" />
+  </ItemGroup>
 </Project>
