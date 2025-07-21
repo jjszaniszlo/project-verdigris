@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://debtfm07ypnrp"]
+
+[ext_resource type="Script" uid="uid://bgrhvodcqaq57" path="res://Scenes/UI/LoadingScreen.cs" id="1_qj53y"]
+[ext_resource type="Theme" uid="uid://muh20i7b8ixw" path="res://Scenes/UI/ui_theme.tres" id="2_63kij"]
+[ext_resource type="PackedScene" uid="uid://mj6ndpilgi5k" path="res://Scenes/UI/Effect/fade_effect.tscn" id="3_u08of"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_63kij"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="LoadingScreen" type="CanvasLayer"]
+script = ExtResource("1_qj53y")
+
+[node name="UI" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Panel" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_63kij")
+theme_override_styles/panel = SubResource("StyleBoxFlat_63kij")
+
+[node name="LoadingProgress" type="ProgressBar" parent="UI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.5
+anchor_right = 0.9
+anchor_bottom = 0.5
+offset_top = -13.5
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_63kij")
+
+[node name="FadeEffectComponent" parent="." node_paths=PackedStringArray("NodeToFade") instance=ExtResource("3_u08of")]
+NodeToFade = NodePath("../UI")
