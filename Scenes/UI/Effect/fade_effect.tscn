@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://mj6ndpilgi5k"]
+
+[ext_resource type="Script" uid="uid://dwpko1p168sme" path="res://Scenes/UI/Effect/FadeEffect.cs" id="1_jx0uw"]
+
+[sub_resource type="Animation" id="Animation_63kij"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mlp0r"]
+_data = {
+&"RESET": SubResource("Animation_63kij")
+}
+
+[node name="FadeEffectComponent" type="AnimationPlayer"]
+libraries = {
+&"": SubResource("AnimationLibrary_mlp0r")
+}
+script = ExtResource("1_jx0uw")

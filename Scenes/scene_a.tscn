@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://burtslbi2m6l3"]
+
+[ext_resource type="Script" uid="uid://qcseesexpewh" path="res://Scenes/Scene.cs" id="1_x6yge"]
+
+[node name="Scene A" type="Node2D"]
+script = ExtResource("1_x6yge")
+SceneChange = "res://Scenes/scene_b.tscn"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ChangeScene" type="Button" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Goto Scene B"
