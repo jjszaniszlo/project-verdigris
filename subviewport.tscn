@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://d11l71krlj4su"]
+
+[ext_resource type="Shader" uid="uid://b2a7yqnxja86s" path="res://Shaders/SubpixelCameraOffset.gdshader" id="1_vkxia"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3dryh"]
+shader = ExtResource("1_vkxia")
+shader_parameter/camera_offset = Vector2(0, 0)
+
+[node name="SubViewportContainer" type="SubViewportContainer"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_3dryh")
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 639.0
+offset_bottom = 359.0
+scale = Vector2(2.97422, 3.00881)
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(640, 360)
+render_target_update_mode = 4
