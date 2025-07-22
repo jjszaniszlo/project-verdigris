@@ -2,6 +2,8 @@ using Godot;
 using GodotUtilities;
 using System;
 
+namespace Verdigris.UI;
+
 [Scene]
 public partial class LoadingScreen : CanvasLayer
 {

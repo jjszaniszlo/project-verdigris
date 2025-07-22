@@ -2,6 +2,9 @@ using System.Threading.Tasks;
 using Godot;
 using Godot.Collections;
 using GodotUtilities;
+using Verdigris.UI;
+
+namespace Verdigris.Autoloads;
 
 public partial class LoadManager : Node
 {

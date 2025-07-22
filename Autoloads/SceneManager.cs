@@ -1,6 +1,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Godot;
+using Verdigris.UI;
+
+namespace Verdigris.Autoloads;
 
 public partial class SceneManager : Node
 {
