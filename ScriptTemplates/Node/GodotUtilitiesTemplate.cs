@@ -1,4 +1,4 @@
-// meta-name: Scene Template
+// meta-name: GodotUtilities Template
 // meta-description: GodotUtilities Boilerplate for a script at the root of a scene.
 // meta-default: true
 // meta-space-indent: 4
