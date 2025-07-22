@@ -1,0 +1,15 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dx6q4rp4fwu25"]
+
+[ext_resource type="Texture2D" uid="uid://celjv0gsdt711" path="res://Resources/atlas/world_atlas.png" id="1_h20xr"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yt4ag"]
+texture = ExtResource("1_h20xr")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[resource]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_yt4ag")
