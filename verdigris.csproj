@@ -4,9 +4,9 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="gamescripts/" />
+    <PackageReference Include="Firebelley.GodotUtilities" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Firebelley.GodotUtilities" Version="5.0.0" />
+   <Compile Remove="ScriptTemplates/**/*.cs" />
   </ItemGroup>
 </Project>

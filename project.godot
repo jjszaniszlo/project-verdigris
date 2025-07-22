@@ -24,6 +24,10 @@ LoadManager="*res://Autoloads/LoadManager.cs"
 
 project/assembly_name="verdigris"
 
+[editor]
+
+script/templates_search_path="res://ScriptTemplates"
+
 [rendering]
 
 textures/vram_compression/import_etc2_astc=true
