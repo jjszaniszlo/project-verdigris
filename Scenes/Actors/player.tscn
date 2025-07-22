@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhy6j57tnl5cq"]
+
+[ext_resource type="PackedScene" uid="uid://coiunwvyiuvgx" path="res://Scenes/Components/velocity_component.tscn" id="1_nikbh"]
+[ext_resource type="PackedScene" uid="uid://cvb7btmy0yjd1" path="res://Scenes/Components/player_controller.tscn" id="2_lm2ka"]
+[ext_resource type="Texture2D" uid="uid://yn7kq3bhxqlt" path="res://Resources/img/character.png" id="3_87pht"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0b7ey"]
+radius = 16.0
+height = 64.0
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="VelocityComponent" parent="." instance=ExtResource("1_nikbh")]
+MaxSpeed = 250.0
+Acceleration = 300.0
+Deceleration = 500.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_0b7ey")
+
+[node name="PlayerController" parent="." node_paths=PackedStringArray("VelocityComponent") instance=ExtResource("2_lm2ka")]
+VelocityComponent = NodePath("../VelocityComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("3_87pht")
