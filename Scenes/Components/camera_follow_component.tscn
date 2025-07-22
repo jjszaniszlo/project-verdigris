@@ -3,4 +3,5 @@
 [ext_resource type="Script" uid="uid://dg7ntonfnsgxc" path="res://Scenes/Components/CameraFollowComponent.cs" id="1_c4d0j"]
 
 [node name="PlayerFollowCameraComponent" type="Camera2D"]
+process_callback = 0
 script = ExtResource("1_c4d0j")
