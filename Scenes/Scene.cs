@@ -2,6 +2,9 @@ using Godot;
 using GodotUtilities;
 using System;
 using System.Threading.Tasks;
+using Verdigris.Autoloads;
+
+namespace Verdigris.Scenes;
 
 [Scene]
 public partial class Scene : Node2D
