@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://7jtklok0qiqm" path="res://Scenes/Components/Actor/health_component.tscn" id="4_mqoqv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0b7ey"]
-radius = 16.0
-height = 64.0
+radius = 8.0
+height = 32.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sfcrp"]
 shader = ExtResource("3_wn7ci")
@@ -16,20 +16,19 @@ shader = ExtResource("3_wn7ci")
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 2
 
-[node name="VelocityComponent" parent="." instance=ExtResource("1_nikbh")]
-MaxSpeed = 250.0
-Acceleration = 300.0
-Deceleration = 500.0
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_0b7ey")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_sfcrp")
+texture = ExtResource("3_87pht")
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_mqoqv")]
 
 [node name="PlayerController" parent="." node_paths=PackedStringArray("VelocityComponent") instance=ExtResource("2_lm2ka")]
 VelocityComponent = NodePath("../VelocityComponent")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_sfcrp")
-scale = Vector2(2, 2)
-texture = ExtResource("3_87pht")
-
-[node name="HealthComponent" parent="." instance=ExtResource("4_mqoqv")]
+[node name="VelocityComponent" parent="." instance=ExtResource("1_nikbh")]
+MaxSpeed = 90.0
+Acceleration = 300.0
+Deceleration = 500.0
