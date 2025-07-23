@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://dx6q4rp4fwu25"]
+[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://dx6q4rp4fwu25"]
 
 [ext_resource type="Texture2D" uid="uid://celjv0gsdt711" path="res://Resources/atlas/world.png" id="1_47nb7"]
 
@@ -8,6 +8,10 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)])
 agent_radius = 0.0
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_lqxr8"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ow2c0"]
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_47nb7"]
 texture = ExtResource("1_47nb7")
 texture_region_size = Vector2i(32, 32)
@@ -15,6 +19,7 @@ texture_region_size = Vector2i(32, 32)
 0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_vlscg")
 1:0/0 = 0
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_lqxr8")
 0:1/0 = 0
 0:2/animation_columns = 15
 0:2/animation_speed = 3.0
@@ -36,6 +41,7 @@ texture_region_size = Vector2i(32, 32)
 0:2/0 = 0
 2:0/0 = 0
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+2:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_ow2c0")
 
 [resource]
 tile_size = Vector2i(32, 32)
