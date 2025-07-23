@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbefq8yhbyces"]
+
+[ext_resource type="TileSet" uid="uid://dx6q4rp4fwu25" path="res://Resources/tileset/world.tres" id="1_a02cp"]
+[ext_resource type="PackedScene" uid="uid://7rtmr1n708mf" path="res://Scenes/Components/ground_generator_component.tscn" id="2_go701"]
+
+[node name="World" type="Node2D"]
+
+[node name="Layers" type="Node2D" parent="."]
+
+[node name="Ground" type="TileMapLayer" parent="Layers"]
+unique_name_in_owner = true
+tile_set = ExtResource("1_a02cp")
+
+[node name="Objects" type="TileMapLayer" parent="Layers"]
+unique_name_in_owner = true
+
+[node name="GroundGeneratorComponent" parent="." node_paths=PackedStringArray("Ground") instance=ExtResource("2_go701")]
+Ground = NodePath("../Layers/Ground")
+HeightGradientScale = 10
