@@ -1,0 +1,33 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dx6q4rp4fwu25"]
+
+[ext_resource type="Texture2D" uid="uid://celjv0gsdt711" path="res://Resources/atlas/world.png" id="1_47nb7"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_47nb7"]
+texture = ExtResource("1_47nb7")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+0:2/animation_columns = 15
+0:2/animation_speed = 3.0
+0:2/animation_frame_0/duration = 1.0
+0:2/animation_frame_1/duration = 1.0
+0:2/animation_frame_2/duration = 1.0
+0:2/animation_frame_3/duration = 1.0
+0:2/animation_frame_4/duration = 1.0
+0:2/animation_frame_5/duration = 1.0
+0:2/animation_frame_6/duration = 1.0
+0:2/animation_frame_7/duration = 1.0
+0:2/animation_frame_8/duration = 1.0
+0:2/animation_frame_9/duration = 1.0
+0:2/animation_frame_10/duration = 1.0
+0:2/animation_frame_11/duration = 1.0
+0:2/animation_frame_12/duration = 1.0
+0:2/animation_frame_13/duration = 1.0
+0:2/animation_frame_14/duration = 1.0
+0:2/0 = 0
+
+[resource]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/4 = SubResource("TileSetAtlasSource_47nb7")
