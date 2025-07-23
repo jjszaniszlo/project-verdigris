@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Scenes.Components;
+
 public partial class CameraFollowComponent : Camera2D
 {
 	[Export]
