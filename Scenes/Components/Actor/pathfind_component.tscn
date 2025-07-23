@@ -6,3 +6,8 @@
 script = ExtResource("1_5yfsf")
 
 [node name="NavigationAgent" type="NavigationAgent2D" parent="."]
+
+[node name="TargetingCooldown" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.3
+one_shot = true
