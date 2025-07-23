@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://dsb5pbed8kp11"]
+
+[ext_resource type="Texture2D" uid="uid://ciukdqe1dvd1r" path="res://Resources/img/crab.png" id="1_dixk2"]
+[ext_resource type="PackedScene" uid="uid://coiunwvyiuvgx" path="res://Scenes/Components/Actor/velocity_component.tscn" id="2_rsqtj"]
+[ext_resource type="PackedScene" uid="uid://7jtklok0qiqm" path="res://Scenes/Components/Actor/health_component.tscn" id="3_vhv3v"]
+[ext_resource type="PackedScene" uid="uid://deycy24bvuegx" path="res://Scenes/Components/Actor/pathfind_component.tscn" id="4_ts2tc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oe2f4"]
+radius = 14.31
+height = 50.8
+
+[node name="Crab" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_oe2f4")
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -5)
+texture = ExtResource("1_dixk2")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_vhv3v")]
+
+[node name="PathfindComponent" parent="." node_paths=PackedStringArray("VelocityComponent") instance=ExtResource("4_ts2tc")]
+VelocityComponent = NodePath("../VelocityComponent")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("2_rsqtj")]
+MaxSpeed = 200.0
+Acceleration = 300.0
+Deceleration = 600.0
