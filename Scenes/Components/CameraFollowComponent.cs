@@ -6,7 +6,7 @@ public partial class CameraFollowComponent : Camera2D
 	public CharacterBody2D Player { get; private set; }
 
 	[Export]
-	public float FollowRate { get; private set; } = 3f;
+	public float FollowRate { get; private set; } = 5f;
 
 	public override void _Ready()
 	{

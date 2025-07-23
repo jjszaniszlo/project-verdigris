@@ -2,7 +2,7 @@ using Godot;
 using GodotUtilities;
 using Microsoft.CodeAnalysis.FlowAnalysis;
 
-public partial class PlayerController : Node2D
+public partial class PlayerController : Node
 {
 	[Export]
 	public VelocityComponent VelocityComponent { get; private set; }	
