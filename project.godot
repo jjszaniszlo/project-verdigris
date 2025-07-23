@@ -13,6 +13,7 @@ config_version=5
 config/name="verdigris"
 run/main_scene="uid://cg0688imk08lr"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
+run/max_fps=120
 config/icon="res://Resources/icon.svg"
 
 [autoload]
@@ -21,18 +22,15 @@ SceneManager="*res://Autoloads/SceneManager.cs"
 LoadManager="*res://Autoloads/LoadManager.cs"
 Globals="*res://Autoloads/Globals.cs"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=360
+window/size/viewport_width=320
+window/size/viewport_height=180
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+display_server/driver.linuxbsd="x11"
 window/vsync/vsync_mode=0
 
 [dotnet]
@@ -68,11 +66,10 @@ move_right={
 
 [physics]
 
+common/physics_ticks_per_second=30
 common/physics_interpolation=true
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
