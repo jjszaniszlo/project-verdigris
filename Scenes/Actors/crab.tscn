@@ -10,11 +10,12 @@ radius = 14.31
 height = 50.8
 
 [node name="Crab" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_oe2f4")
-disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -5)
