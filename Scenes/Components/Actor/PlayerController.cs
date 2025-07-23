@@ -1,6 +1,4 @@
 using Godot;
-using GodotUtilities;
-using Microsoft.CodeAnalysis.FlowAnalysis;
 
 namespace Scenes.Components.Actor;
 
@@ -26,11 +24,11 @@ public partial class PlayerController : Node
 
 		if (inputDirection.LengthSquared() == 0)
 		{
-			VelocityComponent.MinimizeVelocity();
+			VelocityComponent.Decelerate();
 		}
 		else
 		{
-			VelocityComponent.AccelerateToMaxVelocity(inputDirection);
+			VelocityComponent.Accelerate(inputDirection);
 		}
 		VelocityComponent.Move(Player);
 	}
