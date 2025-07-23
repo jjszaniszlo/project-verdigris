@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://7rtmr1n708mf"]
+
+[ext_resource type="Script" uid="uid://qaace0ldgc8f" path="res://Scenes/Components/GroundGeneratorComponent.cs" id="1_hi85s"]
+
+[node name="GroundGeneratorComponent" type="Node"]
+script = ExtResource("1_hi85s")
