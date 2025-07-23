@@ -1,5 +1,6 @@
 using Godot;
-using System;
+
+namespace Scenes.Actors;
 
 public partial class Player : CharacterBody2D
 {

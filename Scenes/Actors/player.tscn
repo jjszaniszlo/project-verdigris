@@ -32,5 +32,5 @@ VelocityComponent = NodePath("../VelocityComponent")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("1_nikbh")]
 MaxSpeed = 90.0
-Acceleration = 300.0
-Deceleration = 500.0
+Acceleration = 60.0
+Deceleration = 40.0
