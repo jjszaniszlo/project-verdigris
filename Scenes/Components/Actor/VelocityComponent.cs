@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Scenes.Components.Actor;
+
 public partial class VelocityComponent : Node
 {
 	[Export]

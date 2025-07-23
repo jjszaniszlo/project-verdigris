@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace Scenes.Components.Actor;
+
 public partial class HealthComponent : Node
 {
 	[Export] public int MaxHealth { get; set; } = 100;

@@ -2,6 +2,8 @@ using Godot;
 using GodotUtilities;
 using Microsoft.CodeAnalysis.FlowAnalysis;
 
+namespace Scenes.Components.Actor;
+
 public partial class PlayerController : Node
 {
 	[Export]
