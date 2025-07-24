@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbefq8yhbyces"]
+[gd_scene load_steps=5 format=3 uid="uid://cbefq8yhbyces"]
 
-[ext_resource type="TileSet" uid="uid://dx6q4rp4fwu25" path="res://Resources/tileset/world.tres" id="1_a02cp"]
+[ext_resource type="TileSet" uid="uid://dx6q4rp4fwu25" path="res://Resources/Tilesets/world.tres" id="1_a02cp"]
+[ext_resource type="TileSet" uid="uid://b5p22y37tdyep" path="res://Resources/Tilesets/water.tres" id="2_5a7ea"]
+[ext_resource type="Material" uid="uid://cgjocunkt7lim" path="res://Resources/Materials/water.tres" id="2_8j60k"]
 [ext_resource type="PackedScene" uid="uid://7rtmr1n708mf" path="res://Scenes/Components/ground_generator_component.tscn" id="2_go701"]
 
 [node name="World" type="Node2D"]
@@ -11,9 +13,17 @@
 unique_name_in_owner = true
 tile_set = ExtResource("1_a02cp")
 
-[node name="Objects" type="TileMapLayer" parent="Layers"]
+[node name="Water" type="TileMapLayer" parent="Layers"]
+unique_name_in_owner = true
+material = ExtResource("2_8j60k")
+tile_set = ExtResource("2_5a7ea")
+
+[node name="StaticObjects" type="TileMapLayer" parent="Layers"]
 unique_name_in_owner = true
 
-[node name="GroundGeneratorComponent" parent="." node_paths=PackedStringArray("Ground") instance=ExtResource("2_go701")]
+[node name="GroundGeneratorComponent" parent="." node_paths=PackedStringArray("Ground", "Water") instance=ExtResource("2_go701")]
 Ground = NodePath("../Layers/Ground")
-HeightGradientScale = 10
+Water = NodePath("../Layers/Water")
+WaterAtlasSourceID = 1
+WaterCollisionHeight = -0.3
+HeightGradientScale = 12
