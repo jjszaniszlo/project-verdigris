@@ -6,19 +6,39 @@ namespace Scenes.Components;
 [Scene]
 public partial class GroundGeneratorComponent : Node
 {
+	[ExportCategory("Ground Layer")]
 	[Export]
 	public TileMapLayer Ground { get; private set; }
+	[Export]
+	public Vector2I SandTileCoords { get; set; } = new Vector2I(0, 0);
+	[Export]
+	private Vector2I GrassTileCoords { get; set; } = new Vector2I(2, 0);
+	[Export]
+	private Vector2I InvisibleCollisionTileCoords { get; set; } = new Vector2I(3, 0);
 
+	[ExportCategory("Water Layer")]
+	[Export]
+	public TileMapLayer Water { get; private set; }
+	[Export]
+	public Vector2I WaterTileCoords { get; set; } = new Vector2I(0, 0);
+	[Export]
+	public Vector2I WaterEdgeCoords { get; set; } = new Vector2I(1, 0);
+
+	[ExportCategory("Atlas Settings")]
+	[Export]
+	public int GroundAtlasSourceID { get; private set; }
+	[Export]
+	public int WaterAtlasSourceID { get; private set; }
+
+	[ExportCategory("Generator Settings")]
+	[Export]
+	public float WaterCollisionHeight { get; set; } = -0.5f;
 	[Export]
 	public int TileSize { get; set; } = 32;
 	[Export]
 	public int ChunkSize { get; set; } = 16;
 	[Export]
 	public int HeightGradientScale { get; set; } = 8;
-
-	private Vector2I SandAtlasCoords { get; set; } = new Vector2I(0, 0);
-	private Vector2I WaterAtlasCoords { get; set; } = new Vector2I(1, 0);
-	private Vector2I GrassAtlasCoords { get; set; } = new Vector2I(2, 0);
 
 	private int ChunkViewDistance => (ChunkSize / 2) - 1;
 
@@ -76,24 +96,40 @@ public partial class GroundGeneratorComponent : Node
 		{
 			for (int j = 0; j < ChunkSize; j++)
 			{
-				float height = GetHeightAt(x + i, y + j);
+				var height = GetHeightAt(x + i, y + j);
 				var cellPosition = new Vector2I((int)(x + i), (int)(y + j));
 
-                Vector2I atlasCoords;
-                if (height < 0)
-                {
-                    atlasCoords = WaterAtlasCoords;
-                }
-                else if (height > 1)
+				if (height < WaterCollisionHeight)
 				{
-					atlasCoords = GrassAtlasCoords;
+					Ground.SetCell(cellPosition, GroundAtlasSourceID, InvisibleCollisionTileCoords);
+				}
+				else if (height > 1)
+				{
+					Ground.SetCell(cellPosition, GroundAtlasSourceID, GrassTileCoords);
 				}
 				else
-                {
-                    atlasCoords = SandAtlasCoords;
-                }
+				{
+					Ground.SetCell(cellPosition, GroundAtlasSourceID, SandTileCoords);
+				}
+			}
+		}
 
-                Ground.SetCell(cellPosition, 0, atlasCoords);
+		Water.Clear();
+		for (int i = 0; i < ChunkSize; i++)
+		{
+			for (int j = 0; j < ChunkSize; j++)
+			{
+				var height = GetHeightAt(x + i, y + j);
+				var cellPosition = new Vector2I((int)(x + i), (int)(y + j));
+
+				if (height == 0)
+				{
+					Water.SetCell(cellPosition, WaterAtlasSourceID, WaterEdgeCoords);
+				}
+				else if (height < 0)
+				{
+					Water.SetCell(cellPosition, WaterAtlasSourceID, WaterTileCoords);
+				}
 			}
 		}
 	}
