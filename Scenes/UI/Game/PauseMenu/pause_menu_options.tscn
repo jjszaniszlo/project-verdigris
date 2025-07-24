@@ -1,0 +1,119 @@
+[gd_scene load_steps=19 format=3 uid="uid://1r04jawohfqv"]
+
+[ext_resource type="Script" uid="uid://blqr2ypljpv3b" path="res://Scenes/UI/Game/PauseMenu/PauseMenuOptions.cs" id="1_lmn5k"]
+[ext_resource type="PackedScene" uid="uid://dmtsd86i6l48o" path="res://Scenes/UI/Game/PauseMenu/button.tscn" id="2_spg3u"]
+[ext_resource type="Texture2D" uid="uid://6y2463037fva" path="res://Resources/Images/GameUI/PauseMenu/Buttons/Resume/normal.png" id="3_2d7as"]
+[ext_resource type="Texture2D" uid="uid://l21ydymb7kq1" path="res://Resources/Images/GameUI/PauseMenu/Buttons/Resume/select.png" id="4_15a1r"]
+[ext_resource type="Texture2D" uid="uid://dhy5xypmypj1p" path="res://Resources/Images/GameUI/PauseMenu/Buttons/Resume/hover.png" id="5_0apf5"]
+[ext_resource type="BitMap" uid="uid://7dlfyl7dtv7h" path="res://Resources/Images/GameUI/PauseMenu/Buttons/Resume/click_mask.png" id="6_whslx"]
+[ext_resource type="Texture2D" uid="uid://dbgs6msdkm5qc" path="res://Resources/Images/GameUI/PauseMenu/Buttons/Options/normal.png" id="7_cermm"]
+[ext_resource type="Texture2D" uid="uid://c8p83wr4o0pjd" path="res://Resources/Images/GameUI/PauseMenu/Buttons/Options/select.png" id="8_qr7ge"]
+[ext_resource type="Texture2D" uid="uid://dxf6g06ihtlli" path="res://Resources/Images/GameUI/PauseMenu/Buttons/Options/hover.png" id="9_04m8e"]
+[ext_resource type="BitMap" uid="uid://qhrudabega1r" path="res://Resources/Images/GameUI/PauseMenu/Buttons/Options/click_mask.png" id="10_7af5d"]
+[ext_resource type="Texture2D" uid="uid://bv8fehpsejmrh" path="res://Resources/Images/GameUI/PauseMenu/Buttons/Quit/normal.png" id="11_tixvt"]
+[ext_resource type="Shader" uid="uid://cjnq4n6d6eh8o" path="res://Resources/Shaders/ButtonHoverEffect.tres" id="11_y55yj"]
+[ext_resource type="Texture2D" uid="uid://d3t6kvivsgio" path="res://Resources/Images/GameUI/PauseMenu/Buttons/Quit/select.png" id="12_iig45"]
+[ext_resource type="Texture2D" uid="uid://blrcs2c3f0k1e" path="res://Resources/Images/GameUI/PauseMenu/Buttons/Quit/hover.png" id="13_gkyfk"]
+[ext_resource type="BitMap" uid="uid://bjwor3v5g1t4a" path="res://Resources/Images/GameUI/PauseMenu/Buttons/Quit/click_mask.png" id="14_1bwll"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2vdt6"]
+shader = ExtResource("11_y55yj")
+shader_parameter/move = Vector2(2, -2)
+shader_parameter/current_time = 0.0
+shader_parameter/move_duration = 0.2
+shader_parameter/amplitude = 2.0
+shader_parameter/damping = 1.0
+shader_parameter/frequency = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y55yj"]
+shader = ExtResource("11_y55yj")
+shader_parameter/move = Vector2(2, -2)
+shader_parameter/current_time = 0.0
+shader_parameter/move_duration = 0.2
+shader_parameter/amplitude = 2.0
+shader_parameter/damping = 1.0
+shader_parameter/frequency = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8iiih"]
+shader = ExtResource("11_y55yj")
+shader_parameter/move = Vector2(2, -2)
+shader_parameter/current_time = 0.0
+shader_parameter/move_duration = 0.2
+shader_parameter/amplitude = 2.0
+shader_parameter/damping = 1.0
+shader_parameter/frequency = 10.0
+
+[node name="PauseMenuOptions" type="Control"]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -90.0
+offset_right = 40.0
+offset_bottom = -50.0
+grow_vertical = 2
+focus_neighbor_left = NodePath("ResumeButton")
+focus_neighbor_top = NodePath("ResumeButton")
+focus_neighbor_right = NodePath("ResumeButton")
+focus_neighbor_bottom = NodePath("QuitButton")
+focus_next = NodePath("ResumeButton")
+focus_previous = NodePath("QuitButton")
+focus_mode = 2
+script = ExtResource("1_lmn5k")
+
+[node name="ResumeButton" parent="." instance=ExtResource("2_spg3u")]
+material = SubResource("ShaderMaterial_2vdt6")
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.125
+anchor_right = 0.025
+anchor_bottom = 1.725
+offset_left = 1.0
+offset_right = 129.0
+focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../OptionsButton")
+focus_next = NodePath("../OptionsButton")
+focus_previous = NodePath("../QuitButton")
+texture_normal = ExtResource("3_2d7as")
+texture_pressed = ExtResource("4_15a1r")
+texture_hover = ExtResource("5_0apf5")
+texture_focused = ExtResource("5_0apf5")
+texture_click_mask = ExtResource("6_whslx")
+
+[node name="OptionsButton" parent="." instance=ExtResource("2_spg3u")]
+material = SubResource("ShaderMaterial_y55yj")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.275
+anchor_top = 1.925
+anchor_right = 0.275
+anchor_bottom = 2.525
+offset_right = 139.0
+focus_neighbor_top = NodePath("../ResumeButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../ResumeButton")
+texture_normal = ExtResource("7_cermm")
+texture_pressed = ExtResource("8_qr7ge")
+texture_hover = ExtResource("9_04m8e")
+texture_focused = ExtResource("9_04m8e")
+texture_click_mask = ExtResource("10_7af5d")
+
+[node name="QuitButton" parent="." instance=ExtResource("2_spg3u")]
+material = SubResource("ShaderMaterial_8iiih")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.575
+anchor_top = 2.725
+anchor_right = 0.575
+anchor_bottom = 3.325
+offset_right = 110.0
+focus_neighbor_top = NodePath("../OptionsButton")
+focus_neighbor_bottom = NodePath("../ResumeButton")
+focus_next = NodePath("../ResumeButton")
+focus_previous = NodePath("../OptionsButton")
+texture_normal = ExtResource("11_tixvt")
+texture_pressed = ExtResource("12_iig45")
+texture_hover = ExtResource("13_gkyfk")
+texture_focused = ExtResource("13_gkyfk")
+texture_click_mask = ExtResource("14_1bwll")

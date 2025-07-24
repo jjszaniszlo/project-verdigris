@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://7dlfyl7dtv7h"
+path="res://.godot/imported/click_mask.png-28cb82088ab13fa457bf1a0dcffc82f5.res"
+
+[deps]
+
+source_file="res://Resources/Images/GameUI/PauseMenu/Buttons/Resume/click_mask.png"
+dest_files=["res://.godot/imported/click_mask.png-28cb82088ab13fa457bf1a0dcffc82f5.res"]
+
+[params]
+
+create_from=0
+threshold=0.5
