@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://debtfm07ypnrp"]
 
 [ext_resource type="Script" uid="uid://bgrhvodcqaq57" path="res://Scenes/UI/LoadingScreen.cs" id="1_qj53y"]
-[ext_resource type="Theme" uid="uid://muh20i7b8ixw" path="res://Scenes/UI/ui_theme.tres" id="2_63kij"]
+[ext_resource type="Theme" uid="uid://muh20i7b8ixw" path="res://Resources/ui_theme.tres" id="2_63kij"]
 [ext_resource type="PackedScene" uid="uid://mj6ndpilgi5k" path="res://Scenes/UI/Effect/fade_effect.tscn" id="3_u08of"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_63kij"]

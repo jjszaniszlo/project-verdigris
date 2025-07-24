@@ -1,0 +1,26 @@
+[gd_resource type="VisualShader" load_steps=2 format=3 uid="uid://c1oko6d3adktv"]
+
+[sub_resource type="VisualShaderNodeVaryingGetter" id="VisualShaderNodeVaryingGetter_yxj07"]
+varying_name = "stretch"
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+
+// Varyings
+varying float var_stretch;
+
+
+
+
+void vertex() {
+	var_stretch = 0.0;
+}
+"
+mode = 1
+flags/light_only = false
+varyings/stretch = "0,0"
+nodes/vertex/0/position = Vector2(840, 340)
+nodes/fragment/3/node = SubResource("VisualShaderNodeVaryingGetter_yxj07")
+nodes/fragment/3/position = Vector2(-1400, -180)
