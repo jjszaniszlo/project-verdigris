@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ciukdqe1dvd1r"
-path="res://.godot/imported/crab.png-a01eb0c5e9fbaba4017f8fb31733f802.ctex"
+uid="uid://dt0ab5uswi6lh"
+path="res://.godot/imported/faded_trail_gradient.png-a44c0d488f862c12b250fad9d1cc3c31.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/img/crab.png"
-dest_files=["res://.godot/imported/crab.png-a01eb0c5e9fbaba4017f8fb31733f802.ctex"]
+source_file="res://Resources/Images/water/faded_trail_gradient.png"
+dest_files=["res://.godot/imported/faded_trail_gradient.png-a44c0d488f862c12b250fad9d1cc3c31.ctex"]
 
 [params]
 

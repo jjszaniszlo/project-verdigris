@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cobj3mu47c0e0"]
+[gd_scene load_steps=4 format=3 uid="uid://cobj3mu47c0e0"]
 
 [ext_resource type="PackedScene" uid="uid://bhy6j57tnl5cq" path="res://Scenes/Actors/player.tscn" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://cbefq8yhbyces" path="res://Scenes/world.tscn" id="1_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://cffjm1vcc8d5c" path="res://Scenes/Components/camera_follow_component.tscn" id="2_qxrlw"]
-[ext_resource type="PackedScene" uid="uid://dsb5pbed8kp11" path="res://Scenes/Actors/crab.tscn" id="5_wowpa"]
 
 [node name="Game" type="Node2D"]
 
@@ -11,20 +10,6 @@
 
 [node name="Player" parent="." instance=ExtResource("1_ebmjs")]
 position = Vector2(256, 256)
-
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="Crab" parent="Node2D" instance=ExtResource("5_wowpa")]
-position = Vector2(-109, 247)
-
-[node name="Crab2" parent="Node2D" instance=ExtResource("5_wowpa")]
-position = Vector2(457, 177)
-
-[node name="Crab3" parent="Node2D" instance=ExtResource("5_wowpa")]
-position = Vector2(-15, 200)
-
-[node name="Crab4" parent="Node2D" instance=ExtResource("5_wowpa")]
-position = Vector2(469, 253)
 
 [node name="PlayerFollowCameraComponent" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("2_qxrlw")]
 Player = NodePath("../Player")

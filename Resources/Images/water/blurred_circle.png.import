@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://yn7kq3bhxqlt"
-path="res://.godot/imported/character.png-dd8ea7ffee2385862daf3897aaef2353.ctex"
+uid="uid://dj5phd02j1rp"
+path="res://.godot/imported/blurred_circle.png-ec46db156daeac477928bb9cb3411952.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/img/character.png"
-dest_files=["res://.godot/imported/character.png-dd8ea7ffee2385862daf3897aaef2353.ctex"]
+source_file="res://Resources/Images/water/blurred_circle.png"
+dest_files=["res://.godot/imported/blurred_circle.png-ec46db156daeac477928bb9cb3411952.ctex"]
 
 [params]
 

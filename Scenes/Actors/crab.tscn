@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dsb5pbed8kp11"]
 
-[ext_resource type="Texture2D" uid="uid://ciukdqe1dvd1r" path="res://Resources/img/crab.png" id="1_dixk2"]
+[ext_resource type="Texture2D" uid="uid://ciukdqe1dvd1r" path="res://Resources/Images/crab.png" id="1_dixk2"]
 [ext_resource type="Script" uid="uid://o0fxmvlmbhps" path="res://Scenes/Actors/Crab.cs" id="1_leup1"]
 [ext_resource type="PackedScene" uid="uid://coiunwvyiuvgx" path="res://Scenes/Components/Actor/velocity_component.tscn" id="2_rsqtj"]
 [ext_resource type="PackedScene" uid="uid://7jtklok0qiqm" path="res://Scenes/Components/Actor/health_component.tscn" id="3_vhv3v"]

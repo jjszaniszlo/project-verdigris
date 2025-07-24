@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=6 format=3 uid="uid://dx6q4rp4fwu25"]
 
-[ext_resource type="Texture2D" uid="uid://celjv0gsdt711" path="res://Resources/atlas/world.png" id="1_47nb7"]
+[ext_resource type="Texture2D" uid="uid://celjv0gsdt711" path="res://Resources/Atlas/world.png" id="1_jqigt"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_vlscg"]
 vertices = PackedVector2Array(16, 16, -16, 16, -16, -16, 16, -16)
@@ -13,35 +13,18 @@ agent_radius = 0.0
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ow2c0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_47nb7"]
-texture = ExtResource("1_47nb7")
+texture = ExtResource("1_jqigt")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_vlscg")
-1:0/0 = 0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_lqxr8")
-0:1/0 = 0
-0:2/animation_columns = 15
-0:2/animation_speed = 3.0
-0:2/animation_frame_0/duration = 1.0
-0:2/animation_frame_1/duration = 1.0
-0:2/animation_frame_2/duration = 1.0
-0:2/animation_frame_3/duration = 1.0
-0:2/animation_frame_4/duration = 1.0
-0:2/animation_frame_5/duration = 1.0
-0:2/animation_frame_6/duration = 1.0
-0:2/animation_frame_7/duration = 1.0
-0:2/animation_frame_8/duration = 1.0
-0:2/animation_frame_9/duration = 1.0
-0:2/animation_frame_10/duration = 1.0
-0:2/animation_frame_11/duration = 1.0
-0:2/animation_frame_12/duration = 1.0
-0:2/animation_frame_13/duration = 1.0
-0:2/animation_frame_14/duration = 1.0
-0:2/0 = 0
 2:0/0 = 0
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_ow2c0")
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_lqxr8")
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
 [resource]
 tile_size = Vector2i(32, 32)
