@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://6ri4wfclvrwi"]
+
+[ext_resource type="PackedScene" uid="uid://bxcdsfwpqdr1c" path="res://Scenes/Components/UI/health_bar_component.tscn" id="1_e20sv"]
+[ext_resource type="PackedScene" uid="uid://wo2joh87jrbr" path="res://Scenes/UI/Game/PauseMenu/pause_menu.tscn" id="2_3mrga"]
+
+[node name="Game UI" type="CanvasLayer"]
+
+[node name="HealthBarComponent" parent="." instance=ExtResource("1_e20sv")]
+value = 97.0
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_3mrga")]
+visible = false

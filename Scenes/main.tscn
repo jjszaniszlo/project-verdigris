@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cg0688imk08lr"]
+[gd_scene load_steps=3 format=3 uid="uid://cg0688imk08lr"]
 
+[ext_resource type="PackedScene" uid="uid://6ri4wfclvrwi" path="res://Scenes/UI/Game/game_ui.tscn" id="2_8gbba"]
 [ext_resource type="PackedScene" uid="uid://cobj3mu47c0e0" path="res://Scenes/game.tscn" id="2_bo1nx"]
 
 [node name="Main" type="Node2D"]
@@ -7,8 +8,4 @@
 [node name="Game" parent="." instance=ExtResource("2_bo1nx")]
 texture_filter = 1
 
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Game UI" parent="." instance=ExtResource("2_8gbba")]
