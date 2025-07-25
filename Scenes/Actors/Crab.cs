@@ -15,11 +15,14 @@ public partial class Crab : CharacterBody2D
 
 	private DelegateStateMachine StateMachine = new();
 
-    public override void _Ready()
-    {
+	public override void _Ready()
+	{
 		StateMachine.AddStates(StateChasePlayer);
 		StateMachine.SetInitialState(StateChasePlayer);
-    }
+		
+		var health = GetNode<HealthComponent>("HealthComponent"); 
+	health.Died += Die;
+	}
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -32,6 +35,16 @@ public partial class Crab : CharacterBody2D
 		PathfindComponent.FollowPath();
 		VelocityComponent.Move(this);
 	}
+
+public void Die()
+{
+	var player = GetTree().Root.GetNode("Main/Player"); 
+	var levelComponent = player.GetNode<LevelComponent>("LevelComponent"); 
+
+	levelComponent?.GainExperience(5); 
+
+	QueueFree();
+}
 
 	public override void _Notification(int what)
 	{
