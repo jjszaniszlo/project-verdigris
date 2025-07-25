@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://uslquwxx1ufm"]
+
+[ext_resource type="Shader" uid="uid://cfmwi6ui7pnws" path="res://Resources/Shaders/PixelSmoothing.gdshader" id="1_stqod"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b2ja5"]
+shader = ExtResource("1_stqod")
+
+[node name="AnimatedActorComponent" type="AnimatedSprite2D"]
+material = SubResource("ShaderMaterial_b2ja5")

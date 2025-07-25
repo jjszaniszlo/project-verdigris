@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://cq3h5mjchdtnq"]
+
+[node name="ShootFireworkComponent" type="Node2D"]
