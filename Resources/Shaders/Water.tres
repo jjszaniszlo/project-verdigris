@@ -770,7 +770,7 @@ void fragment() {
 
 
 // MultiplyAdd:212
-	vec2 n_out212p0 = (vec2(n_out37p0) * vec2(n_out39p0)) + n_out213p0;
+	vec2 n_out212p0 = fma(vec2(n_out37p0), vec2(n_out39p0), n_out213p0);
 
 
 	vec4 n_out214p0;
@@ -958,7 +958,7 @@ void fragment() {
 
 // MultiplyAdd:186
 	vec2 n_in186p2 = vec2(0.00000, 0.00000);
-	vec2 n_out186p0 = (n_out142p0 * vec2(n_out164p0)) + n_in186p2;
+	vec2 n_out186p0 = fma(n_out142p0, vec2(n_out164p0), n_in186p2);
 
 
 	vec4 n_out177p0;
