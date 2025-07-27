@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://df2suo3qp6fc8"]
+
+[ext_resource type="Script" uid="uid://dyow1lq28ui0r" path="res://Scenes/Components/PlayerEventSubscriberComponent.cs" id="1_dorn6"]
+
+[node name="PlayerEventSubscriberComponent" type="Node"]
+script = ExtResource("1_dorn6")

@@ -1,12 +1,43 @@
-[gd_scene load_steps=3 format=3 uid="uid://6ri4wfclvrwi"]
+[gd_scene load_steps=6 format=3 uid="uid://6ri4wfclvrwi"]
 
 [ext_resource type="PackedScene" uid="uid://bxcdsfwpqdr1c" path="res://Scenes/Components/UI/health_bar_component.tscn" id="1_e20sv"]
+[ext_resource type="PackedScene" uid="uid://dv7ldh6felw0o" path="res://Scenes/Components/UI/xp_bar_component.tscn" id="1_hiq23"]
 [ext_resource type="PackedScene" uid="uid://wo2joh87jrbr" path="res://Scenes/UI/Game/PauseMenu/pause_menu.tscn" id="2_3mrga"]
+[ext_resource type="Script" uid="uid://cda3bgfkg1sgs" path="res://Scenes/Components/UI/PlayerUiControlComponent.cs" id="3_4xw0s"]
+[ext_resource type="PackedScene" uid="uid://df2suo3qp6fc8" path="res://Scenes/Components/player_event_subscriber_component.tscn" id="3_qecb0"]
 
-[node name="Game UI" type="CanvasLayer"]
+[node name="GameUI" type="CanvasLayer"]
+process_mode = 3
 
-[node name="HealthBarComponent" parent="." instance=ExtResource("1_e20sv")]
-value = 97.0
+[node name="InGameUI" type="Control" parent="."]
+process_mode = 1
+layout_mode = 3
+anchors_preset = 0
+
+[node name="HealthBarComponent" parent="InGameUI" instance=ExtResource("1_e20sv")]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 126.0
+offset_bottom = 21.0
+
+[node name="XPBarComponent" parent="InGameUI" instance=ExtResource("1_hiq23")]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 19.0
+offset_right = 119.0
+offset_bottom = 24.0
+value = 0.0
+
+[node name="PlayerEventSubscriberComponent" parent="InGameUI" node_paths=PackedStringArray("HealthBar", "ExperienceBar") instance=ExtResource("3_qecb0")]
+HealthBar = NodePath("../HealthBarComponent")
+ExperienceBar = NodePath("../XPBarComponent")
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_3mrga")]
+process_mode = 2
 visible = false
+
+[node name="PlayerUIControlComponent" type="Node" parent="." node_paths=PackedStringArray("InGameUI", "PauseMenu")]
+script = ExtResource("3_4xw0s")
+InGameUI = NodePath("../InGameUI")
+PauseMenu = NodePath("../PauseMenu")

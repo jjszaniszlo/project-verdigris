@@ -1,15 +1,22 @@
 using System;
 using Godot;
 using GodotUtilities;
+using Scenes.Actors;
+using Scenes.Components;
 
 public partial class Globals : Node
 {
 	public static Globals Instance { get; private set; }
 
-	public Camera2D MainCamera { get; set; }
+	public CameraFollowComponent MainCamera { get; set; }
 
-	private CharacterBody2D _player;
-	public CharacterBody2D Player
+	public ScreenShake ScreenShake { get; set; }
+	public GrayscaleEffect GrayscaleEffect { get; set; }
+
+	public EffectsManager EffectsManager { get; set; }
+
+	private Player _player;
+	public Player Player
 	{
 		get => _player;
 		set

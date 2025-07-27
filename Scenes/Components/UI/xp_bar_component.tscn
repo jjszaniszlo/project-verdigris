@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv7ldh6felw0o"]
+
+[ext_resource type="Texture2D" uid="uid://dmdtoqd2hgbkt" path="res://Resources/Images/GameUI/XPBar/xp_background.png" id="1_yvot6"]
+[ext_resource type="Texture2D" uid="uid://cmy0sq4eyg06o" path="res://Resources/Images/GameUI/XPBar/xp_progress.png" id="2_cu2yl"]
+
+[node name="XPBarComponent" type="TextureProgressBar"]
+offset_right = 105.0
+offset_bottom = 5.0
+value = 50.0
+texture_under = ExtResource("1_yvot6")
+texture_progress = ExtResource("2_cu2yl")
+texture_progress_offset = Vector2(4, 1)
