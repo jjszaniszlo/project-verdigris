@@ -1,11 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbefq8yhbyces"]
+[gd_scene load_steps=7 format=3 uid="uid://cbefq8yhbyces"]
 
 [ext_resource type="TileSet" uid="uid://dx6q4rp4fwu25" path="res://Resources/Tilesets/world.tres" id="1_a02cp"]
+[ext_resource type="Script" uid="uid://003ytkd18v04" path="res://Scenes/World.cs" id="1_fo5ed"]
 [ext_resource type="TileSet" uid="uid://b5p22y37tdyep" path="res://Resources/Tilesets/water.tres" id="2_5a7ea"]
-[ext_resource type="Material" uid="uid://cgjocunkt7lim" path="res://Resources/Materials/water.tres" id="2_8j60k"]
+[ext_resource type="Material" uid="uid://cgjocunkt7lim" path="res://Resources/Materials/Water.tres" id="2_8j60k"]
 [ext_resource type="PackedScene" uid="uid://7rtmr1n708mf" path="res://Scenes/Components/ground_generator_component.tscn" id="2_go701"]
 
+[sub_resource type="Environment" id="Environment_8j60k"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 1
+
 [node name="World" type="Node2D"]
+script = ExtResource("1_fo5ed")
 
 [node name="Layers" type="Node2D" parent="."]
 
@@ -26,4 +33,8 @@ Ground = NodePath("../Layers/Ground")
 Water = NodePath("../Layers/Water")
 WaterAtlasSourceID = 1
 WaterCollisionHeight = -0.3
+ChunkSize = 25
 HeightGradientScale = 12
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8j60k")

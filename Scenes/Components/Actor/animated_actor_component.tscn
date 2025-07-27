@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://uslquwxx1ufm"]
+
+[ext_resource type="Shader" uid="uid://cad4fqvsekhxw" path="res://Resources/Shaders/ActorDamageEffects.tres" id="1_cq0y0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_stqod"]
+shader = ExtResource("1_cq0y0")
+
+[node name="AnimatedActorComponent" type="AnimatedSprite2D"]
+material = SubResource("ShaderMaterial_stqod")

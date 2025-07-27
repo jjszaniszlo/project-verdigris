@@ -1,0 +1,47 @@
+[gd_resource type="VisualShader" load_steps=7 format=3 uid="uid://dsrpxfc7d3dc1"]
+
+[ext_resource type="Script" uid="uid://dvtqngcp7kos3" path="res://Resources/Shaders/ShaderNodes/TexturePointSmooth.cs" id="1_fkhmd"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_pmuip"]
+linked_parent_graph_frame = 8
+input_name = "texture"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_t72gj"]
+linked_parent_graph_frame = 8
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_id2w6"]
+linked_parent_graph_frame = 8
+input_name = "texture_pixel_size"
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_fkhmd"]
+linked_parent_graph_frame = 8
+initialized = true
+script = ExtResource("1_fkhmd")
+
+[sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_54uc1"]
+size = Vector2(929, 524)
+title = ""
+attached_nodes = PackedInt32Array(19, 21, 20, 22)
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+
+
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(500, 200)
+nodes/fragment/8/node = SubResource("VisualShaderNodeFrame_54uc1")
+nodes/fragment/8/position = Vector2(-680, 0)
+nodes/fragment/19/node = SubResource("VisualShaderNodeInput_pmuip")
+nodes/fragment/19/position = Vector2(-560, 60)
+nodes/fragment/20/node = SubResource("VisualShaderNodeInput_t72gj")
+nodes/fragment/20/position = Vector2(-640, 240)
+nodes/fragment/21/node = SubResource("VisualShaderNodeInput_id2w6")
+nodes/fragment/21/position = Vector2(-620, 420)
+nodes/fragment/22/node = SubResource("VisualShaderNodeCustom_fkhmd")
+nodes/fragment/22/position = Vector2(-40, 240)
+nodes/fragment/connections = PackedInt32Array(19, 0, 22, 0, 20, 0, 22, 1, 21, 0, 22, 2)

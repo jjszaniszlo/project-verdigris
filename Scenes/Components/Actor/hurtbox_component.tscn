@@ -1,13 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dsqrlbmhe5in1"]
+[gd_scene load_steps=2 format=3 uid="uid://dsqrlbmhe5in1"]
 
 [ext_resource type="Script" uid="uid://dyh6xg6y4a08p" path="res://Scenes/Components/Actor/HurtboxComponent.cs" id="1_rgq6i"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_leup1"]
-
 [node name="HurtboxComponent" type="Area2D"]
-collision_layer = 2
-collision_mask = 4
+collision_layer = 12
+collision_mask = 0
+input_pickable = false
+monitoring = false
 script = ExtResource("1_rgq6i")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_leup1")

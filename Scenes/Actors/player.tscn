@@ -1,34 +1,143 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhy6j57tnl5cq"]
+[gd_scene load_steps=26 format=3 uid="uid://bhy6j57tnl5cq"]
 
 [ext_resource type="PackedScene" uid="uid://coiunwvyiuvgx" path="res://Scenes/Components/Actor/velocity_component.tscn" id="1_nikbh"]
 [ext_resource type="Script" uid="uid://b1aqxwcvoie72" path="res://Scenes/Actors/Player.cs" id="1_sfcrp"]
-[ext_resource type="PackedScene" uid="uid://cvb7btmy0yjd1" path="res://Scenes/Components/Actor/player_controller.tscn" id="2_lm2ka"]
-[ext_resource type="Texture2D" uid="uid://yn7kq3bhxqlt" path="res://Resources/Images/character.png" id="3_87pht"]
-[ext_resource type="Shader" uid="uid://cfmwi6ui7pnws" path="res://Resources/Shaders/PixelSmoothing.gdshader" id="3_wn7ci"]
+[ext_resource type="PackedScene" uid="uid://dlhjnaettbij" path="res://Scenes/Components/Actor/drop_shadow_component.tscn" id="2_borc1"]
+[ext_resource type="PackedScene" uid="uid://cvb7btmy0yjd1" path="res://Scenes/Components/Actor/player_controller_component.tscn" id="2_lm2ka"]
+[ext_resource type="PackedScene" uid="uid://uslquwxx1ufm" path="res://Scenes/Components/Actor/animated_actor_component.tscn" id="2_wn7ci"]
+[ext_resource type="Script" uid="uid://d2e7ixj52pq52" path="res://Scenes/Components/Actor/AnimatedActorComponent.cs" id="3_sfcrp"]
+[ext_resource type="SpriteFrames" uid="uid://btivpdcxpr2mm" path="res://Resources/SpriteFrames/player.tres" id="3_tvyim"]
+[ext_resource type="Script" uid="uid://crxwveoxoll7s" path="res://Scripts/AnimatedSpriteAnimation.cs" id="4_b2ja5"]
 [ext_resource type="PackedScene" uid="uid://7jtklok0qiqm" path="res://Scenes/Components/Actor/health_component.tscn" id="4_mqoqv"]
+[ext_resource type="PackedScene" uid="uid://biuhb4u6dyk2o" path="res://Scenes/Components/Actor/in_water_component.tscn" id="7_yffqf"]
+[ext_resource type="PackedScene" uid="uid://bk4p7lxd3k4g6" path="res://Scenes/Components/Actor/LevelComponent.tscn" id="8_0by00"]
+[ext_resource type="PackedScene" uid="uid://2ngqcun0fuju" path="res://Scenes/Components/Actor/shoot_firework_component.tscn" id="10_borc1"]
+[ext_resource type="PackedScene" uid="uid://dsqrlbmhe5in1" path="res://Scenes/Components/Actor/hurtbox_component.tscn" id="11_tbug6"]
+[ext_resource type="PackedScene" uid="uid://c1b7c3abon176" path="res://Scenes/Components/Actor/die_component.tscn" id="13_8j2b5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0b7ey"]
-radius = 5.9
-height = 26.79
+radius = 3.0
+height = 10.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sfcrp"]
-shader = ExtResource("3_wn7ci")
+[sub_resource type="Resource" id="Resource_tvyim"]
+script = ExtResource("4_b2ja5")
+AnimationName = "weapon_idle_screen"
+FlipH = false
+FlipV = false
+metadata/_custom_type_script = "uid://crxwveoxoll7s"
+
+[sub_resource type="Resource" id="Resource_4sjoo"]
+script = ExtResource("4_b2ja5")
+AnimationName = "weapon_idle_away"
+FlipH = false
+FlipV = false
+metadata/_custom_type_script = "uid://crxwveoxoll7s"
+
+[sub_resource type="Resource" id="Resource_borc1"]
+script = ExtResource("4_b2ja5")
+AnimationName = "weapon_idle_sideways"
+FlipH = true
+FlipV = false
+metadata/_custom_type_script = "uid://crxwveoxoll7s"
+
+[sub_resource type="Resource" id="Resource_0by00"]
+script = ExtResource("4_b2ja5")
+AnimationName = "weapon_idle_sideways"
+FlipH = false
+FlipV = false
+metadata/_custom_type_script = "uid://crxwveoxoll7s"
+
+[sub_resource type="Resource" id="Resource_yffqf"]
+script = ExtResource("4_b2ja5")
+AnimationName = "weapon_run_screen"
+FlipH = false
+FlipV = false
+metadata/_custom_type_script = "uid://crxwveoxoll7s"
+
+[sub_resource type="Resource" id="Resource_8j2b5"]
+script = ExtResource("4_b2ja5")
+AnimationName = "weapon_run_away"
+FlipH = false
+FlipV = false
+metadata/_custom_type_script = "uid://crxwveoxoll7s"
+
+[sub_resource type="Resource" id="Resource_tbug6"]
+script = ExtResource("4_b2ja5")
+AnimationName = "weapon_run_sideways"
+FlipH = true
+FlipV = false
+metadata/_custom_type_script = "uid://crxwveoxoll7s"
+
+[sub_resource type="Resource" id="Resource_2d4n6"]
+script = ExtResource("4_b2ja5")
+AnimationName = "weapon_run_sideways"
+FlipH = false
+FlipV = false
+metadata/_custom_type_script = "uid://crxwveoxoll7s"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tbug6"]
+radius = 6.0
+height = 28.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_borc1"]
 
 [node name="Player" type="CharacterBody2D"]
-texture_filter = 2
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_sfcrp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_0b7ey")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_sfcrp")
-texture = ExtResource("3_87pht")
+[node name="DropShadowComponent" parent="." instance=ExtResource("2_borc1")]
+scale = Vector2(0.275, 0.115)
+
+[node name="InWaterComponent" parent="." node_paths=PackedStringArray("DropShadowComponent") instance=ExtResource("7_yffqf")]
+DropShadowComponent = NodePath("../DropShadowComponent")
+
+[node name="AnimatedActorComponent" parent="InWaterComponent" instance=ExtResource("2_wn7ci")]
+sprite_frames = ExtResource("3_tvyim")
+animation = &"idle_sideways"
+autoplay = "weapon_idle_screen"
+frame_progress = 0.590809
+offset = Vector2(0, -16)
+script = ExtResource("3_sfcrp")
+IdleTowards = SubResource("Resource_tvyim")
+IdleAway = SubResource("Resource_4sjoo")
+IdleLeft = SubResource("Resource_borc1")
+IdleRight = SubResource("Resource_0by00")
+MoveTowards = SubResource("Resource_yffqf")
+MoveAway = SubResource("Resource_8j2b5")
+MoveLeft = SubResource("Resource_tbug6")
+MoveRight = SubResource("Resource_2d4n6")
+
+[node name="DieComponent" parent="." node_paths=PackedStringArray("HealthComponent", "DeathSprite") instance=ExtResource("13_8j2b5")]
+HealthComponent = NodePath("../HealthComponent")
+DeathSprite = NodePath("../InWaterComponent/AnimatedActorComponent")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_mqoqv")]
 
-[node name="PlayerController" parent="." node_paths=PackedStringArray("VelocityComponent") instance=ExtResource("2_lm2ka")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("HealthComponent", "TakeDamageSprite") instance=ExtResource("11_tbug6")]
+collision_layer = 8
+HealthComponent = NodePath("../HealthComponent")
+TakeDamageSprite = NodePath("../InWaterComponent/AnimatedActorComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, -15.765)
+shape = SubResource("CapsuleShape2D_tbug6")
+
+[node name="ShootFireworkComponent" parent="." node_paths=PackedStringArray("PlayerControllerComponent") instance=ExtResource("10_borc1")]
+PlayerControllerComponent = NodePath("../PlayerControllerComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShootFireworkComponent"]
+shape = SubResource("CircleShape2D_borc1")
+
+[node name="LevelComponent" parent="." instance=ExtResource("8_0by00")]
+
+[node name="PlayerControllerComponent" parent="." node_paths=PackedStringArray("VelocityComponent", "AnimatedActorComponent") instance=ExtResource("2_lm2ka")]
 VelocityComponent = NodePath("../VelocityComponent")
+AnimatedActorComponent = NodePath("../InWaterComponent/AnimatedActorComponent")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("1_nikbh")]
 MaxSpeed = 90.0

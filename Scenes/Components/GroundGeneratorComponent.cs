@@ -42,18 +42,11 @@ public partial class GroundGeneratorComponent : Node
 
 	private int ChunkViewDistance => (ChunkSize / 2) - 1;
 
-	private CharacterBody2D _player;
+	public Node2D ShowCenterTarget { get; set; }
 
 	public override void _Ready()
 	{
-		SetPhysicsProcess(false);
 		LoadChunk(0, 0);
-
-		Globals.Instance.PlayerChanged += (player) =>
-		{
-			SetPhysicsProcess(true);
-			_player = player;
-		};
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -61,8 +54,8 @@ public partial class GroundGeneratorComponent : Node
 		var worldSize = Ground.GetUsedRect();
 		var worldSizeStart = worldSize.Position;
 		var worldSizeEnd = worldSize.End;
-		var playerViewPositionPositive = (_player.Position / TileSize) + new Vector2(ChunkViewDistance, ChunkViewDistance);
-		var playerViewPositionNegative = (_player.Position / TileSize) - new Vector2(ChunkViewDistance, ChunkViewDistance);
+		var playerViewPositionPositive = (ShowCenterTarget.Position / TileSize) + new Vector2(ChunkViewDistance, ChunkViewDistance);
+		var playerViewPositionNegative = (ShowCenterTarget.Position / TileSize) - new Vector2(ChunkViewDistance, ChunkViewDistance);
 
 		if (playerViewPositionPositive.X > worldSizeEnd.X)
 		{

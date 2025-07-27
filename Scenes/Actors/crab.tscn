@@ -1,35 +1,92 @@
-[gd_scene load_steps=8 format=3 uid="uid://dsb5pbed8kp11"]
+[gd_scene load_steps=19 format=3 uid="uid://dsb5pbed8kp11"]
 
 [ext_resource type="Texture2D" uid="uid://ciukdqe1dvd1r" path="res://Resources/Images/crab.png" id="1_dixk2"]
 [ext_resource type="Script" uid="uid://o0fxmvlmbhps" path="res://Scenes/Actors/Crab.cs" id="1_leup1"]
 [ext_resource type="PackedScene" uid="uid://coiunwvyiuvgx" path="res://Scenes/Components/Actor/velocity_component.tscn" id="2_rsqtj"]
+[ext_resource type="PackedScene" uid="uid://biuhb4u6dyk2o" path="res://Scenes/Components/Actor/in_water_component.tscn" id="3_8qqn6"]
 [ext_resource type="PackedScene" uid="uid://7jtklok0qiqm" path="res://Scenes/Components/Actor/health_component.tscn" id="3_vhv3v"]
+[ext_resource type="Shader" uid="uid://cad4fqvsekhxw" path="res://Resources/Shaders/ActorDamageEffects.tres" id="4_8qqn6"]
+[ext_resource type="PackedScene" uid="uid://dlhjnaettbij" path="res://Scenes/Components/Actor/drop_shadow_component.tscn" id="4_g78gg"]
 [ext_resource type="PackedScene" uid="uid://deycy24bvuegx" path="res://Scenes/Components/Actor/pathfind_component.tscn" id="4_ts2tc"]
 [ext_resource type="PackedScene" uid="uid://dsqrlbmhe5in1" path="res://Scenes/Components/Actor/hurtbox_component.tscn" id="4_unb3g"]
+[ext_resource type="PackedScene" uid="uid://c1b7c3abon176" path="res://Scenes/Components/Actor/die_component.tscn" id="7_77io0"]
+[ext_resource type="PackedScene" uid="uid://cdo7ip5i6aukh" path="res://Scenes/Components/Actor/xp_component.tscn" id="7_va5w6"]
+[ext_resource type="PackedScene" uid="uid://ge623skda424" path="res://Scenes/Components/Actor/melee_attack_component.tscn" id="9_dl3rf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oe2f4"]
 custom_solver_bias = 0.1
-radius = 14.29
-height = 54.78
+radius = 6.0
+height = 14.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8qqn6"]
+frequency = 0.0618
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dl3rf"]
+width = 64
+height = 64
+noise = SubResource("FastNoiseLite_8qqn6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8qqn6"]
+shader = ExtResource("4_8qqn6")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_dl3rf")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g78gg"]
+radius = 30.7
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dl3rf"]
+radius = 28.09
 
 [node name="Crab" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_leup1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_oe2f4")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -5)
+[node name="DropShadowComponent" parent="." instance=ExtResource("4_g78gg")]
+position = Vector2(0, -8)
+scale = Vector2(1, 0.31)
+
+[node name="InWaterComponent" parent="." node_paths=PackedStringArray("DropShadowComponent") instance=ExtResource("3_8qqn6")]
+scale = Vector2(1.83, 1.17)
+DropShadowComponent = NodePath("../DropShadowComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="InWaterComponent"]
+material = SubResource("ShaderMaterial_8qqn6")
+instance_shader_parameters/take_damage_fade = 0.0
+scale = Vector2(0.546448, 0.854701)
 texture = ExtResource("1_dixk2")
+offset = Vector2(0, -24.075)
+
+[node name="DieComponent" parent="." node_paths=PackedStringArray("HealthComponent", "DeathSprite") instance=ExtResource("7_77io0")]
+HealthComponent = NodePath("../HealthComponent")
+DeathSprite = NodePath("../InWaterComponent/Sprite2D")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_vhv3v")]
+MaxHealth = 20
 
-[node name="MeleeAttackComponent" type="Node" parent="."]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("HealthComponent", "TakeDamageSprite") instance=ExtResource("4_unb3g")]
+position = Vector2(0, -17)
+collision_layer = 4
+HealthComponent = NodePath("../HealthComponent")
+TakeDamageSprite = NodePath("../InWaterComponent/Sprite2D")
 
-[node name="HurtboxComponent" parent="." instance=ExtResource("4_unb3g")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_g78gg")
+debug_color = Color(9.62615e-07, 0.810394, 0.404614, 0.42)
+
+[node name="MeleeAttackComponent" parent="." instance=ExtResource("9_dl3rf")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeAttackComponent"]
+position = Vector2(0, -22)
+rotation = 1.5708
+shape = SubResource("CircleShape2D_dl3rf")
+debug_color = Color(0.920038, 6.05485e-05, 0.696339, 0.42)
 
 [node name="PathfindComponent" parent="." node_paths=PackedStringArray("VelocityComponent") instance=ExtResource("4_ts2tc")]
 VelocityComponent = NodePath("../VelocityComponent")
@@ -38,3 +95,6 @@ VelocityComponent = NodePath("../VelocityComponent")
 MaxSpeed = 50.0
 Acceleration = 30.0
 Deceleration = 20.0
+
+[node name="XpComponent" parent="." node_paths=PackedStringArray("DieComponent") instance=ExtResource("7_va5w6")]
+DieComponent = NodePath("../DieComponent")

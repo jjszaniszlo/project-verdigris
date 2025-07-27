@@ -1,0 +1,111 @@
+[gd_scene load_steps=19 format=3 uid="uid://c2s5anmw84ifa"]
+
+[ext_resource type="Texture2D" uid="uid://cclm3nqhqvsag" path="res://Resources/Atlas/firework.png" id="1_8j6wd"]
+[ext_resource type="Shader" uid="uid://xr1ayboc5bbu" path="res://Resources/Shaders/FireworkEffects.tres" id="1_dwcil"]
+[ext_resource type="Texture2D" uid="uid://bojtxah6b32jr" path="res://Resources/Atlas/firework_emission.png" id="2_t1wx5"]
+[ext_resource type="Script" uid="uid://ka0ud6xtpp2x" path="res://Scenes/Firework.cs" id="4_rly5o"]
+
+[sub_resource type="Gradient" id="Gradient_o06y3"]
+colors = PackedColorArray(9.191, 0, 0, 1, 1, 0.396078, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t1wx5"]
+gradient = SubResource("Gradient_o06y3")
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.535613, 0.498576)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dwcil"]
+shader = ExtResource("1_dwcil")
+shader_parameter/gradient_factor = 2.453
+shader_parameter/gradient = SubResource("GradientTexture2D_t1wx5")
+shader_parameter/glow_intensity = 0.998
+shader_parameter/Emission = ExtResource("2_t1wx5")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8j6wd"]
+atlas = ExtResource("1_8j6wd")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwcil"]
+atlas = ExtResource("1_8j6wd")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1wx5"]
+atlas = ExtResource("1_8j6wd")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rly5o"]
+atlas = ExtResource("1_8j6wd")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qk72u"]
+atlas = ExtResource("1_8j6wd")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0sbm"]
+atlas = ExtResource("1_8j6wd")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ny75q"]
+atlas = ExtResource("1_8j6wd")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwhco"]
+atlas = ExtResource("1_8j6wd")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fvxq"]
+atlas = ExtResource("1_8j6wd")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_haqgj"]
+atlas = ExtResource("1_8j6wd")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3hhal"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8j6wd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwcil")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t1wx5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rly5o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qk72u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p0sbm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ny75q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rwhco")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fvxq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_haqgj")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Firework" type="AnimatedSprite2D"]
+modulate = Color(19.853, 19.486, 20.221, 1)
+z_index = 2
+material = SubResource("ShaderMaterial_dwcil")
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_3hhal")
+autoplay = "default"
+frame = 9
+frame_progress = 1.0
+script = ExtResource("4_rly5o")

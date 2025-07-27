@@ -4,7 +4,7 @@ using GodotUtilities;
 namespace Scenes.UI.Game.PauseMenu;
 
 [Scene]
-public partial class PauseMenuButton : TextureButton
+public partial class MenuButton : TextureButton
 {
 	public override void _Ready()
 	{

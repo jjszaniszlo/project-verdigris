@@ -18,6 +18,7 @@ void vertex() {
 	var_stretch = 0.0;
 }
 "
+graph_offset = Vector2(-507.242, -92.8618)
 mode = 1
 flags/light_only = false
 varyings/stretch = "0,0"
