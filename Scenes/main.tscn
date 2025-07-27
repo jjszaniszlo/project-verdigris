@@ -1,11 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://cg0688imk08lr"]
+[gd_scene load_steps=5 format=3 uid="uid://cg0688imk08lr"]
 
 [ext_resource type="PackedScene" uid="uid://6ri4wfclvrwi" path="res://Scenes/UI/Game/game_ui.tscn" id="2_8gbba"]
 [ext_resource type="PackedScene" uid="uid://cobj3mu47c0e0" path="res://Scenes/game.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://bh0nj7ybcb2bl" path="res://Scenes/screen_shake.tscn" id="2_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://k6xoaymb4apw" path="res://Scenes/UI/Effect/grayscale_effect.tscn" id="3_jjvhh"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Game" parent="." instance=ExtResource("2_bo1nx")]
+process_mode = 1
 texture_filter = 1
+
+[node name="ScreenShake" parent="." instance=ExtResource("2_jjvhh")]
+process_mode = 1
+
+[node name="GrayscaleEffect" parent="." instance=ExtResource("3_jjvhh")]
 
 [node name="Game UI" parent="." instance=ExtResource("2_8gbba")]

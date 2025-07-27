@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://dx6q4rp4fwu25" path="res://Resources/Tilesets/world.tres" id="1_a02cp"]
 [ext_resource type="TileSet" uid="uid://b5p22y37tdyep" path="res://Resources/Tilesets/water.tres" id="2_5a7ea"]
-[ext_resource type="Material" uid="uid://cgjocunkt7lim" path="res://Resources/Materials/water.tres" id="2_8j60k"]
+[ext_resource type="Material" uid="uid://cgjocunkt7lim" path="res://Resources/Materials/Water.tres" id="2_8j60k"]
 [ext_resource type="PackedScene" uid="uid://7rtmr1n708mf" path="res://Scenes/Components/ground_generator_component.tscn" id="2_go701"]
 
 [sub_resource type="Environment" id="Environment_8j60k"]

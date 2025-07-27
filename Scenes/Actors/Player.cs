@@ -2,7 +2,6 @@ using System;
 using Godot;
 using GodotUtilities;
 using Scenes.Components.Actor;
-using static Scenes.Components.Actor.PlayerControllerComponent;
 
 namespace Scenes.Actors;
 
@@ -10,55 +9,32 @@ namespace Scenes.Actors;
 public partial class Player : CharacterBody2D
 {
 	[Node]
-	public AnimatedActorComponent AnimatedActorComponent { get; private set; }
+	public LevelComponent LevelComponent { get; private set; }
 	[Node]
-	public PlayerControllerComponent PlayerControllerComponent { get; private set; }
+	public HealthComponent HealthComponent { get; private set; }
+	[Node]
+	public DieComponent DieComponent { get; private set; }
 
 	public override void _Ready()
 	{
 		Globals.Instance.Player = this;
 
-		PlayerControllerComponent.PlayerMovementChanged += OnPlayerFacingChanged;
+		HealthComponent.HealthChanged += OnHealthChanged;
+		LevelComponent.LevelChanged += OnLevelChanged;
+
+		PlayerEventBus.Instance.EmitPlayerHealthChanged(HealthComponent.CurrentHealth, HealthComponent.MaxHealth);
+		PlayerEventBus.Instance.EmitPlayerExperienceChanged(LevelComponent.Experience, LevelComponent.ExperienceToNextLevel);
 	}
 
-	private void OnPlayerFacingChanged(FacingDirection direction, bool isMoving)
-	{
-		if (isMoving)
-		{
-			switch (direction)
-			{
-				case FacingDirection.Up:
-					AnimatedActorComponent.PlayMoveAway();
-					break;
-				case FacingDirection.Down:
-					AnimatedActorComponent.PlayMoveTowards();
-					break;
-				case FacingDirection.Left:
-					AnimatedActorComponent.PlayMoveLeft();
-					break;
-				case FacingDirection.Right:
-					AnimatedActorComponent.PlayMoveRight();
-					break;
-			}
-			return;
-		}
+    private void OnHealthChanged(HealthComponent.HealthChangedContext healthChangedContext)
+    {
+		PlayerEventBus.Instance.EmitPlayerHealthChanged(healthChangedContext.CurrentHealth, healthChangedContext.MaxHealth);
+    }
 
-		switch (direction)
-		{
-			case FacingDirection.Up:
-				AnimatedActorComponent.PlayIdleAway();
-				break;
-			case FacingDirection.Down:
-				AnimatedActorComponent.PlayIdleTowards();
-				break;
-			case FacingDirection.Left:
-				AnimatedActorComponent.PlayIdleLeft();
-				break;
-			case FacingDirection.Right:
-				AnimatedActorComponent.PlayIdleRight();
-				break;
-		}
-	}
+    private void OnLevelChanged(int level, int experience, int experienceToNextLevel)
+    {
+        PlayerEventBus.Instance.EmitPlayerExperienceChanged(experience, experienceToNextLevel);
+    }
 
     public override void _Notification(int what)
     {

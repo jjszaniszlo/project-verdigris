@@ -1,35 +1,64 @@
-[gd_scene load_steps=8 format=3 uid="uid://dsb5pbed8kp11"]
+[gd_scene load_steps=13 format=3 uid="uid://dsb5pbed8kp11"]
 
 [ext_resource type="Texture2D" uid="uid://ciukdqe1dvd1r" path="res://Resources/Images/crab.png" id="1_dixk2"]
 [ext_resource type="Script" uid="uid://o0fxmvlmbhps" path="res://Scenes/Actors/Crab.cs" id="1_leup1"]
 [ext_resource type="PackedScene" uid="uid://coiunwvyiuvgx" path="res://Scenes/Components/Actor/velocity_component.tscn" id="2_rsqtj"]
+[ext_resource type="PackedScene" uid="uid://biuhb4u6dyk2o" path="res://Scenes/Components/Actor/in_water_component.tscn" id="3_8qqn6"]
 [ext_resource type="PackedScene" uid="uid://7jtklok0qiqm" path="res://Scenes/Components/Actor/health_component.tscn" id="3_vhv3v"]
+[ext_resource type="PackedScene" uid="uid://dlhjnaettbij" path="res://Scenes/Components/Actor/drop_shadow_component.tscn" id="4_g78gg"]
 [ext_resource type="PackedScene" uid="uid://deycy24bvuegx" path="res://Scenes/Components/Actor/pathfind_component.tscn" id="4_ts2tc"]
 [ext_resource type="PackedScene" uid="uid://dsqrlbmhe5in1" path="res://Scenes/Components/Actor/hurtbox_component.tscn" id="4_unb3g"]
+[ext_resource type="PackedScene" uid="uid://c1b7c3abon176" path="res://Scenes/Components/Actor/die_component.tscn" id="7_77io0"]
+[ext_resource type="PackedScene" uid="uid://cdo7ip5i6aukh" path="res://Scenes/Components/Actor/xp_component.tscn" id="7_va5w6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oe2f4"]
 custom_solver_bias = 0.1
-radius = 14.29
-height = 54.78
+radius = 6.0
+height = 14.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g78gg"]
+radius = 27.0
 
 [node name="Crab" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_leup1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_oe2f4")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -5)
+[node name="DropShadowComponent" parent="." instance=ExtResource("4_g78gg")]
+position = Vector2(0, -8)
+scale = Vector2(1, 0.31)
+
+[node name="InWaterComponent" parent="." node_paths=PackedStringArray("DropShadowComponent") instance=ExtResource("3_8qqn6")]
+scale = Vector2(1.83, 1.17)
+DropShadowComponent = NodePath("../DropShadowComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="InWaterComponent"]
+scale = Vector2(0.546448, 0.854701)
 texture = ExtResource("1_dixk2")
+offset = Vector2(0, -24.075)
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_vhv3v")]
+MaxHealth = 20
 
-[node name="MeleeAttackComponent" type="Node" parent="."]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("4_unb3g")]
+position = Vector2(0, -17)
+HealthComponent = NodePath("../HealthComponent")
 
-[node name="HurtboxComponent" parent="." instance=ExtResource("4_unb3g")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_g78gg")
+
+[node name="XpComponent" parent="." node_paths=PackedStringArray("DieComponent") instance=ExtResource("7_va5w6")]
+DieComponent = NodePath("../DieComponent")
+
+[node name="DieComponent" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("7_77io0")]
+HealthComponent = NodePath("../HealthComponent")
 
 [node name="PathfindComponent" parent="." node_paths=PackedStringArray("VelocityComponent") instance=ExtResource("4_ts2tc")]
 VelocityComponent = NodePath("../VelocityComponent")

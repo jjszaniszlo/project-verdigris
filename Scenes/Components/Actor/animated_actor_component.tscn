@@ -1,9 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://uslquwxx1ufm"]
+[gd_scene load_steps=2 format=3 uid="uid://uslquwxx1ufm"]
 
-[ext_resource type="Shader" uid="uid://cfmwi6ui7pnws" path="res://Resources/Shaders/PixelSmoothing.gdshader" id="1_stqod"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_b2ja5"]
-shader = ExtResource("1_stqod")
+[ext_resource type="Material" uid="uid://knrjesvkpn3x" path="res://Resources/Materials/TexturePointSmooth.tres" id="1_cq0y0"]
 
 [node name="AnimatedActorComponent" type="AnimatedSprite2D"]
-material = SubResource("ShaderMaterial_b2ja5")
+material = ExtResource("1_cq0y0")

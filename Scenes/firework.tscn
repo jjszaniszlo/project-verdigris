@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://c2s5anmw84ifa"]
+[gd_scene load_steps=19 format=3 uid="uid://c2s5anmw84ifa"]
 
 [ext_resource type="Texture2D" uid="uid://cclm3nqhqvsag" path="res://Resources/Atlas/firework.png" id="1_8j6wd"]
 [ext_resource type="Shader" uid="uid://xr1ayboc5bbu" path="res://Resources/Shaders/FireworkEffects.tres" id="1_dwcil"]
 [ext_resource type="Texture2D" uid="uid://bojtxah6b32jr" path="res://Resources/Atlas/firework_emission.png" id="2_t1wx5"]
+[ext_resource type="Script" uid="uid://ka0ud6xtpp2x" path="res://Scenes/Firework.cs" id="4_rly5o"]
 
 [sub_resource type="Gradient" id="Gradient_o06y3"]
 colors = PackedColorArray(9.191, 0, 0, 1, 1, 0.396078, 0, 1)
@@ -93,14 +94,18 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_haqgj")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
 "speed": 5.0
 }]
 
 [node name="Firework" type="AnimatedSprite2D"]
 modulate = Color(19.853, 19.486, 20.221, 1)
+z_index = 2
 material = SubResource("ShaderMaterial_dwcil")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_3hhal")
 autoplay = "default"
+frame = 9
+frame_progress = 1.0
+script = ExtResource("4_rly5o")

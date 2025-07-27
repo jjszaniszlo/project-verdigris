@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdo7ip5i6aukh"]
+
+[ext_resource type="Script" uid="uid://bp5yiofulov8" path="res://Scenes/Components/Actor/XpComponent.cs" id="1_bqlja"]
+
+[node name="XpComponent" type="Node2D"]
+script = ExtResource("1_bqlja")

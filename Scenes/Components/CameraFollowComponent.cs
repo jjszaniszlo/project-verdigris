@@ -1,7 +1,9 @@
 using Godot;
+using GodotUtilities;
 
 namespace Scenes.Components;
 
+[Scene]
 public partial class CameraFollowComponent : Camera2D
 {
 	[Export]
@@ -21,5 +23,13 @@ public partial class CameraFollowComponent : Camera2D
 	{
 		Position = Position.Lerp(Player.GlobalPosition, (float)delta * FollowRate);
 	}
+
+    public override void _Notification(int what)
+    {
+		if (what == NotificationSceneInstantiated)
+		{
+			WireNodes();
+		}
+    }
 }
 

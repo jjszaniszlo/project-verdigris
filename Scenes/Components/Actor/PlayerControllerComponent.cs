@@ -6,6 +6,8 @@ public partial class PlayerControllerComponent : Node2D
 {
 	[Export]
 	public VelocityComponent VelocityComponent { get; private set; }
+	[Export]
+	public AnimatedActorComponent AnimatedActorComponent { get; private set; }
 	public CharacterBody2D Player { get; private set; }
 
 	public Vector2 AimingAt => GetGlobalMousePosition();
@@ -20,7 +22,7 @@ public partial class PlayerControllerComponent : Node2D
 			if (_CurrentFacingDirection != value)
 			{
 				_CurrentFacingDirection = value;
-				EmitSignal(SignalName.PlayerMovementChanged, (int)_CurrentFacingDirection, _IsMoving);
+				OnPlayerFacingChanged(_CurrentFacingDirection, _IsMoving);
 			}
 		}
 	}
@@ -34,7 +36,7 @@ public partial class PlayerControllerComponent : Node2D
 			if (_IsMoving != value)
 			{
 				_IsMoving = value;
-				EmitSignal(SignalName.PlayerMovementChanged, (int)CurrentFacingDirection, _IsMoving);
+				OnPlayerFacingChanged(_CurrentFacingDirection, _IsMoving);
 			}
 		}
 	}
@@ -43,9 +45,6 @@ public partial class PlayerControllerComponent : Node2D
 	private bool FacingDown => Facing.Dot(Vector2.Down) > Facing.Dot(Vector2.Right) && Facing.Dot(Vector2.Down) > Facing.Dot(Vector2.Left);
 	private bool FacingLeft => Facing.Dot(Vector2.Left) > Facing.Dot(Vector2.Up) && Facing.Dot(Vector2.Left) > Facing.Dot(Vector2.Down);
 	private bool FacingRight => Facing.Dot(Vector2.Right) > Facing.Dot(Vector2.Up) && Facing.Dot(Vector2.Right) > Facing.Dot(Vector2.Down);
-
-	[Signal]
-	public delegate void PlayerMovementChangedEventHandler(FacingDirection direction, bool isMoving);
 
     public override void _Ready()
 	{
@@ -97,6 +96,44 @@ public partial class PlayerControllerComponent : Node2D
 		else if (FacingRight)
 		{
 			CurrentFacingDirection = FacingDirection.Right;
+		}
+	}
+	private void OnPlayerFacingChanged(FacingDirection direction, bool isMoving)
+	{
+		if (isMoving)
+		{
+			switch (direction)
+			{
+				case FacingDirection.Up:
+					AnimatedActorComponent.PlayMoveAway();
+					break;
+				case FacingDirection.Down:
+					AnimatedActorComponent.PlayMoveTowards();
+					break;
+				case FacingDirection.Left:
+					AnimatedActorComponent.PlayMoveLeft();
+					break;
+				case FacingDirection.Right:
+					AnimatedActorComponent.PlayMoveRight();
+					break;
+			}
+			return;
+		}
+
+		switch (direction)
+		{
+			case FacingDirection.Up:
+				AnimatedActorComponent.PlayIdleAway();
+				break;
+			case FacingDirection.Down:
+				AnimatedActorComponent.PlayIdleTowards();
+				break;
+			case FacingDirection.Left:
+				AnimatedActorComponent.PlayIdleLeft();
+				break;
+			case FacingDirection.Right:
+				AnimatedActorComponent.PlayIdleRight();
+				break;
 		}
 	}
 
