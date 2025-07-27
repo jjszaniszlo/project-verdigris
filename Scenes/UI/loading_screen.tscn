@@ -31,6 +31,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_63kij")
 
 [node name="LoadingProgress" type="ProgressBar" parent="UI"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
