@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://dmtsd86i6l48o"]
 
-[ext_resource type="Shader" uid="uid://cjnq4n6d6eh8o" path="res://Resources/Shaders/ButtonHoverEffect.tres" id="1_6gg7r"]
-[ext_resource type="Script" uid="uid://jps718fahwrm" path="res://Scenes/UI/Game/PauseMenu/PauseMenuButton.cs" id="1_mc0yx"]
+[ext_resource type="Shader" uid="uid://cjnq4n6d6eh8o" path="res://Resources/Shaders/ButtonHoverEffect.tres" id="1_3buum"]
+[ext_resource type="Script" uid="uid://jps718fahwrm" path="res://Scenes/Components/UI/MenuButton.cs" id="2_j3iyo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mocfc"]
-shader = ExtResource("1_6gg7r")
+shader = ExtResource("1_3buum")
 shader_parameter/move = Vector2(2, -2)
 shader_parameter/current_time = 0.0
 shader_parameter/move_duration = 0.2
@@ -12,9 +12,9 @@ shader_parameter/amplitude = 2.0
 shader_parameter/damping = 1.0
 shader_parameter/frequency = 10.0
 
-[node name="Button" type="TextureButton"]
+[node name="MenuButton" type="TextureButton"]
 material = SubResource("ShaderMaterial_mocfc")
 mouse_filter = 1
 action_mode = 0
 stretch_mode = 0
-script = ExtResource("1_mc0yx")
+script = ExtResource("2_j3iyo")

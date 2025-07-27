@@ -8,14 +8,19 @@ public partial class Globals : Node
 {
 	public static Globals Instance { get; private set; }
 
+	[Export]
 	public CameraFollowComponent MainCamera { get; set; }
 
+	[Export]
 	public ScreenShake ScreenShake { get; set; }
+	[Export]
 	public GrayscaleEffect GrayscaleEffect { get; set; }
 
+	[Export]
 	public EffectsManager EffectsManager { get; set; }
 
 	private Player _player;
+	[Export]
 	public Player Player
 	{
 		get => _player;

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="verdigris"
-run/main_scene="uid://cg0688imk08lr"
+run/main_scene="uid://chgdtxyegh3ld"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 run/max_fps=120
 config/icon="res://Resources/icon.svg"
@@ -81,7 +81,8 @@ shoot_firework={
 
 2d_physics/layer_1="World"
 2d_physics/layer_2="Enemies"
-2d_physics/layer_3="Projectiles"
+2d_physics/layer_3="Player Projectile Attacks"
+2d_physics/layer_4="Enemy Melee Attacks"
 
 [physics]
 

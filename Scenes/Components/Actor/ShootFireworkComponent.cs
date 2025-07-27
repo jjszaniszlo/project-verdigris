@@ -22,16 +22,16 @@ public partial class ShootFireworkComponent : Area2D
 		set
 		{
 			_FireCooldown = value;
-			if (_fireTimer != null)
+			if (_FireTimer != null)
 			{
-				_fireTimer.WaitTime = _FireCooldown;
+				_FireTimer.WaitTime = _FireCooldown;
 			}
 		}
 	}
 
 	public CollisionShape2D CollisionShape2D { get; private set; }
 
-	private Timer _fireTimer = new();
+	private Timer _FireTimer = new();
 
 	public override void _Ready()
 	{
@@ -41,40 +41,21 @@ public partial class ShootFireworkComponent : Area2D
 			GD.PrintErr("ShootFireworkComponent requires a CollisionShape2D child node.");
 		}
 
-		_fireTimer.WaitTime = FireCooldown;
-		_fireTimer.ProcessCallback = Timer.TimerProcessCallback.Physics;
-		_fireTimer.OneShot = false;
-		_fireTimer.Autostart = true;
-		_fireTimer.Timeout += Fire;
-		AddChild(_fireTimer);
+		_FireTimer.WaitTime = FireCooldown;
+		_FireTimer.ProcessCallback = Timer.TimerProcessCallback.Physics;
+		_FireTimer.OneShot = false;
+		_FireTimer.Autostart = true;
+		_FireTimer.Timeout += Fire;
+		AddChild(_FireTimer);
 	}
-
-	private bool _isFiring = false;
 
 	public override void _PhysicsProcess(double delta)
 	{
 		GlobalPosition = PlayerControllerComponent.AimingAt;
 
-		if (_isFiring)
-		{
-			HurtActorsInArea();
-			_isFiring = false;
-		}
 	}
 
-	public void Fire()
-	{
-		if (_isFiring) return;
-		_isFiring = true;
-
-		var fireworkEffect = FireworkEffect.Instantiate<Node2D>();
-		fireworkEffect.GlobalPosition = PlayerControllerComponent.AimingAt;
-
-		Globals.Instance.ScreenShake.PlayShake();
-		Globals.Instance.EffectsManager.AddEffect(fireworkEffect);
-	}
-
-	private void HurtActorsInArea()
+	private void Fire()
 	{
 		var hurtboxes = GetOverlappingAreas();
 		foreach (var area in hurtboxes)
@@ -84,5 +65,11 @@ public partial class ShootFireworkComponent : Area2D
 				hurtbox.Damage(Damage);
 			}
 		}
+
+		var fireworkEffect = FireworkEffect.Instantiate<Node2D>();
+		fireworkEffect.GlobalPosition = PlayerControllerComponent.AimingAt;
+
+		Globals.Instance.ScreenShake.PlayShake();
+		Globals.Instance.EffectsManager.AddEffect(fireworkEffect);
 	}
 }

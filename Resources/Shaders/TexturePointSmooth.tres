@@ -20,7 +20,7 @@ initialized = true
 script = ExtResource("1_fkhmd")
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_54uc1"]
-size = Vector2(971, 586)
+size = Vector2(929, 524)
 title = ""
 attached_nodes = PackedInt32Array(19, 21, 20, 22)
 

@@ -17,6 +17,7 @@ public partial class CameraFollowComponent : Camera2D
 		Position = Player.GlobalPosition;
 
 		Globals.Instance.MainCamera = this;
+		MakeCurrent();
 	}
 
 	public override void _PhysicsProcess(double delta)

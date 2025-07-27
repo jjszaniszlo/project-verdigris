@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://1r04jawohfqv"]
 
 [ext_resource type="Script" uid="uid://blqr2ypljpv3b" path="res://Scenes/UI/Game/PauseMenu/PauseMenuOptions.cs" id="1_lmn5k"]
-[ext_resource type="PackedScene" uid="uid://dmtsd86i6l48o" path="res://Scenes/UI/Game/PauseMenu/button.tscn" id="2_spg3u"]
+[ext_resource type="PackedScene" uid="uid://dmtsd86i6l48o" path="res://Scenes/Components/UI/menu_button.tscn" id="2_spg3u"]
 [ext_resource type="Texture2D" uid="uid://6y2463037fva" path="res://Resources/Images/GameUI/PauseMenu/Buttons/Resume/normal.png" id="3_2d7as"]
 [ext_resource type="Texture2D" uid="uid://l21ydymb7kq1" path="res://Resources/Images/GameUI/PauseMenu/Buttons/Resume/select.png" id="4_15a1r"]
 [ext_resource type="Texture2D" uid="uid://dhy5xypmypj1p" path="res://Resources/Images/GameUI/PauseMenu/Buttons/Resume/hover.png" id="5_0apf5"]

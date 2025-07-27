@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://chgdtxyegh3ld"]
+
+[ext_resource type="PackedScene" uid="uid://cbefq8yhbyces" path="res://Scenes/world.tscn" id="1_28flt"]
+[ext_resource type="Script" uid="uid://bsi0hxf62gmjn" path="res://Scenes/CameraMainMenuScroll.cs" id="2_48xlc"]
+[ext_resource type="Script" uid="uid://chy5cs7pxqc35" path="res://Scenes/FireworkSpawner.cs" id="3_vr1f0"]
+[ext_resource type="PackedScene" uid="uid://c2s5anmw84ifa" path="res://Scenes/firework.tscn" id="4_5egv6"]
+[ext_resource type="PackedScene" uid="uid://bh0nj7ybcb2bl" path="res://Scenes/UI/Effect/screen_shake.tscn" id="4_t1dhk"]
+[ext_resource type="PackedScene" uid="uid://cbxqx6hqc7a20" path="res://Scenes/UI/main_menu_ui.tscn" id="6_opfnp"]
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="World" parent="." node_paths=PackedStringArray("ShowCenterTarget") instance=ExtResource("1_28flt")]
+position = Vector2(0, 30)
+ShowCenterTarget = NodePath("../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(128, 21)
+process_callback = 0
+script = ExtResource("2_48xlc")
+HeightOffset = 30.0
+
+[node name="FireworkSpawner" type="Node2D" parent="." node_paths=PackedStringArray("SpawnPointCenter")]
+script = ExtResource("3_vr1f0")
+FireworkScene = ExtResource("4_5egv6")
+SpawnPointCenter = NodePath("../Camera2D")
+
+[node name="ScreenShake" parent="." instance=ExtResource("4_t1dhk")]
+
+[node name="MainMenuUI" parent="." instance=ExtResource("6_opfnp")]

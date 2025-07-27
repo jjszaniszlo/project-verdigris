@@ -9,10 +9,11 @@
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
 
-[node name="World" parent="." instance=ExtResource("1_wrm1d")]
+[node name="World" parent="." node_paths=PackedStringArray("ShowCenterTarget") instance=ExtResource("1_wrm1d")]
+ShowCenterTarget = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("1_ebmjs")]
-position = Vector2(256, 256)
+position = Vector2(0, 90.395)
 
 [node name="PlayerFollowCameraComponent" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("2_qxrlw")]
 Player = NodePath("../Player")
@@ -21,19 +22,19 @@ Player = NodePath("../Player")
 script = ExtResource("4_wowpa")
 
 [node name="Crab3" parent="." instance=ExtResource("4_3dryh")]
-position = Vector2(-194, 189)
+position = Vector2(-385, -46)
 
 [node name="Crab" parent="." instance=ExtResource("4_3dryh")]
-position = Vector2(548, 159)
+position = Vector2(47, -105)
 
 [node name="Crab2" parent="." instance=ExtResource("4_3dryh")]
-position = Vector2(26, 181)
+position = Vector2(-93, -112)
 
 [node name="Crab4" parent="." instance=ExtResource("4_3dryh")]
-position = Vector2(845, 100)
+position = Vector2(156, -42)
 
 [node name="Crab5" parent="." instance=ExtResource("4_3dryh")]
 position = Vector2(1184, 193)
 
 [node name="Crab6" parent="." instance=ExtResource("4_3dryh")]
-position = Vector2(-481, 70)
+position = Vector2(-248, -98)
