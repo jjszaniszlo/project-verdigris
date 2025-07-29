@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=28 format=3 uid="uid://cjnq4n6d6eh8o"]
+[gd_resource type="VisualShader" load_steps=29 format=3 uid="uid://cjnq4n6d6eh8o"]
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_d6tax"]
 input_name = "vertex"
@@ -11,14 +11,14 @@ op_type = 0
 linked_parent_graph_frame = 13
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_d6tax"]
-size = Vector2(1610, 1056)
+size = Vector2(1710, 1076)
 title = "Move Button"
 attached_nodes = PackedInt32Array(7, 6, 12, 9, 2, 8)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_o26pd"]
 size = Vector2(3109, 1383)
 title = "Bounce Button"
-attached_nodes = PackedInt32Array(26, 16, 20, 21, 25, 22, 23, 24, 27, 28, 29, 30, 32, 33, 34, 35)
+attached_nodes = PackedInt32Array(26, 16, 20, 21, 25, 22, 23, 24, 27, 28, 29, 30, 32, 33, 34, 35, 36)
 
 [sub_resource type="VisualShaderNodeVectorFunc" id="VisualShaderNodeVectorFunc_d6tax"]
 default_input_values = [0, Vector2(0, 0)]
@@ -28,6 +28,7 @@ op_type = 0
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_d6tax"]
 linked_parent_graph_frame = 13
 parameter_name = "current_time"
+qualifier = 2
 hint = 1
 default_value_enabled = true
 
@@ -97,6 +98,10 @@ parameter_name = "frequency"
 linked_parent_graph_frame = 14
 operator = 2
 
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_0yh6a"]
+linked_parent_graph_frame = 14
+operator = 6
+
 [sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_d6tax"]
 linked_parent_graph_frame = 13
 parameter_name = "move"
@@ -121,7 +126,7 @@ code = "shader_type canvas_item;
 render_mode blend_mix;
 
 uniform vec2 move;
-uniform float current_time : hint_range(0.0, 1.0) = 0.0;
+instance uniform float current_time : hint_range(0.0, 1.0) = 0.0;
 uniform float move_duration = 0.20000000298023;
 uniform float amplitude;
 uniform float damping;
@@ -201,12 +206,17 @@ void vertex() {
 	float n_out21p0 = n_out2p0 - n_out8p0;
 
 
+// FloatOp:36
+	float n_in36p1 = 0.00000;
+	float n_out36p0 = max(n_out21p0, n_in36p1);
+
+
 // FloatParameter:34
 	float n_out34p0 = frequency;
 
 
 // FloatOp:35
-	float n_out35p0 = n_out21p0 * n_out34p0;
+	float n_out35p0 = n_out36p0 * n_out34p0;
 
 
 // FloatFunc:20
@@ -235,7 +245,7 @@ mode = 1
 flags/light_only = false
 nodes/vertex/0/position = Vector2(1280, 640)
 nodes/vertex/2/node = SubResource("VisualShaderNodeFloatParameter_d6tax")
-nodes/vertex/2/position = Vector2(-2340, -360)
+nodes/vertex/2/position = Vector2(-2460, -380)
 nodes/vertex/6/node = SubResource("VisualShaderNodeVec2Parameter_d6tax")
 nodes/vertex/6/position = Vector2(-1560, -300)
 nodes/vertex/7/node = SubResource("VisualShaderNodeMix_o26pd")
@@ -259,7 +269,7 @@ nodes/vertex/16/position = Vector2(-360, 960)
 nodes/vertex/20/node = SubResource("VisualShaderNodeFloatFunc_d6tax")
 nodes/vertex/20/position = Vector2(-560, 1620)
 nodes/vertex/21/node = SubResource("VisualShaderNodeFloatOp_o26pd")
-nodes/vertex/21/position = Vector2(-1160, 1620)
+nodes/vertex/21/position = Vector2(-1400, 1640)
 nodes/vertex/22/node = SubResource("VisualShaderNodeFloatConstant_bb803")
 nodes/vertex/22/position = Vector2(-1040, 1280)
 nodes/vertex/23/node = SubResource("VisualShaderNodeFloatOp_p44f5")
@@ -287,5 +297,7 @@ nodes/vertex/33/position = Vector2(-380, 1240)
 nodes/vertex/34/node = SubResource("VisualShaderNodeFloatParameter_msemx")
 nodes/vertex/34/position = Vector2(-1280, 1940)
 nodes/vertex/35/node = SubResource("VisualShaderNodeFloatOp_uos13")
-nodes/vertex/35/position = Vector2(-860, 1800)
-nodes/vertex/connections = PackedInt32Array(6, 0, 7, 1, 2, 0, 9, 0, 8, 0, 9, 1, 10, 0, 11, 0, 7, 0, 11, 1, 9, 0, 12, 0, 12, 0, 7, 2, 6, 0, 16, 0, 8, 0, 21, 1, 22, 0, 23, 0, 24, 0, 23, 1, 26, 0, 24, 0, 25, 0, 26, 1, 2, 0, 21, 0, 2, 0, 28, 0, 27, 0, 28, 1, 20, 0, 29, 1, 16, 0, 30, 0, 29, 0, 30, 1, 11, 0, 31, 0, 30, 0, 31, 1, 31, 0, 0, 0, 23, 0, 33, 1, 32, 0, 33, 0, 33, 0, 29, 0, 2, 0, 26, 0, 35, 0, 20, 0, 21, 0, 35, 0, 34, 0, 35, 1)
+nodes/vertex/35/position = Vector2(-720, 1800)
+nodes/vertex/36/node = SubResource("VisualShaderNodeFloatOp_0yh6a")
+nodes/vertex/36/position = Vector2(-1100, 1660)
+nodes/vertex/connections = PackedInt32Array(6, 0, 7, 1, 2, 0, 9, 0, 8, 0, 9, 1, 10, 0, 11, 0, 7, 0, 11, 1, 9, 0, 12, 0, 12, 0, 7, 2, 6, 0, 16, 0, 22, 0, 23, 0, 24, 0, 23, 1, 26, 0, 24, 0, 25, 0, 26, 1, 2, 0, 28, 0, 27, 0, 28, 1, 20, 0, 29, 1, 16, 0, 30, 0, 29, 0, 30, 1, 11, 0, 31, 0, 30, 0, 31, 1, 31, 0, 0, 0, 23, 0, 33, 1, 32, 0, 33, 0, 33, 0, 29, 0, 2, 0, 26, 0, 35, 0, 20, 0, 34, 0, 35, 1, 2, 0, 21, 0, 8, 0, 21, 1, 21, 0, 36, 0, 36, 0, 35, 0)

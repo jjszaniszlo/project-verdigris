@@ -32,32 +32,24 @@ public partial class Disolve : VisualShaderNodeCustom
 
 	public override string _GetInputPortName(int port)
 	{
-		switch (port)
+		return port switch
 		{
-			case 0:
-				return "NoiseColor";
-			case 1:
-				return "PixelColor";
-			case 2:
-				return "Threshold";
-			default:
-				throw new ArgumentOutOfRangeException(nameof(port), "Invalid input port index");
-		}
+			0 => "NoiseColor",
+			1 => "PixelColor",
+			2 => "Threshold",
+			_ => throw new ArgumentOutOfRangeException(nameof(port), "Invalid input port index"),
+		};
 	}
 
 	public override PortType _GetInputPortType(int port)
 	{
-		switch (port)
+		return port switch
 		{
-			case 0:
-				return PortType.Vector4D;
-			case 1:
-				return PortType.Vector4D;
-			case 2:
-				return PortType.Scalar;
-			default:
-				throw new ArgumentOutOfRangeException(nameof(port), "Invalid input port index");
-		}
+			0 => PortType.Vector4D,
+			1 => PortType.Vector4D,
+			2 => PortType.Scalar,
+			_ => throw new ArgumentOutOfRangeException(nameof(port), "Invalid input port index"),
+		};
 	}
 
 	public override int _GetOutputPortCount()
@@ -72,13 +64,7 @@ public partial class Disolve : VisualShaderNodeCustom
 
 	public override PortType _GetOutputPortType(int port)
 	{
-		switch (port)
-		{
-			case 0:
-				return PortType.Vector4D;
-			default:
-				return PortType.Scalar;
-		}
+		return PortType.Vector4D;
 	}
 
 	public override string _GetGlobalCode(Mode mode)

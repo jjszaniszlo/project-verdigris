@@ -15,12 +15,13 @@ linked_parent_graph_frame = 8
 input_name = "texture_pixel_size"
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_fkhmd"]
+expanded_output_ports = [0]
 linked_parent_graph_frame = 8
 initialized = true
 script = ExtResource("1_fkhmd")
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_54uc1"]
-size = Vector2(929, 524)
+size = Vector2(889, 524)
 title = ""
 attached_nodes = PackedInt32Array(19, 21, 20, 22)
 
@@ -30,6 +31,47 @@ render_mode blend_mix;
 
 
 
+// TexturePointSmooth
+
+		vec4 texturePointSmooth(sampler2D smp, vec2 uv, vec2 pixel_size)
+		{
+			vec2 ddx = dFdx(uv);
+			vec2 ddy = dFdy(uv);
+			vec2 lxy = sqrt(ddx * ddx + ddy * ddy);
+
+			vec2 uv_pixels = uv / pixel_size;
+
+			vec2 uv_pixels_floor = round(uv_pixels) - vec2(0.5f);
+			vec2 uv_dxy_pixels = uv_pixels - uv_pixels_floor;
+
+			uv_dxy_pixels = clamp((uv_dxy_pixels - vec2(0.5f)) * pixel_size / lxy + vec2(0.5f), 0.0f, 1.0f);
+
+			uv = uv_pixels_floor * pixel_size;
+
+			return textureGrad(smp, uv + uv_dxy_pixels * pixel_size, ddx, ddy);
+        }
+
+void fragment() {
+// Input:20
+	vec2 n_out20p0 = UV;
+
+
+// Input:21
+	vec2 n_out21p0 = TEXTURE_PIXEL_SIZE;
+
+
+	vec4 n_out22p0;
+// TexturePointSmooth:22
+	{
+		n_out22p0 = texturePointSmooth(TEXTURE, n_out20p0, n_out21p0);
+	}
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out22p0.xyz);
+
+
+}
 "
 mode = 1
 flags/light_only = false
@@ -43,5 +85,5 @@ nodes/fragment/20/position = Vector2(-640, 240)
 nodes/fragment/21/node = SubResource("VisualShaderNodeInput_id2w6")
 nodes/fragment/21/position = Vector2(-620, 420)
 nodes/fragment/22/node = SubResource("VisualShaderNodeCustom_fkhmd")
-nodes/fragment/22/position = Vector2(-40, 240)
-nodes/fragment/connections = PackedInt32Array(19, 0, 22, 0, 20, 0, 22, 1, 21, 0, 22, 2)
+nodes/fragment/22/position = Vector2(-80, 180)
+nodes/fragment/connections = PackedInt32Array(19, 0, 22, 0, 20, 0, 22, 1, 21, 0, 22, 2, 22, 0, 0, 0)

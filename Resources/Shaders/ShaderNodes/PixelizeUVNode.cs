@@ -73,7 +73,11 @@ public partial class PixelizeUVNode : VisualShaderNodeCustom
 
     public override PortType _GetOutputPortType(int port)
     {
-        return PortType.Vector2D;
+        return port switch
+        {
+            0 => PortType.Vector4D,
+            _ => throw new ArgumentOutOfRangeException(nameof(port), "Invalid output port index"),
+        };
     }
 
     public override string _GetGlobalCode(Mode mode)

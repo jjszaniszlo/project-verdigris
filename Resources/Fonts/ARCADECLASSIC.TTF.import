@@ -13,18 +13,18 @@ dest_files=["res://.godot/imported/ARCADECLASSIC.TTF-f29baf4db984fbd54f4561b64a7
 [params]
 
 Rendering=null
-antialiasing=1
+antialiasing=0
 generate_mipmaps=false
-disable_embedded_bitmaps=true
+disable_embedded_bitmaps=false
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48
 allow_system_fallback=true
-force_autohinter=false
-hinting=1
+force_autohinter=true
+hinting=2
 subpixel_positioning=4
-keep_rounding_remainders=true
-oversampling=0.0
+keep_rounding_remainders=false
+oversampling=2.0
 Fallbacks=null
 fallbacks=[]
 Compress=null

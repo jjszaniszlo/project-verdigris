@@ -62,7 +62,7 @@ public partial class TexturePointSmooth : VisualShaderNodeCustom
 
 	public override int _GetOutputPortCount()
 	{
-		return 4;
+		return 1;
 	}
 
 	public override string _GetOutputPortName(int port)
@@ -72,7 +72,11 @@ public partial class TexturePointSmooth : VisualShaderNodeCustom
 
 	public override PortType _GetOutputPortType(int port)
 	{
-		return PortType.Vector4D;
+        return port switch
+        {
+            0 => PortType.Vector4D,
+            _ => throw new ArgumentOutOfRangeException(nameof(port), "Invalid output port index"),
+        };
 	}
 
 	public override string _GetGlobalCode(Mode mode)
