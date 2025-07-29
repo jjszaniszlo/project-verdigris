@@ -1,4 +1,13 @@
-[gd_resource type="VisualShader" load_steps=29 format=3 uid="uid://cjnq4n6d6eh8o"]
+[gd_resource type="VisualShader" load_steps=32 format=3 uid="uid://cjnq4n6d6eh8o"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_o26pd"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_bb803"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_bb803"]
+expanded_output_ports = [0]
+input_name = "color"
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_d6tax"]
 input_name = "vertex"
@@ -240,7 +249,21 @@ void vertex() {
 
 
 }
+
+void fragment() {
+// Input:4
+	vec4 n_out4p0 = COLOR;
+	float n_out4p4 = n_out4p0.a;
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out4p0.xyz);
+	COLOR.a = n_out4p4;
+
+
+}
 "
+graph_offset = Vector2(-575.174, -201.597)
 mode = 1
 flags/light_only = false
 nodes/vertex/0/position = Vector2(1280, 640)
@@ -301,3 +324,10 @@ nodes/vertex/35/position = Vector2(-720, 1800)
 nodes/vertex/36/node = SubResource("VisualShaderNodeFloatOp_0yh6a")
 nodes/vertex/36/position = Vector2(-1100, 1660)
 nodes/vertex/connections = PackedInt32Array(6, 0, 7, 1, 2, 0, 9, 0, 8, 0, 9, 1, 10, 0, 11, 0, 7, 0, 11, 1, 9, 0, 12, 0, 12, 0, 7, 2, 6, 0, 16, 0, 22, 0, 23, 0, 24, 0, 23, 1, 26, 0, 24, 0, 25, 0, 26, 1, 2, 0, 28, 0, 27, 0, 28, 1, 20, 0, 29, 1, 16, 0, 30, 0, 29, 0, 30, 1, 11, 0, 31, 0, 30, 0, 31, 1, 31, 0, 0, 0, 23, 0, 33, 1, 32, 0, 33, 0, 33, 0, 29, 0, 2, 0, 26, 0, 35, 0, 20, 0, 34, 0, 35, 1, 2, 0, 21, 0, 8, 0, 21, 1, 21, 0, 36, 0, 36, 0, 35, 0)
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_o26pd")
+nodes/fragment/2/position = Vector2(-1080, 20)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_bb803")
+nodes/fragment/3/position = Vector2(-952.459, 283.866)
+nodes/fragment/4/node = SubResource("VisualShaderNodeInput_bb803")
+nodes/fragment/4/position = Vector2(-420, 20)
+nodes/fragment/connections = PackedInt32Array(4, 0, 0, 0, 4, 4, 0, 1)

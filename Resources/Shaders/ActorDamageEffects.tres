@@ -7,7 +7,7 @@ linked_parent_graph_frame = 12
 input_name = "color"
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_m7el7"]
-size = Vector2(1369, 984)
+size = Vector2(1438, 1347)
 title = "Death Effect"
 attached_nodes = PackedInt32Array(13, 10, 9, 7, 14, 15)
 
@@ -51,7 +51,7 @@ parameter_name = "take_damage_fade"
 qualifier = 2
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_n6fo7"]
-size = Vector2(1029, 524)
+size = Vector2(1029, 737)
 title = "Take Damage"
 attached_nodes = PackedInt32Array(5, 4, 3, 2)
 
