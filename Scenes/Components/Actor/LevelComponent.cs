@@ -10,18 +10,21 @@ namespace Scenes.Components.Actor
         [Export] public int ExperienceToNextLevel { get; private set; } = 10;
 
         [Signal]
-        public delegate void LevelChangedEventHandler(int level, int experience, int ExperienceToNextLevel);
+        public delegate void LevelChangedEventHandler(int levelsGained, int experience, int ExperienceToNextLevel);
+
+        private int _OldLevel = 1;
 
         public void GainExperience(int amount)
         {
             Experience += amount;
-            GD.Print($"Gained {amount} XP. Total: {Experience}");
-            EmitSignal(SignalName.LevelChanged, Level, Experience, ExperienceToNextLevel);
 
+            _OldLevel = Level;
             while (Experience >= ExperienceToNextLevel)
             {
                 LevelUp();
             }
+            int levelsGained = Math.Max(0, Level - _OldLevel);
+            EmitSignal(SignalName.LevelChanged, levelsGained, Experience, ExperienceToNextLevel);
         }
 
         private void LevelUp()
@@ -29,8 +32,7 @@ namespace Scenes.Components.Actor
             Experience -= ExperienceToNextLevel;
             Level++;
             ExperienceToNextLevel = (int)(ExperienceToNextLevel * 1.5f);
-            GD.Print($" Level Up! Your Level {Level} (Next XP: {ExperienceToNextLevel})");
-            EmitSignal(SignalName.LevelChanged, Level, Experience, ExperienceToNextLevel);
+            GD.Print($"Level up! New level: {Level}, Experience to next level: {ExperienceToNextLevel}");
         }
     }
 }

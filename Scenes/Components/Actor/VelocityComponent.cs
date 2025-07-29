@@ -18,6 +18,8 @@ public partial class VelocityComponent : Node
 
 	public float SpeedMultiplier { get; set; } = 1f;
 	public float AccelerationMultiplier { get; set; } = 1f;
+
+	public float CurrentDeceleration => Deceleration * AccelerationMultiplier;
 	public float CurrentAcceleration => Acceleration * AccelerationMultiplier;
 	public float CurrentMaxSpeed => MaxSpeed * SpeedMultiplier;
 
@@ -28,7 +30,7 @@ public partial class VelocityComponent : Node
 
 	public void Decelerate()
 	{
-		Velocity = Velocity.Lerp(Vector2.Zero, 1f - Mathf.Exp(-Deceleration * AccelerationMultiplier * (float)GetProcessDeltaTime()));
+		Velocity = Velocity.Lerp(Vector2.Zero, 1f - Mathf.Exp(-CurrentDeceleration * (float)GetProcessDeltaTime()));
 	}
 
 	public void MinimizeVelocity()
@@ -59,7 +61,7 @@ public partial class VelocityComponent : Node
 
 	private void AccelerateToVelocity(Vector2 velocity)
 	{
-		Velocity = Velocity.Lerp(velocity, 1f - Mathf.Exp(-Acceleration * AccelerationMultiplier * (float)GetProcessDeltaTime()));
+		Velocity = Velocity.Lerp(velocity, 1f - Mathf.Exp(-CurrentAcceleration * (float)GetProcessDeltaTime()));
 	}
 }
 

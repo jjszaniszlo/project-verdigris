@@ -1,4 +1,6 @@
 using Godot;
+using Godot.Collections;
+using Scenes.UI.Game.UpgradeMenu;
 using System;
 
 public partial class PlayerUiControlComponent : Node
@@ -9,11 +11,34 @@ public partial class PlayerUiControlComponent : Node
 	[Export]
 	public PauseMenu PauseMenu { get; private set; }
 
+	[Export]
+	public UpgradeCardsUI UpgradeCards { get; private set; }
+
 	private bool _IsPaused;
+	private bool _IsUpgrading;
 
 	public override void _Ready()
 	{
 		PauseMenu.PauseMenuOptions.ResumeButton.Pressed += TogglePause;
+
+		GameEventBus.Instance.OpenUpgradeSelection += OnOpenUpgradeSelection;
+		GameEventBus.Instance.UpgradeSelected += (_) =>
+		{
+			_IsUpgrading = false;
+			TreeUpdatePause();
+			ToggleEffects();
+			UpdateUIVisibility();
+		};
+	}
+
+	private void OnOpenUpgradeSelection(Array<Resource> upgrades)
+	{
+		_IsUpgrading = true;
+		TreeUpdatePause();
+		ToggleEffects();
+		UpdateUIVisibility();
+
+		UpgradeCards.SetUpgrades(upgrades);
 	}
 
 	public override void _Input(InputEvent @event)
@@ -28,9 +53,14 @@ public partial class PlayerUiControlComponent : Node
 	{
 		_IsPaused = !_IsPaused;
 
-		GetTree().Paused = _IsPaused;
+		TreeUpdatePause();
+		ToggleEffects();
+		UpdateUIVisibility();
+	}
 
-		if (_IsPaused)
+	private void ToggleEffects()
+	{
+		if (_IsPaused || _IsUpgrading)
 		{
 			Globals.Instance.GrayscaleEffect.EnableEffect();
 		}
@@ -38,8 +68,17 @@ public partial class PlayerUiControlComponent : Node
 		{
 			Globals.Instance.GrayscaleEffect.DisableEffect();
 		}
+	}
 
-		InGameUI.Visible = !_IsPaused;
+	private void UpdateUIVisibility()
+	{
+		InGameUI.Visible = !_IsPaused && !_IsUpgrading;
 		PauseMenu.Visible = _IsPaused;
+		UpgradeCards.Visible = _IsUpgrading;
+	}
+
+	private void TreeUpdatePause()
+	{
+		GetTree().Paused = _IsPaused || _IsUpgrading;
 	}
 }

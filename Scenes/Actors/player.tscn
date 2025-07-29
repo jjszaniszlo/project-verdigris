@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bhy6j57tnl5cq"]
+[gd_scene load_steps=29 format=3 uid="uid://bhy6j57tnl5cq"]
 
 [ext_resource type="PackedScene" uid="uid://coiunwvyiuvgx" path="res://Scenes/Components/Actor/velocity_component.tscn" id="1_nikbh"]
 [ext_resource type="Script" uid="uid://b1aqxwcvoie72" path="res://Scenes/Actors/Player.cs" id="1_sfcrp"]
@@ -11,9 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://7jtklok0qiqm" path="res://Scenes/Components/Actor/health_component.tscn" id="4_mqoqv"]
 [ext_resource type="PackedScene" uid="uid://biuhb4u6dyk2o" path="res://Scenes/Components/Actor/in_water_component.tscn" id="7_yffqf"]
 [ext_resource type="PackedScene" uid="uid://bk4p7lxd3k4g6" path="res://Scenes/Components/Actor/LevelComponent.tscn" id="8_0by00"]
-[ext_resource type="PackedScene" uid="uid://2ngqcun0fuju" path="res://Scenes/Components/Actor/shoot_firework_component.tscn" id="10_borc1"]
+[ext_resource type="PackedScene" uid="uid://cjf6h3b6fquyt" path="res://Scenes/Components/Actor/attack_manager_component.tscn" id="9_3345o"]
+[ext_resource type="PackedScene" uid="uid://2ngqcun0fuju" path="res://Scenes/Components/Actor/Attacks/firework_attack_component.tscn" id="10_borc1"]
 [ext_resource type="PackedScene" uid="uid://dsqrlbmhe5in1" path="res://Scenes/Components/Actor/hurtbox_component.tscn" id="11_tbug6"]
+[ext_resource type="PackedScene" uid="uid://d08ncu7nysyjq" path="res://Scenes/Components/Actor/Modifiers/modifier_manager_component.tscn" id="11_wswtc"]
 [ext_resource type="PackedScene" uid="uid://c1b7c3abon176" path="res://Scenes/Components/Actor/die_component.tscn" id="13_8j2b5"]
+[ext_resource type="PackedScene" uid="uid://c6ibryytn27vc" path="res://Scenes/Components/Actor/Modifiers/actor_stat_modifier.tscn" id="15_2d4n6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0b7ey"]
 radius = 3.0
@@ -75,11 +78,11 @@ FlipH = false
 FlipV = false
 metadata/_custom_type_script = "uid://crxwveoxoll7s"
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_3345o"]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tbug6"]
 radius = 6.0
 height = 28.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_borc1"]
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
@@ -112,9 +115,28 @@ MoveAway = SubResource("Resource_8j2b5")
 MoveLeft = SubResource("Resource_tbug6")
 MoveRight = SubResource("Resource_2d4n6")
 
-[node name="DieComponent" parent="." node_paths=PackedStringArray("HealthComponent", "DeathSprite") instance=ExtResource("13_8j2b5")]
+[node name="ModifierManagerComponent" parent="." node_paths=PackedStringArray("AttackManagerComponent") instance=ExtResource("11_wswtc")]
+AttackManagerComponent = NodePath("../AttackManagerComponent")
+
+[node name="ActorStatModifier" parent="ModifierManagerComponent" node_paths=PackedStringArray("HealthComponent", "VelocityComponent") instance=ExtResource("15_2d4n6")]
+HealthComponent = NodePath("../../HealthComponent")
+VelocityComponent = NodePath("../../VelocityComponent")
+
+[node name="AttackManagerComponent" parent="." node_paths=PackedStringArray("PlayerControllerComponent") instance=ExtResource("9_3345o")]
+PlayerControllerComponent = NodePath("../PlayerControllerComponent")
+
+[node name="FireworkAttackComponent" parent="AttackManagerComponent" instance=ExtResource("10_borc1")]
+FireworkProjectileDamage = 10.0
+FireworkExplosionRadius = 20.0
+Damage = 20.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackManagerComponent/FireworkAttackComponent"]
+shape = SubResource("CircleShape2D_3345o")
+
+[node name="DieComponent" parent="." node_paths=PackedStringArray("HealthComponent", "DeathSprite", "ShadowSprite") instance=ExtResource("13_8j2b5")]
 HealthComponent = NodePath("../HealthComponent")
 DeathSprite = NodePath("../InWaterComponent/AnimatedActorComponent")
+ShadowSprite = NodePath("../DropShadowComponent")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_mqoqv")]
 
@@ -126,12 +148,6 @@ TakeDamageSprite = NodePath("../InWaterComponent/AnimatedActorComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(0, -15.765)
 shape = SubResource("CapsuleShape2D_tbug6")
-
-[node name="ShootFireworkComponent" parent="." node_paths=PackedStringArray("PlayerControllerComponent") instance=ExtResource("10_borc1")]
-PlayerControllerComponent = NodePath("../PlayerControllerComponent")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShootFireworkComponent"]
-shape = SubResource("CircleShape2D_borc1")
 
 [node name="LevelComponent" parent="." instance=ExtResource("8_0by00")]
 

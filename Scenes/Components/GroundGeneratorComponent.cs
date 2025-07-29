@@ -54,8 +54,8 @@ public partial class GroundGeneratorComponent : Node
 		var worldSize = Ground.GetUsedRect();
 		var worldSizeStart = worldSize.Position;
 		var worldSizeEnd = worldSize.End;
-		var playerViewPositionPositive = (ShowCenterTarget.Position / TileSize) + new Vector2(ChunkViewDistance, ChunkViewDistance);
-		var playerViewPositionNegative = (ShowCenterTarget.Position / TileSize) - new Vector2(ChunkViewDistance, ChunkViewDistance);
+		var playerViewPositionPositive = (ShowCenterTarget.GlobalPosition / TileSize) + new Vector2(ChunkViewDistance, ChunkViewDistance);
+		var playerViewPositionNegative = (ShowCenterTarget.GlobalPosition / TileSize) - new Vector2(ChunkViewDistance, ChunkViewDistance);
 
 		if (playerViewPositionPositive.X > worldSizeEnd.X)
 		{

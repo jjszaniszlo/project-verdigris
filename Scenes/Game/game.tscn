@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://cobj3mu47c0e0"]
+
+[ext_resource type="PackedScene" uid="uid://cbefq8yhbyces" path="res://Scenes/Game/world.tscn" id="1_flgk0"]
+[ext_resource type="PackedScene" uid="uid://bhy6j57tnl5cq" path="res://Scenes/Actors/player.tscn" id="2_vifcx"]
+[ext_resource type="PackedScene" uid="uid://cffjm1vcc8d5c" path="res://Scenes/Components/camera_follow_component.tscn" id="3_xfil1"]
+[ext_resource type="PackedScene" uid="uid://du3qjuad4s06e" path="res://Scenes/Game/effects_manager.tscn" id="4_huoen"]
+[ext_resource type="PackedScene" uid="uid://1v3ebl0i7aaf" path="res://Scenes/Game/player_upgrade_manager.tscn" id="5_7jvlm"]
+[ext_resource type="PackedScene" uid="uid://dsb5pbed8kp11" path="res://Scenes/Actors/crab.tscn" id="6_qtymf"]
+
+[node name="Game" type="Node2D"]
+y_sort_enabled = true
+
+[node name="World" parent="." node_paths=PackedStringArray("ShowCenterTarget") instance=ExtResource("1_flgk0")]
+ShowCenterTarget = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("2_vifcx")]
+position = Vector2(0, 90.395)
+
+[node name="PlayerFollowCameraComponent" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("3_xfil1")]
+Player = NodePath("../Player")
+
+[node name="EffectsManager" parent="." instance=ExtResource("4_huoen")]
+
+[node name="PlayerUpgradeManager" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("5_7jvlm")]
+Player = NodePath("../Player")
+
+[node name="Crab" parent="." instance=ExtResource("6_qtymf")]
+position = Vector2(626, 53)
+
+[node name="Crab2" parent="." instance=ExtResource("6_qtymf")]
+position = Vector2(413, -84)
+
+[node name="Crab3" parent="." instance=ExtResource("6_qtymf")]
+position = Vector2(-12, -141)
+
+[node name="Crab4" parent="." instance=ExtResource("6_qtymf")]
+position = Vector2(228, -134)
+
+[node name="Crab5" parent="." instance=ExtResource("6_qtymf")]
+position = Vector2(-180, -137)
+
+[node name="Crab6" parent="." instance=ExtResource("6_qtymf")]
+position = Vector2(-361, -121)
+
+[node name="Crab7" parent="." instance=ExtResource("6_qtymf")]
+position = Vector2(606, -69)
+
+[node name="Crab8" parent="." instance=ExtResource("6_qtymf")]
+position = Vector2(-1116, 141)
+
+[node name="Crab9" parent="." instance=ExtResource("6_qtymf")]
+position = Vector2(137, 129)
+
+[node name="Crab10" parent="." instance=ExtResource("6_qtymf")]
+position = Vector2(-76, -8)
+
+[node name="Crab11" parent="." instance=ExtResource("6_qtymf")]
+position = Vector2(-501, -65)
+
+[node name="Crab12" parent="." instance=ExtResource("6_qtymf")]
+position = Vector2(-261, -58)
+
+[node name="Crab13" parent="." instance=ExtResource("6_qtymf")]
+position = Vector2(-669, -61)
+
+[node name="Crab14" parent="." instance=ExtResource("6_qtymf")]
+position = Vector2(-850, -45)
+
+[node name="Crab15" parent="." instance=ExtResource("6_qtymf")]
+position = Vector2(117, 7)
+
+[node name="Crab16" parent="." instance=ExtResource("6_qtymf")]
+position = Vector2(-1026, 6)

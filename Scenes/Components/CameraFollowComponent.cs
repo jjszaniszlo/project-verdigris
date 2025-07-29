@@ -22,7 +22,7 @@ public partial class CameraFollowComponent : Camera2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		Position = Position.Lerp(Player.GlobalPosition, (float)delta * FollowRate);
+		Position = Position.Lerp(Player?.GlobalPosition ?? Position, (float)delta * FollowRate);
 	}
 
     public override void _Notification(int what)

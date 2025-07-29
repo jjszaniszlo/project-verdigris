@@ -22,6 +22,7 @@ SceneManager="*res://Autoloads/SceneManager.cs"
 LoadManager="*res://Autoloads/LoadManager.cs"
 Globals="*res://Autoloads/Globals.cs"
 PlayerEventBus="*res://Autoloads/PlayerEventBus.cs"
+GameEventBus="*res://Autoloads/GameEventBus.cs"
 
 [display]
 
@@ -46,6 +47,7 @@ script/templates_search_path="res://ScriptTemplates"
 folder_colors={
 "res://Scenes/Actors/": "orange",
 "res://Scenes/Components/": "green",
+"res://Scenes/Game/": "yellow",
 "res://Scenes/UI/": "purple"
 }
 

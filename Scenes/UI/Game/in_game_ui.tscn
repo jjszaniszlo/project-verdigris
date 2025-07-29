@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsok1j2vp6j46"]
+[gd_scene load_steps=5 format=3 uid="uid://bsok1j2vp6j46"]
 
 [ext_resource type="PackedScene" uid="uid://bxcdsfwpqdr1c" path="res://Scenes/Components/UI/health_bar_component.tscn" id="1_8kumt"]
+[ext_resource type="Script" uid="uid://b8iviyg547lu4" path="res://Scenes/UI/Game/InGameUi.cs" id="1_sj4bn"]
 [ext_resource type="PackedScene" uid="uid://dv7ldh6felw0o" path="res://Scenes/Components/UI/xp_bar_component.tscn" id="2_sj4bn"]
 [ext_resource type="PackedScene" uid="uid://df2suo3qp6fc8" path="res://Scenes/Components/player_event_subscriber_component.tscn" id="3_53rpn"]
 
@@ -8,6 +9,16 @@
 process_mode = 1
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_sj4bn")
+
+[node name="DebugLabel" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 129.0
+offset_top = 6.0
+offset_right = 177.0
+offset_bottom = 41.0
+text = "Foo"
 
 [node name="HealthBarComponent" parent="." instance=ExtResource("1_8kumt")]
 layout_mode = 0
@@ -24,6 +35,7 @@ offset_right = 119.0
 offset_bottom = 24.0
 value = 0.0
 
-[node name="PlayerEventSubscriberComponent" parent="." node_paths=PackedStringArray("HealthBar", "ExperienceBar") instance=ExtResource("3_53rpn")]
+[node name="PlayerEventSubscriberComponent" parent="." node_paths=PackedStringArray("HealthBar", "ExperienceBar", "DebugLabel") instance=ExtResource("3_53rpn")]
 HealthBar = NodePath("../HealthBarComponent")
 ExperienceBar = NodePath("../XPBarComponent")
+DebugLabel = NodePath("../DebugLabel")

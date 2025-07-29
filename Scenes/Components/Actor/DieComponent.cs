@@ -11,23 +11,37 @@ public partial class DieComponent : Node2D
 	[Export]
 	public CanvasItem DeathSprite { get; private set; }
 
+	[Export]
+	public CanvasItem ShadowSprite { get; private set; }
+
 	[Signal]
 	public delegate void DiedEventHandler();
 
 	public override void _Ready()
 	{
 		HealthComponent.Died += OnDied;
+		if (DeathSprite == null)
+		{
+			GD.PushError("DeathSprite is not set in DieComponent. Please assign a valid CanvasItem.");
+			return;
+		}
+
+		if (ShadowSprite == null)
+		{
+			GD.PushError("ShadowSprite is not set in DieComponent. Please assign a valid CanvasItem.");
+			return;
+		}
 	}
 
 	private async void OnDied()
 	{
-		if (DeathSprite != null)
-		{
-			var tween = CreateTween()
-				.TweenProperty(DeathSprite, "instance_shader_parameters/death_disolve_threshold", 0.0f, 0.5f)
-				.From(1.0f);
-			await ToSignal(tween, Tween.SignalName.Finished);
-		}
+		CreateTween()
+			.TweenProperty(ShadowSprite, "modulate", new Color(1, 1, 1, 0), 1.2f)
+			.FromCurrent();
+		var tween = CreateTween()
+			.TweenProperty(DeathSprite, "instance_shader_parameters/death_disolve_threshold", 0.0f, 1.2f)
+			.From(1.0f);
+		await ToSignal(tween, Tween.SignalName.Finished);
 
 		EmitSignal(SignalName.Died);
 		GetParent().QueueFree();

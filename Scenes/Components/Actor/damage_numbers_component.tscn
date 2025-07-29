@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://b2ri2lf0a6064"]
+
+[node name="DamageNumbersComponent" type="Node2D"]

@@ -18,7 +18,8 @@ public partial class MainMenuControls : Control
     private async void OnPlayButtonPressed()
     {
 		SceneManager.Instance.LoadingScreen = GD.Load<PackedScene>("res://Scenes/UI/loading_screen.tscn");
-		await SceneManager.Instance.SwapScenes("res://Scenes/main.tscn", null, GetTree().Root.GetNode<Node2D>("MainMenu"));
+		Globals.Instance.ScreenShake.StopShake();
+		await SceneManager.Instance.SwapScenes("res://Scenes/Game/main_game.tscn", null, GetTree().Root.GetNode<Node2D>("MainMenu"));
 	}
 
     public override void _Notification(int what)

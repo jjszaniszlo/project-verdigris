@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://mkr4nfl46cjh"]
+
+[ext_resource type="Script" uid="uid://blo8foik5j8ah" path="res://Scenes/UI/Game/UpgradeMenu/UpgradeCardsUI.cs" id="1_8dkoe"]
+
+[sub_resource type="Curve" id="Curve_flr1o"]
+_data = [Vector2(0, 0.00818372), 0.0, 4.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_6qe1h"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="UpgradeCardsUI" type="ColorRect"]
+process_mode = 2
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.2
+anchor_right = 0.95
+anchor_bottom = 0.8
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0)
+script = ExtResource("1_8dkoe")
+HandCurve = SubResource("Curve_flr1o")
+RotationCurve = SubResource("Curve_6qe1h")
+MaxRotation = 0.169
+XSeparation = 17.52
+YMin = 32.0
+YMax = -18.0

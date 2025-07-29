@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://chgdtxyegh3ld"]
 
-[ext_resource type="PackedScene" uid="uid://cbefq8yhbyces" path="res://Scenes/world.tscn" id="1_28flt"]
-[ext_resource type="Script" uid="uid://bsi0hxf62gmjn" path="res://Scenes/CameraMainMenuScroll.cs" id="2_48xlc"]
-[ext_resource type="Script" uid="uid://chy5cs7pxqc35" path="res://Scenes/FireworkSpawner.cs" id="3_vr1f0"]
-[ext_resource type="PackedScene" uid="uid://c2s5anmw84ifa" path="res://Scenes/firework.tscn" id="4_5egv6"]
+[ext_resource type="PackedScene" uid="uid://cbefq8yhbyces" path="res://Scenes/Game/world.tscn" id="1_28flt"]
+[ext_resource type="Script" uid="uid://bsi0hxf62gmjn" path="res://Scenes/UI/MainMenu/CameraMainMenuScroll.cs" id="2_48xlc"]
+[ext_resource type="Script" uid="uid://chy5cs7pxqc35" path="res://Scenes/UI/MainMenu/FireworkSpawner.cs" id="3_vr1f0"]
+[ext_resource type="PackedScene" uid="uid://c2s5anmw84ifa" path="res://Scenes/Game/firework.tscn" id="4_5egv6"]
 [ext_resource type="PackedScene" uid="uid://bh0nj7ybcb2bl" path="res://Scenes/UI/Effect/screen_shake.tscn" id="4_t1dhk"]
 [ext_resource type="PackedScene" uid="uid://cbxqx6hqc7a20" path="res://Scenes/UI/main_menu_ui.tscn" id="6_opfnp"]
 

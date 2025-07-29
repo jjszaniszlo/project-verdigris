@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dv7ldh6felw0o"]
+[gd_scene load_steps=5 format=3 uid="uid://dv7ldh6felw0o"]
 
 [ext_resource type="Texture2D" uid="uid://dmdtoqd2hgbkt" path="res://Resources/Images/GameUI/XPBar/xp_background.png" id="1_yvot6"]
 [ext_resource type="Texture2D" uid="uid://cmy0sq4eyg06o" path="res://Resources/Images/GameUI/XPBar/xp_progress.png" id="2_cu2yl"]
+[ext_resource type="Script" uid="uid://dxcuhrq5uiyhf" path="res://Scenes/Components/UI/XpBarComponent.cs" id="3_12w4b"]
+[ext_resource type="Theme" uid="uid://muh20i7b8ixw" path="res://Resources/ui_theme.tres" id="3_cu2yl"]
 
 [node name="XPBarComponent" type="TextureProgressBar"]
 offset_right = 105.0
@@ -10,3 +12,16 @@ value = 50.0
 texture_under = ExtResource("1_yvot6")
 texture_progress = ExtResource("2_cu2yl")
 texture_progress_offset = Vector2(4, 1)
+script = ExtResource("3_12w4b")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 1.0
+offset_right = 174.0
+offset_bottom = 26.0
+scale = Vector2(0.125, 0.125)
+theme = ExtResource("3_cu2yl")
+text = "Next Level: 10 XP"
+horizontal_alignment = 1
+vertical_alignment = 1

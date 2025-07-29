@@ -14,6 +14,7 @@ public partial class ScreenShake : CanvasLayer
     public override void _Ready()
     {
 		Globals.Instance.ScreenShake = this;
+		StopShake();
     }
 
 	public void PlayShake()
@@ -23,6 +24,11 @@ public partial class ScreenShake : CanvasLayer
 			.SetPauseMode(Tween.TweenPauseMode.Process)
 			.TweenProperty(ColorRect, "material:shader_parameter/ShakeStrength", 0.0f, 0.3f)
 			.From(Strength);
+	}
+
+	public void StopShake()
+	{
+		(ColorRect.Material as ShaderMaterial).SetShaderParameter("ShakeStrength", 0.0f);
 	}
 
 	public override void _Notification(int what)

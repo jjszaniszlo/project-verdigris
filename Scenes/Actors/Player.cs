@@ -2,6 +2,7 @@ using System;
 using Godot;
 using GodotUtilities;
 using Scenes.Components.Actor;
+using Verdigris.Scenes.Components.Actor.Modifiers;
 
 namespace Scenes.Actors;
 
@@ -15,6 +16,9 @@ public partial class Player : CharacterBody2D
 	[Node]
 	public DieComponent DieComponent { get; private set; }
 
+	[Node]
+	public ModifierManagerComponent ModifierManagerComponent { get; private set; }
+
 	public override void _Ready()
 	{
 		Globals.Instance.Player = this;
@@ -22,8 +26,11 @@ public partial class Player : CharacterBody2D
 		HealthComponent.HealthChanged += OnHealthChanged;
 		LevelComponent.LevelChanged += OnLevelChanged;
 
-		PlayerEventBus.Instance.EmitPlayerHealthChanged(HealthComponent.CurrentHealth, HealthComponent.MaxHealth);
-		PlayerEventBus.Instance.EmitPlayerExperienceChanged(LevelComponent.Experience, LevelComponent.ExperienceToNextLevel);
+		GameEventBus.Instance.GameUIReady += () =>
+		{
+			PlayerEventBus.Instance.EmitPlayerHealthChanged(HealthComponent.CurrentHealth, HealthComponent.CurrentMaxHealth);
+			PlayerEventBus.Instance.EmitPlayerExperienceChanged(LevelComponent.Experience, LevelComponent.ExperienceToNextLevel);
+		};
 	}
 
     private void OnHealthChanged(HealthComponent.HealthChangedContext healthChangedContext)
@@ -31,9 +38,10 @@ public partial class Player : CharacterBody2D
 		PlayerEventBus.Instance.EmitPlayerHealthChanged(healthChangedContext.CurrentHealth, healthChangedContext.MaxHealth);
     }
 
-    private void OnLevelChanged(int level, int experience, int experienceToNextLevel)
+    private void OnLevelChanged(int levelsGained, int experience, int experienceToNextLevel)
     {
         PlayerEventBus.Instance.EmitPlayerExperienceChanged(experience, experienceToNextLevel);
+		for (int i = 0; i < levelsGained; i++) PlayerEventBus.Instance.EmitPlayerLevelUp();
     }
 
     public override void _Notification(int what)

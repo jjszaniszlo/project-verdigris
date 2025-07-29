@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cclm3nqhqvsag" path="res://Resources/Atlas/firework.png" id="1_8j6wd"]
 [ext_resource type="Shader" uid="uid://xr1ayboc5bbu" path="res://Resources/Shaders/FireworkEffects.tres" id="1_dwcil"]
 [ext_resource type="Texture2D" uid="uid://bojtxah6b32jr" path="res://Resources/Atlas/firework_emission.png" id="2_t1wx5"]
-[ext_resource type="Script" uid="uid://ka0ud6xtpp2x" path="res://Scenes/Firework.cs" id="4_rly5o"]
+[ext_resource type="Script" uid="uid://ka0ud6xtpp2x" path="res://Scenes/Game/Firework.cs" id="4_rly5o"]
 
 [sub_resource type="Gradient" id="Gradient_o06y3"]
 colors = PackedColorArray(9.191, 0, 0, 1, 1, 0.396078, 0, 1)
