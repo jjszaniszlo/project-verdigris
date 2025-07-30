@@ -35,6 +35,8 @@ public partial class DieComponent : Node2D
 
 	private async void OnDied()
 	{
+		EmitSignal(SignalName.Died);
+
 		CreateTween()
 			.TweenProperty(ShadowSprite, "modulate", new Color(1, 1, 1, 0), 1.2f)
 			.FromCurrent();
@@ -43,7 +45,6 @@ public partial class DieComponent : Node2D
 			.From(1.0f);
 		await ToSignal(tween, Tween.SignalName.Finished);
 
-		EmitSignal(SignalName.Died);
 		GetParent().QueueFree();
 	}
 }

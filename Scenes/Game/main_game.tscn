@@ -23,6 +23,7 @@ texture_filter = 1
 
 [node name="ScreenShake" parent="." instance=ExtResource("2_fuq2u")]
 process_mode = 1
+Strength = 0.2
 
 [node name="DamageNumbers" type="Node" parent="."]
 script = ExtResource("3_fuq2u")
@@ -35,4 +36,5 @@ LabelSettings = SubResource("LabelSettings_fuq2u")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("7_qkdyd")
+volume_db = 0.8
 autoplay = true

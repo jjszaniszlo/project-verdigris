@@ -25,5 +25,6 @@ FireworkScene = ExtResource("4_5egv6")
 SpawnPointCenter = NodePath("../Camera2D")
 
 [node name="ScreenShake" parent="." instance=ExtResource("4_t1dhk")]
+Strength = 0.5
 
 [node name="MainMenuUI" parent="." instance=ExtResource("6_opfnp")]

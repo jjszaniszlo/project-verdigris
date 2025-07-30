@@ -15,6 +15,10 @@ public partial class HurtboxComponent : Area2D
 
 	public void Damage(float amount)
 	{
+		if (HealthComponent.CurrentHealth <= 0)
+		{
+			return;
+		}
 		HealthComponent.Damage(amount);
 		EmitSignal(SignalName.HurtboxDamaged, amount);
 		CreateTween()

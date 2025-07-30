@@ -1,0 +1,28 @@
+[gd_scene load_steps=8 format=3 uid="uid://d0lcswyont3lq"]
+
+[ext_resource type="Shader" uid="uid://xr1ayboc5bbu" path="res://Resources/Shaders/FireworkEffects.tres" id="1_drrbq"]
+[ext_resource type="Texture2D" uid="uid://c0sywr8sxcval" path="res://Resources/Images/firework_bullet.png" id="1_lh1hi"]
+[ext_resource type="Texture2D" uid="uid://dalxsc7smmi1n" path="res://Resources/Images/firework_bullet_emission.png" id="2_xvx12"]
+[ext_resource type="Script" uid="uid://02inacsokaim" path="res://Scenes/Game/ShootEffect.cs" id="4_mgys2"]
+
+[sub_resource type="Gradient" id="Gradient_xvx12"]
+colors = PackedColorArray(0.71, 0.541375, 0.1775, 1, 1, 0.28, 0.28, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mgys2"]
+gradient = SubResource("Gradient_xvx12")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xvx12"]
+shader = ExtResource("1_drrbq")
+shader_parameter/gradient_factor = 5.0
+shader_parameter/gradient = SubResource("GradientTexture2D_mgys2")
+shader_parameter/glow_intensity = 2.074
+shader_parameter/Emission = ExtResource("2_xvx12")
+
+[node name="ShootEffect" type="Sprite2D"]
+modulate = Color(2, 2, 2, 1)
+material = SubResource("ShaderMaterial_xvx12")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_lh1hi")
+script = ExtResource("4_mgys2")

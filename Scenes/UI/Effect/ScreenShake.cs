@@ -22,7 +22,7 @@ public partial class ScreenShake : CanvasLayer
 		CreateTween()
 			.SetProcessMode(Tween.TweenProcessMode.Physics)
 			.SetPauseMode(Tween.TweenPauseMode.Process)
-			.TweenProperty(ColorRect, "material:shader_parameter/ShakeStrength", 0.0f, 0.3f)
+			.TweenProperty(ColorRect, "material:shader_parameter/ShakeStrength", 0.0f, 0.5f)
 			.From(Strength);
 	}
 

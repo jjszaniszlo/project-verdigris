@@ -1,4 +1,6 @@
+using System.ComponentModel.DataAnnotations;
 using Godot;
+using Godot.Collections;
 using GodotUtilities;
 
 namespace Scenes.Components;
@@ -85,6 +87,11 @@ public partial class GroundGeneratorComponent : Node
 	{
 		Ground.Clear();
 
+		var rockyCells = new Array<Vector2I>();
+		var grassyCells = new Array<Vector2I>();
+		var fencyCells = new Array<Vector2I>();
+		var roadyCells = new Array<Vector2I>();
+
 		for (int i = 0; i < ChunkSize; i++)
 		{
 			for (int j = 0; j < ChunkSize; j++)
@@ -104,8 +111,30 @@ public partial class GroundGeneratorComponent : Node
 				{
 					Ground.SetCell(cellPosition, GroundAtlasSourceID, SandTileCoords);
 				}
+
+				if (height > 1 && height < 1.2)
+				{
+					rockyCells.Add(cellPosition);
+				}
+				else if (height >= 1.1 && height < 1.2)
+				{
+					grassyCells.Add(cellPosition);
+				}
+				else if (height >= 1.2 && height < 1.3)
+				{
+					fencyCells.Add(cellPosition);
+				}
+				else if (height >= 1.3)
+				{
+					roadyCells.Add(cellPosition);
+				}
 			}
 		}
+
+		Ground.SetCellsTerrainConnect(rockyCells, 0, 0);
+		Ground.SetCellsTerrainConnect(grassyCells, 0, 1);
+		Ground.SetCellsTerrainConnect(fencyCells, 0, 5);
+		Ground.SetCellsTerrainConnect(roadyCells, 0, 3);
 
 		Water.Clear();
 		for (int i = 0; i < ChunkSize; i++)

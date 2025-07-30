@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://b2ri2lf0a6064"]
+[gd_scene load_steps=2 format=3 uid="uid://b2ri2lf0a6064"]
+
+[ext_resource type="Script" uid="uid://y5bx1xnb6b7q" path="res://Scenes/Components/Actor/DamageNumbersComponent.cs" id="1_gtrel"]
 
 [node name="DamageNumbersComponent" type="Node2D"]
+script = ExtResource("1_gtrel")

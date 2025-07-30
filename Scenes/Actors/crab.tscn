@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dsb5pbed8kp11"]
+[gd_scene load_steps=23 format=3 uid="uid://dsb5pbed8kp11"]
 
 [ext_resource type="Texture2D" uid="uid://ciukdqe1dvd1r" path="res://Resources/Images/crab.png" id="1_dixk2"]
 [ext_resource type="Script" uid="uid://o0fxmvlmbhps" path="res://Scenes/Actors/Crab.cs" id="1_leup1"]
@@ -13,8 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://ba73bxynb7qda" path="res://Scenes/Components/Actor/Attacks/base_attack_component.tscn" id="6_kjmwr"]
 [ext_resource type="PackedScene" uid="uid://c1b7c3abon176" path="res://Scenes/Components/Actor/die_component.tscn" id="7_77io0"]
 [ext_resource type="PackedScene" uid="uid://cdo7ip5i6aukh" path="res://Scenes/Components/Actor/xp_component.tscn" id="7_va5w6"]
+[ext_resource type="AudioStream" uid="uid://bgd5w7egpd5o7" path="res://Resources/Sound/collect.wav" id="9_x6mvq"]
+[ext_resource type="Script" uid="uid://dcnqfktxg0hql" path="res://Scenes/Components/Actor/DeathSoundComponent.cs" id="10_6nscv"]
 [ext_resource type="PackedScene" uid="uid://b2ri2lf0a6064" path="res://Scenes/Components/Actor/damage_numbers_component.tscn" id="14_kjmwr"]
-[ext_resource type="Script" uid="uid://y5bx1xnb6b7q" path="res://Scenes/Components/Actor/DamageNumbersComponent.cs" id="15_12lid"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oe2f4"]
 custom_solver_bias = 0.1
@@ -86,6 +87,11 @@ HealthComponent = NodePath("../HealthComponent")
 DeathSprite = NodePath("../InWaterComponent/Sprite2D")
 ShadowSprite = NodePath("../DropShadowComponent")
 
+[node name="DeathSoundComponent" type="AudioStreamPlayer2D" parent="." node_paths=PackedStringArray("DieComponent")]
+stream = ExtResource("9_x6mvq")
+script = ExtResource("10_6nscv")
+DieComponent = NodePath("../DieComponent")
+
 [node name="HealthComponent" parent="." instance=ExtResource("3_vhv3v")]
 MaxHealth = 60.0
 
@@ -112,5 +118,4 @@ DieComponent = NodePath("../DieComponent")
 
 [node name="DamageNumbersComponent" parent="." node_paths=PackedStringArray("HurtboxComponent") instance=ExtResource("14_kjmwr")]
 position = Vector2(0, -38)
-script = ExtResource("15_12lid")
 HurtboxComponent = NodePath("../HurtboxComponent")
