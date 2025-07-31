@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ibn71s6xd5el"]
+
+[ext_resource type="Script" uid="uid://n04h0qjb8xg6" path="res://Scenes/Components/Actor/HitScanComponent.cs" id="1_5l75l"]
+
+[node name="HitScanComponent" type="RayCast2D"]
+script = ExtResource("1_5l75l")

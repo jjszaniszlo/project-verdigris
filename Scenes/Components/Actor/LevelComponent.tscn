@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk4p7lxd3k4g6"]
+
+[ext_resource type="Script" uid="uid://c4okidq03tqm5" path="res://Scenes/Components/Actor/LevelComponent.cs" id="1_xp"]
+
+[node name="LevelComponent" type="Node"]
+script = ExtResource("1_xp")

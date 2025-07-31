@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxcdsfwpqdr1c"]
+
+[ext_resource type="Texture2D" uid="uid://bgjnne730s74a" path="res://Resources/Images/GameUI/HealthBar/health_background.png" id="1_f1n6t"]
+[ext_resource type="Texture2D" uid="uid://cl7mkhtci6jp0" path="res://Resources/Images/GameUI/HealthBar/health_progress.png" id="3_8g7y1"]
+[ext_resource type="Theme" uid="uid://muh20i7b8ixw" path="res://Resources/ui_theme.tres" id="3_f1n6t"]
+[ext_resource type="Script" uid="uid://bgjsqtd2agvwu" path="res://Scenes/Components/UI/HealthBarComponent.cs" id="3_luhqn"]
+
+[node name="HealthBarComponent" type="TextureProgressBar"]
+offset_right = 120.0
+offset_bottom = 14.0
+value = 100.0
+texture_under = ExtResource("1_f1n6t")
+texture_progress = ExtResource("3_8g7y1")
+texture_progress_offset = Vector2(1, 1)
+script = ExtResource("3_luhqn")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 5.0
+offset_right = 173.0
+offset_bottom = 45.0
+scale = Vector2(0.125, 0.125)
+theme = ExtResource("3_f1n6t")
+text = "100 / 100"

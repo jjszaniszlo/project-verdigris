@@ -1,0 +1,169 @@
+[gd_resource type="VisualShader" load_steps=15 format=3 uid="uid://cad4fqvsekhxw"]
+
+[ext_resource type="Script" uid="uid://b60dn6m8obsya" path="res://Resources/Shaders/ShaderNodes/Disolve.cs" id="1_m7el7"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_efayp"]
+linked_parent_graph_frame = 12
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_m7el7"]
+size = Vector2(1369, 984)
+title = "Death Effect"
+attached_nodes = PackedInt32Array(13, 10, 9, 7, 14, 15)
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_m7el7"]
+linked_parent_graph_frame = 12
+parameter_name = "death_disolve_threshold"
+qualifier = 2
+hint = 1
+default_value_enabled = true
+default_value = 1.0
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_m7el7"]
+linked_parent_graph_frame = 12
+parameter_name = "noise_texture"
+texture_type = 1
+texture_filter = 1
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_m7el7"]
+linked_parent_graph_frame = 12
+source = 5
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_m7el7"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(0.5, 0.5, 0.5)]
+op_type = 3
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_n6fo7"]
+linked_parent_graph_frame = 6
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_n6fo7"]
+linked_parent_graph_frame = 6
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_vjapb"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(1, 1, 1, 1), 2, Quaternion(0.5, 0.5, 0.5, 0.5)]
+linked_parent_graph_frame = 6
+op_type = 5
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_76k3m"]
+linked_parent_graph_frame = 6
+parameter_name = "take_damage_fade"
+qualifier = 2
+
+[sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_n6fo7"]
+size = Vector2(1029, 524)
+title = "Take Damage"
+attached_nodes = PackedInt32Array(5, 4, 3, 2)
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_efayp"]
+expanded_output_ports = [0]
+linked_parent_graph_frame = 12
+initialized = true
+script = ExtResource("1_m7el7")
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_m7el7"]
+linked_parent_graph_frame = 12
+input_name = "uv"
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform sampler2D noise_texture : source_color, filter_nearest;
+instance uniform float death_disolve_threshold : hint_range(0.0, 1.0) = 1.0;
+instance uniform float take_damage_fade;
+
+
+// Disolve
+
+		vec4 disolve(vec4 noise_color, vec4 pixel_color, float threshold) {
+			if (noise_color.r > threshold) {
+				return vec4(0.0, 0.0, 0.0, 0.0);
+			} else {
+				return pixel_color;
+			}
+        }
+
+void fragment() {
+// Input:9
+	vec2 n_out9p0 = UV;
+
+
+	vec4 n_out15p0;
+// Texture2D:15
+	n_out15p0 = texture(noise_texture, n_out9p0);
+
+
+// Input:10
+	vec4 n_out10p0 = COLOR;
+
+
+// FloatParameter:13
+	float n_out13p0 = death_disolve_threshold;
+
+
+	vec4 n_out7p0;
+// Disolve:7
+	{
+		n_out7p0 = disolve(n_out15p0, n_out10p0, n_out13p0);
+	}
+	float n_out7p4 = n_out7p0.a;
+
+
+// Input:3
+	vec4 n_out3p0 = COLOR;
+
+
+// ColorConstant:2
+	vec4 n_out2p0 = vec4(1.000000, 1.000000, 1.000000, 1.000000);
+
+
+// FloatParameter:5
+	float n_out5p0 = take_damage_fade;
+
+
+// Mix:4
+	vec4 n_out4p0 = mix(n_out3p0, n_out2p0, vec4(n_out5p0));
+
+
+// Mix:16
+	vec3 n_out16p0 = mix(vec3(n_out7p0.xyz), vec3(n_out4p0.xyz), vec3(n_out13p0));
+
+
+// Output:0
+	COLOR.rgb = n_out16p0;
+	COLOR.a = n_out7p4;
+
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(480, -100)
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorConstant_n6fo7")
+nodes/fragment/2/position = Vector2(-940, 680)
+nodes/fragment/3/node = SubResource("VisualShaderNodeInput_n6fo7")
+nodes/fragment/3/position = Vector2(-980, 520)
+nodes/fragment/4/node = SubResource("VisualShaderNodeMix_vjapb")
+nodes/fragment/4/position = Vector2(-280, 480)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatParameter_76k3m")
+nodes/fragment/5/position = Vector2(-920, 840)
+nodes/fragment/6/node = SubResource("VisualShaderNodeFrame_n6fo7")
+nodes/fragment/6/position = Vector2(-1020, 418)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_efayp")
+nodes/fragment/7/position = Vector2(-360, -340)
+nodes/fragment/9/node = SubResource("VisualShaderNodeInput_m7el7")
+nodes/fragment/9/position = Vector2(-1400, -920)
+nodes/fragment/10/node = SubResource("VisualShaderNodeInput_efayp")
+nodes/fragment/10/position = Vector2(-900, -360)
+nodes/fragment/12/node = SubResource("VisualShaderNodeFrame_m7el7")
+nodes/fragment/12/position = Vector2(-1440, -1000)
+nodes/fragment/13/node = SubResource("VisualShaderNodeFloatParameter_m7el7")
+nodes/fragment/13/position = Vector2(-800, -100)
+nodes/fragment/14/node = SubResource("VisualShaderNodeTexture2DParameter_m7el7")
+nodes/fragment/14/position = Vector2(-1400, -780)
+nodes/fragment/15/node = SubResource("VisualShaderNodeTexture_m7el7")
+nodes/fragment/15/position = Vector2(-840, -780)
+nodes/fragment/16/node = SubResource("VisualShaderNodeMix_m7el7")
+nodes/fragment/16/position = Vector2(120, 60)
+nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0, 2, 0, 4, 1, 5, 0, 4, 2, 10, 0, 7, 1, 13, 0, 7, 2, 7, 4, 0, 1, 14, 0, 15, 2, 9, 0, 15, 0, 15, 0, 7, 0, 7, 0, 16, 0, 4, 0, 16, 1, 13, 0, 16, 2, 16, 0, 0, 0)

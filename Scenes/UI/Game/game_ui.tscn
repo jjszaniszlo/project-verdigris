@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://6ri4wfclvrwi"]
+
+[ext_resource type="PackedScene" uid="uid://bsok1j2vp6j46" path="res://Scenes/UI/Game/in_game_ui.tscn" id="1_4xw0s"]
+[ext_resource type="PackedScene" uid="uid://wo2joh87jrbr" path="res://Scenes/UI/Game/PauseMenu/pause_menu.tscn" id="2_3mrga"]
+[ext_resource type="PackedScene" uid="uid://mkr4nfl46cjh" path="res://Scenes/UI/Game/UpgradeMenu/upgrade_cards.tscn" id="2_hiq23"]
+[ext_resource type="Script" uid="uid://cda3bgfkg1sgs" path="res://Scenes/Components/UI/PlayerUiControlComponent.cs" id="3_4xw0s"]
+[ext_resource type="PackedScene" uid="uid://d11y0ejbhq56y" path="res://Scenes/UI/Game/GameOver/game_over.tscn" id="4_qecb0"]
+
+[node name="GameUI" type="CanvasLayer"]
+process_mode = 3
+
+[node name="InGameUI" parent="." instance=ExtResource("1_4xw0s")]
+
+[node name="UpgradeCards" parent="." instance=ExtResource("2_hiq23")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_3mrga")]
+process_mode = 2
+visible = false
+
+[node name="GameOver" parent="." instance=ExtResource("4_qecb0")]
+visible = false
+
+[node name="PlayerUIControlComponent" type="Node" parent="." node_paths=PackedStringArray("InGameUI", "PauseMenu", "UpgradeCards", "GameOverUI")]
+script = ExtResource("3_4xw0s")
+InGameUI = NodePath("../InGameUI")
+PauseMenu = NodePath("../PauseMenu")
+UpgradeCards = NodePath("../UpgradeCards")
+GameOverUI = NodePath("../GameOver")

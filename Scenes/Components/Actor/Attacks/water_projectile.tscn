@@ -1,0 +1,38 @@
+[gd_scene load_steps=9 format=3 uid="uid://dhvlme88hw5hk"]
+
+[ext_resource type="Shader" uid="uid://xr1ayboc5bbu" path="res://Resources/Shaders/FireworkEffects.tres" id="1_2o76i"]
+[ext_resource type="Script" uid="uid://dximok150l14u" path="res://Scenes/Components/Actor/Attacks/Projectile.cs" id="1_lrsgp"]
+[ext_resource type="Texture2D" uid="uid://c0sywr8sxcval" path="res://Resources/Images/firework_bullet.png" id="1_rt76q"]
+[ext_resource type="Texture2D" uid="uid://dalxsc7smmi1n" path="res://Resources/Images/firework_bullet_emission.png" id="2_5h66q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5h66q"]
+radius = 4.0
+
+[sub_resource type="Gradient" id="Gradient_2o76i"]
+colors = PackedColorArray(0, 0.564706, 1, 1, 0, 0, 0.364706, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5h66q"]
+gradient = SubResource("Gradient_2o76i")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lrsgp"]
+shader = ExtResource("1_2o76i")
+shader_parameter/gradient_factor = 15.689
+shader_parameter/gradient = SubResource("GradientTexture2D_5h66q")
+shader_parameter/glow_intensity = 0.802
+shader_parameter/Emission = ExtResource("2_5h66q")
+
+[node name="WaterProjectile" type="Area2D"]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_lrsgp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5h66q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_lrsgp")
+position = Vector2(0.5, 0.5)
+texture = ExtResource("1_rt76q")

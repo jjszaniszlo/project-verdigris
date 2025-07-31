@@ -1,0 +1,42 @@
+[gd_scene load_steps=10 format=3 uid="uid://cg0688imk08lr"]
+
+[ext_resource type="PackedScene" uid="uid://cobj3mu47c0e0" path="res://Scenes/Game/game.tscn" id="1_sy0d1"]
+[ext_resource type="PackedScene" uid="uid://bh0nj7ybcb2bl" path="res://Scenes/UI/Effect/screen_shake.tscn" id="2_fuq2u"]
+[ext_resource type="Script" uid="uid://b2drqai28dd6g" path="res://Scenes/Game/DamageNumbers.cs" id="3_fuq2u"]
+[ext_resource type="PackedScene" uid="uid://k6xoaymb4apw" path="res://Scenes/UI/Effect/grayscale_effect.tscn" id="3_q5o1p"]
+[ext_resource type="FontFile" uid="uid://b4vpjpixnar7x" path="res://Resources/Fonts/Kreon-VariableFont_wght.ttf" id="4_q5o1p"]
+[ext_resource type="PackedScene" uid="uid://6ri4wfclvrwi" path="res://Scenes/UI/Game/game_ui.tscn" id="4_qkdyd"]
+[ext_resource type="AudioStream" uid="uid://0eaxl3jjaix3" path="res://Resources/Sound/wave_john_szaniszlo_arrangement.wav" id="7_qkdyd"]
+[ext_resource type="Script" uid="uid://pel8b5ss1y4n" path="res://Scenes/Game/AudioStreamPlayer.cs" id="8_55edr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fuq2u"]
+font = ExtResource("4_q5o1p")
+font_size = 20
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.647059)
+
+[node name="Main" type="Node2D"]
+
+[node name="Game" parent="." instance=ExtResource("1_sy0d1")]
+process_mode = 1
+texture_filter = 1
+
+[node name="ScreenShake" parent="." instance=ExtResource("2_fuq2u")]
+process_mode = 1
+Strength = 0.2
+
+[node name="DamageNumbers" type="Node" parent="."]
+script = ExtResource("3_fuq2u")
+LabelSettings = SubResource("LabelSettings_fuq2u")
+
+[node name="GrayscaleEffect" parent="." instance=ExtResource("3_q5o1p")]
+
+[node name="Game UI" parent="." instance=ExtResource("4_qkdyd")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("7_qkdyd")
+volume_db = 0.8
+autoplay = true
+script = ExtResource("8_55edr")

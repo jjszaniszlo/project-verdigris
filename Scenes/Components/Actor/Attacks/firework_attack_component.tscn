@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://2ngqcun0fuju"]
+
+[ext_resource type="Script" uid="uid://dprkpps6cq7ex" path="res://Scenes/Components/Actor/Attacks/FireworkAttackComponent.cs" id="1_nup8q"]
+[ext_resource type="PackedScene" uid="uid://c2s5anmw84ifa" path="res://Scenes/Game/firework.tscn" id="2_2ljpj"]
+[ext_resource type="PackedScene" uid="uid://caodufqxuogi7" path="res://Scenes/Components/Actor/Modifiers/firework_attack_modifier_component.tscn" id="3_74k7h"]
+[ext_resource type="AudioStream" uid="uid://c2d2bx0n5e2dl" path="res://Resources/Sound/firework.mp3" id="4_ik2ek"]
+
+[node name="FireworkAttackComponent" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource("1_nup8q")
+FireworkEffect = ExtResource("2_2ljpj")
+FireworkProjectileDamage = 1.0
+FireworkExplosionRadius = 30.0
+ModifierComponent = ExtResource("3_74k7h")
+Damage = 2.0
+
+[node name="FireworkSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ik2ek")
+volume_db = 10.0
+max_polyphony = 2

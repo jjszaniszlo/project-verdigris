@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://k6xoaymb4apw"]
+
+[ext_resource type="Script" uid="uid://dcexrkqje3jwg" path="res://Scenes/UI/Effect/GrayscaleEffect.cs" id="1_r3ecp"]
+[ext_resource type="Shader" uid="uid://dw4mp6r6fpvxj" path="res://Resources/Shaders/PauseGrayScale.tres" id="1_tovqr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r3ecp"]
+shader = ExtResource("1_tovqr")
+shader_parameter/gray_intensity = 5.0
+shader_parameter/time = 0.0
+
+[node name="GrayscaleEffect" type="CanvasLayer"]
+script = ExtResource("1_r3ecp")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_r3ecp")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

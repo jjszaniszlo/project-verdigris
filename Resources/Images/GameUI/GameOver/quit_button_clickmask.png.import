@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://yq4y6iayo47t"
+path="res://.godot/imported/quit_button_clickmask.png-77547ecd7015cc1df196a8b317ed0acd.res"
+
+[deps]
+
+source_file="res://Resources/Images/GameUI/GameOver/quit_button_clickmask.png"
+dest_files=["res://.godot/imported/quit_button_clickmask.png-77547ecd7015cc1df196a8b317ed0acd.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

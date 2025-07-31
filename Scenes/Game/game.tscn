@@ -1,0 +1,46 @@
+[gd_scene load_steps=12 format=3 uid="uid://cobj3mu47c0e0"]
+
+[ext_resource type="PackedScene" uid="uid://cbefq8yhbyces" path="res://Scenes/Game/world.tscn" id="1_flgk0"]
+[ext_resource type="PackedScene" uid="uid://bhy6j57tnl5cq" path="res://Scenes/Actors/player.tscn" id="2_vifcx"]
+[ext_resource type="PackedScene" uid="uid://cffjm1vcc8d5c" path="res://Scenes/Components/camera_follow_component.tscn" id="3_xfil1"]
+[ext_resource type="PackedScene" uid="uid://du3qjuad4s06e" path="res://Scenes/Game/effects_manager.tscn" id="4_huoen"]
+[ext_resource type="PackedScene" uid="uid://1v3ebl0i7aaf" path="res://Scenes/Game/player_upgrade_manager.tscn" id="5_7jvlm"]
+[ext_resource type="Script" uid="uid://c5krwdacpb54g" path="res://Scenes/Game/EnemySpawner.cs" id="6_flgk0"]
+[ext_resource type="PackedScene" uid="uid://dsb5pbed8kp11" path="res://Scenes/Actors/crab.tscn" id="6_qtymf"]
+[ext_resource type="Script" uid="uid://bhrpl6wq1p7km" path="res://Scripts/EnemySpawn.cs" id="7_xfil1"]
+[ext_resource type="PackedScene" uid="uid://dqf7t68rqwf0o" path="res://Scenes/Actors/turtle.tscn" id="9_huoen"]
+
+[sub_resource type="Resource" id="Resource_huoen"]
+script = ExtResource("7_xfil1")
+Scene = ExtResource("6_qtymf")
+Weight = 10.0
+metadata/_custom_type_script = "uid://bhrpl6wq1p7km"
+
+[sub_resource type="Resource" id="Resource_xfil1"]
+script = ExtResource("7_xfil1")
+Scene = ExtResource("9_huoen")
+Weight = 1.0
+metadata/_custom_type_script = "uid://bhrpl6wq1p7km"
+
+[node name="Game" type="Node2D"]
+y_sort_enabled = true
+
+[node name="World" parent="." node_paths=PackedStringArray("ShowCenterTarget") instance=ExtResource("1_flgk0")]
+ShowCenterTarget = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("2_vifcx")]
+position = Vector2(0, 90.395)
+
+[node name="PlayerFollowCameraComponent" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("3_xfil1")]
+Player = NodePath("../Player")
+
+[node name="EffectsManager" parent="." instance=ExtResource("4_huoen")]
+
+[node name="PlayerUpgradeManager" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("5_7jvlm")]
+Player = NodePath("../Player")
+
+[node name="EnemySpawner" type="Node2D" parent="." node_paths=PackedStringArray("CameraFollowComponent")]
+y_sort_enabled = true
+script = ExtResource("6_flgk0")
+EnemyScenes = [SubResource("Resource_huoen"), SubResource("Resource_xfil1")]
+CameraFollowComponent = NodePath("../PlayerFollowCameraComponent")

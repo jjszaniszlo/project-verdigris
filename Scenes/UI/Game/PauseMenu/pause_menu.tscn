@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://wo2joh87jrbr"]
+
+[ext_resource type="Script" uid="uid://c4tb35vwhf22x" path="res://Scenes/UI/Game/PauseMenu/PauseMenu.cs" id="1_gs8xb"]
+[ext_resource type="Texture2D" uid="uid://dwboamkek7bgo" path="res://Resources/Images/GameUI/PauseMenu/pausemenu_background.png" id="1_rnbtj"]
+[ext_resource type="PackedScene" uid="uid://1r04jawohfqv" path="res://Scenes/UI/Game/PauseMenu/pause_menu_options.tscn" id="2_fbj7p"]
+[ext_resource type="Texture2D" uid="uid://c0kk277ultg48" path="res://Resources/Images/GameUI/OptionsMenu/background.png" id="3_edsyg"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gs8xb")
+
+[node name="OptionsMenu" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="OptionsMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_left = -83.0
+offset_top = 5.0
+offset_right = 126.0
+offset_bottom = 1.0
+texture = ExtResource("3_edsyg")
+
+[node name="BlackBar" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_right = 112.0
+grow_vertical = 2
+texture = ExtResource("1_rnbtj")
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseMenuOptions" parent="." instance=ExtResource("2_fbj7p")]
+layout_mode = 1

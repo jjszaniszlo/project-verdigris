@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmtsd86i6l48o"]
+
+[ext_resource type="Material" uid="uid://dpvpl3wdut4gn" path="res://Resources/Materials/HoverEffect.tres" id="1_yct0f"]
+[ext_resource type="Script" uid="uid://jps718fahwrm" path="res://Scenes/Components/UI/MenuButton.cs" id="2_j3iyo"]
+
+[node name="MenuButton" type="TextureButton"]
+material = ExtResource("1_yct0f")
+mouse_filter = 1
+action_mode = 0
+stretch_mode = 0
+script = ExtResource("2_j3iyo")

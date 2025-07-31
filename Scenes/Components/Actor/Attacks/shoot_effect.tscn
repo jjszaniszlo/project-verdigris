@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://d0lcswyont3lq"]
+
+[ext_resource type="Script" uid="uid://dximok150l14u" path="res://Scenes/Components/Actor/Attacks/Projectile.cs" id="1_8xmmu"]
+[ext_resource type="Shader" uid="uid://xr1ayboc5bbu" path="res://Resources/Shaders/FireworkEffects.tres" id="2_k6gop"]
+[ext_resource type="Texture2D" uid="uid://dalxsc7smmi1n" path="res://Resources/Images/firework_bullet_emission.png" id="3_ptydk"]
+[ext_resource type="Texture2D" uid="uid://c0sywr8sxcval" path="res://Resources/Images/firework_bullet.png" id="4_utnsl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mgys2"]
+radius = 8.0
+
+[sub_resource type="Gradient" id="Gradient_xvx12"]
+colors = PackedColorArray(0.71, 0.541375, 0.1775, 1, 1, 0.28, 0.28, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mgys2"]
+gradient = SubResource("Gradient_xvx12")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xvx12"]
+shader = ExtResource("2_k6gop")
+shader_parameter/gradient_factor = 5.0
+shader_parameter/gradient = SubResource("GradientTexture2D_mgys2")
+shader_parameter/glow_intensity = 2.074
+shader_parameter/Emission = ExtResource("3_ptydk")
+
+[node name="ShootEffect" type="Area2D"]
+collision_layer = 4
+collision_mask = 4
+input_pickable = false
+script = ExtResource("1_8xmmu")
+Speed = 200.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mgys2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(2, 2, 2, 1)
+material = SubResource("ShaderMaterial_xvx12")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_utnsl")

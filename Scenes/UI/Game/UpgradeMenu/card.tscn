@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://hpqr10mccquc"]
+
+[ext_resource type="Script" uid="uid://dfk3n21wjwpqh" path="res://Scenes/UI/Game/UpgradeMenu/Card.cs" id="1_ewgbw"]
+[ext_resource type="FontFile" uid="uid://b4vpjpixnar7x" path="res://Resources/Fonts/Kreon-VariableFont_wght.ttf" id="3_qa78w"]
+
+[sub_resource type="Theme" id="Theme_c0xxm"]
+default_font = ExtResource("3_qa78w")
+default_font_size = 14
+RichTextLabel/constants/line_separation = -4
+
+[node name="UpgradeCard" type="Control"]
+layout_mode = 3
+anchor_right = 0.15
+anchor_bottom = 0.356
+offset_bottom = -0.0800018
+pivot_offset = Vector2(24, 32)
+script = ExtResource("1_ewgbw")
+
+[node name="TextureButtonComponent" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(48, 64)
+layout_mode = 1
+anchors_preset = -1
+offset_right = 48.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="TextComponent" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 6.0
+offset_top = 36.0
+offset_right = 150.0
+offset_bottom = 124.0
+scale = Vector2(0.25, 0.25)
+mouse_filter = 2
+theme = SubResource("Theme_c0xxm")
+bbcode_enabled = true
+text = "asdasd
+asd
+asd"
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0

@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbxqx6hqc7a20"]
+
+[ext_resource type="Texture2D" uid="uid://bybe855x6wtfp" path="res://Resources/Images/UI/MainMenu/title_character.png" id="1_m7hkf"]
+[ext_resource type="Texture2D" uid="uid://s71sdb5n142x" path="res://Resources/Images/UI/MainMenu/title_text.png" id="2_ee57e"]
+[ext_resource type="PackedScene" uid="uid://coysahaujgmid" path="res://Scenes/Components/UI/main_menu_controls.tscn" id="3_e6g5g"]
+
+[node name="MainMenuCanvas" type="CanvasLayer"]
+
+[node name="MainMenuUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -90.0
+offset_right = 160.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Character" type="TextureRect" parent="MainMenuUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.137
+anchor_top = 0.022
+anchor_right = 0.366
+anchor_bottom = 0.4
+offset_left = 0.159996
+offset_top = 0.0399997
+offset_right = -0.12001
+texture = ExtResource("1_m7hkf")
+
+[node name="TitleText" type="TextureRect" parent="MainMenuUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.119
+anchor_top = 0.322
+anchor_right = 0.891
+anchor_bottom = 0.578
+offset_left = -0.0800018
+offset_top = 0.0399933
+offset_right = -0.119995
+offset_bottom = -0.0400009
+texture = ExtResource("2_ee57e")
+
+[node name="MainMenuControls" parent="MainMenuUI" instance=ExtResource("3_e6g5g")]

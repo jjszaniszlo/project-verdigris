@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://c8um0ncu27gd8"]
+
+[node name="DifficultyModifierComponent" type="Node"]

@@ -10,15 +10,34 @@ config_version=5
 
 [application]
 
-config/name="verdigris"
-run/main_scene="uid://burtslbi2m6l3"
+config/name="Sunburnt Survivors"
+config/version="0.1.0-alpha"
+run/main_scene="uid://chgdtxyegh3ld"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
-config/icon="res://Resources/icon.svg"
+run/max_fps=120
+boot_splash/fullsize=false
+boot_splash/image="uid://5n1mi58pbf34"
+config/icon="uid://5n1mi58pbf34"
+config/macos_native_icon="res://Resources/Images/icon.icns"
+config/windows_native_icon="res://Resources/Images/icon.ico"
 
 [autoload]
 
 SceneManager="*res://Autoloads/SceneManager.cs"
 LoadManager="*res://Autoloads/LoadManager.cs"
+Globals="*res://Autoloads/Globals.cs"
+PlayerEventBus="*res://Autoloads/PlayerEventBus.cs"
+GameEventBus="*res://Autoloads/GameEventBus.cs"
+
+[display]
+
+window/size/viewport_width=320
+window/size/viewport_height=180
+window/size/window_width_override=1920
+window/size/window_height_override=1080
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/vsync/vsync_mode=0
 
 [dotnet]
 
@@ -28,6 +47,57 @@ project/assembly_name="verdigris"
 
 script/templates_search_path="res://ScriptTemplates"
 
+[file_customization]
+
+folder_colors={
+"res://Scenes/Actors/": "orange",
+"res://Scenes/Components/": "green",
+"res://Scenes/Game/": "yellow",
+"res://Scenes/UI/": "purple"
+}
+
+[input]
+
+move_forward={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":119,"location":0,"echo":false,"script":null)
+]
+}
+move_backward={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"location":0,"echo":false,"script":null)
+]
+}
+move_left={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":97,"location":0,"echo":false,"script":null)
+]
+}
+move_right={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"location":0,"echo":false,"script":null)
+]
+}
+shoot_firework={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(442, 27),"global_position":Vector2(456, 100),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+
+[layer_names]
+
+2d_physics/layer_1="World"
+2d_physics/layer_2="Enemies"
+2d_physics/layer_3="Player Attacks"
+2d_physics/layer_4="Enemy Attacks"
+
+[physics]
+
+common/physics_ticks_per_second=30
+common/physics_interpolation=true
+
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 textures/vram_compression/import_etc2_astc=true
+viewport/hdr_2d=true

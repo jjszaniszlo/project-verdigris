@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cffjm1vcc8d5c"]
+
+[ext_resource type="Script" uid="uid://dg7ntonfnsgxc" path="res://Scenes/Components/CameraFollowComponent.cs" id="1_c4d0j"]
+[ext_resource type="PackedScene" uid="uid://cikbi4j5a8mfp" path="res://Scenes/Components/spawn_point_component.tscn" id="2_dtcbu"]
+
+[node name="PlayerFollowCameraComponent" type="Camera2D"]
+process_callback = 0
+script = ExtResource("1_c4d0j")
+
+[node name="SpawnPointComponent" parent="." instance=ExtResource("2_dtcbu")]

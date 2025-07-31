@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://1v3ebl0i7aaf"]
+
+[ext_resource type="Script" uid="uid://coo2wcjowxc70" path="res://Scenes/Game/PlayerUpgradeManager.cs" id="1_3m35q"]
+
+[node name="PlayerUpgradeManager" type="Node"]
+script = ExtResource("1_3m35q")

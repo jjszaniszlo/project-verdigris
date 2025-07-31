@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dpvpl3wdut4gn"]
+
+[ext_resource type="Shader" uid="uid://cjnq4n6d6eh8o" path="res://Resources/Shaders/ButtonHoverEffect.tres" id="1_dt6ut"]
+
+[resource]
+shader = ExtResource("1_dt6ut")
+shader_parameter/move = Vector2(2, -2)
+shader_parameter/move_duration = 0.2
+shader_parameter/amplitude = 4.0
+shader_parameter/damping = 0.5
+shader_parameter/frequency = 4.0
