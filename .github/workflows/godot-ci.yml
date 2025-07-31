@@ -5,10 +5,10 @@ on:
 
 env:
   GODOT_VERSION: 4.4.1
-  EXPORT_NAME: ProjectVerdigris
+  EXPORT_NAME: sunburnt_survivors
   PROJECT_PATH: .
   ITCH_USERNAME: jjszaniszlo
-  ITCH_GAME_ID: project-verdigris
+  ITCH_GAME_ID: sunburnt-survivors
 
 jobs:
   export-windows:
@@ -80,82 +80,98 @@ jobs:
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono
       - name: Mac Build
         run: |
-          mkdir -v -p build/macOS
+          mkdir -v -p build/macos
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
-          godot --headless --verbose --export-release "macOS" "$EXPORT_DIR/macOS/$EXPORT_NAME.zip"
+          godot --headless --verbose --export-release "macOS" "$EXPORT_DIR/macos/$EXPORT_NAME.zip"
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: mac
-          path: build/macOS/
-  # release:
-  #   needs: [ export-linux, export-windows ]
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: write
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v3
-  #       with:
-  #         fetch-depth: 0
+          name: macos
+          path: build/macos/
+  release:
+    needs: [ export-linux, export-windows, export-mac ]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-  #     - name: Set up GitVersion
-  #       uses: gittools/actions/gitversion/setup@v0.9.15
-  #       with:
-  #         versionSpec: '5.x'
+      - name: Set up GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.15
+        with:
+          versionSpec: '5.x'
 
-  #     - name: Execute GitVersion
-  #       uses: gittools/actions/gitversion/execute@v0.9.15
-  #       with:
-  #         useConfigFile: true
-  #         configFilePath: GitVersion.yml
+      - name: Execute GitVersion
+        uses: gittools/actions/gitversion/execute@v0.9.15
+        with:
+          useConfigFile: true
+          configFilePath: GitVersion.yml
 
-  #     - name: Get branch name
-  #       id: get_branch
-  #       run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
+      - name: Get branch name
+        id: get_branch
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
 
-  #     - name: Download Linux artifacts
-  #       uses: actions/download-artifact@v3
-  #       with:
-  #         name: linux
+      - name: Download Linux artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: linux
 
-  #     - name: Download Windows artifacts
-  #       uses: actions/download-artifact@v3
-  #       with:
-  #         name: windows
+      - name: Download MacOS artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: macos
 
-  #     - name: Create Release
-  #       id: create_release
-  #       uses: actions/create-release@v1
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       with:
-  #         tag_name: ${{env.GitVersion_MajorMinorPatch}}
-  #         release_name: ${{env.GitVersion_MajorMinorPatch}}
-  #         body: |
-  #           Release notes for ${{env.GitVersion_MajorMinorPatch}}
-  #         draft: false
-  #         prerelease: false
+      - name: Download Windows artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: windows
 
-  #     - name: Upload Linux Release Asset
-  #       id: upload-linux-release-asset
-  #       uses: actions/upload-release-asset@v1
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       with:
-  #         upload_url: ${{ steps.create_release.outputs.upload_url }}
-  #         asset_path: linux.zip
-  #         asset_name: ${{ env.EXPORT_NAME }}_linux_x86_64.zip
-  #         asset_content_type: application/zip
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{env.GitVersion_MajorMinorPatch}}
+          release_name: ${{env.GitVersion_MajorMinorPatch}}
+          body: |
+            Release notes for ${{env.GitVersion_MajorMinorPatch}}
+          draft: false
+          prerelease: false
 
-  #     - name: Upload Windows Release Asset
-  #       id: upload-windows-release-asset
-  #       uses: actions/upload-release-asset@v1
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       with:
-  #         upload_url: ${{ steps.create_release.outputs.upload_url }}
-  #         asset_path: windows.zip
-  #         asset_name: ${{ env.EXPORT_NAME }}_windows_x86_64.zip
-  #         asset_content_type: application/zip
+      - name: Upload Linux Release Asset
+        id: upload-linux-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: linux.zip
+          asset_name: ${{ env.EXPORT_NAME }}_linux_x86_64.zip
+          asset_content_type: application/zip
+
+      - name: Upload MacOS Release Asset
+        id: upload-macos-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: macos.zip
+          asset_name: ${{ env.EXPORT_NAME }}_macos_universal.zip
+          asset_content_type: application/zip
+
+      - name: Upload Windows Release Asset
+        id: upload-windows-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: windows.zip
+          asset_name: ${{ env.EXPORT_NAME }}_windows_x86_64.zip
+          asset_content_type: application/zip
