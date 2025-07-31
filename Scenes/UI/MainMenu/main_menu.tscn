@@ -14,7 +14,7 @@ position = Vector2(0, 30)
 ShowCenterTarget = NodePath("../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(128, 21)
+position = Vector2(165, 465)
 process_callback = 0
 script = ExtResource("2_48xlc")
 HeightOffset = 30.0

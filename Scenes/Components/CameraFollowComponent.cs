@@ -12,6 +12,9 @@ public partial class CameraFollowComponent : Camera2D
 	[Export]
 	public float FollowRate { get; private set; } = 5f;
 
+	[Node]
+	public SpawnPointComponent SpawnPointComponent { get; private set; }
+
 	public override void _Ready()
 	{
 		Position = Player.GlobalPosition;

@@ -37,7 +37,7 @@ Water = NodePath("../Layers/WaterAndRockLine")
 GroundAtlasSourceID = 1
 WaterAtlasSourceID = 1
 WaterCollisionHeight = -0.3
-ChunkSize = 25
+ChunkSize = 20
 HeightGradientScale = 12
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
