@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Godot;
 using GodotUtilities;
+using Scenes.Actors;
 using Scenes.Components.Actor;
 
 [Scene]
@@ -10,6 +11,9 @@ public partial class FireworkAttackComponent : BaseAttackComponent
 	public PackedScene FireworkEffect { get; private set; }
 	[Export]
 	public PackedScene FireworkProjectileEffect { get; private set; }
+
+	[Export]
+	public float FireworkProjectileSpeed { get; private set; } = 200f;
 
 	[Export]
 	public float FireworkProjectileDamage { get; private set; } = 20f;
@@ -47,7 +51,7 @@ public partial class FireworkAttackComponent : BaseAttackComponent
 
 	public override void _PhysicsProcess(double delta)
 	{
-		GlobalPosition = HitScanComponent.GetHitPosition();
+		GlobalPosition = _CurrentFireworkProjectile?.GlobalPosition ?? GlobalPosition;
 	}
 
     public override void _Notification(int what)
@@ -58,23 +62,35 @@ public partial class FireworkAttackComponent : BaseAttackComponent
 		}
     }
 
-	public override async void Attack()
+	private Projectile _CurrentFireworkProjectile;
+
+	public override void Attack()
 	{
-		var fireworkEffect = FireworkEffect.Instantiate<Node2D>();
-		fireworkEffect.GlobalPosition = GlobalPosition;
+		var fireworkProjectile = FireworkProjectileEffect.Instantiate<Projectile>();
+		fireworkProjectile.Speed = FireworkProjectileSpeed;
+		fireworkProjectile.Damage = FireworkProjectileDamage;
+		fireworkProjectile.Direction = PlayerControllerComponent.AimingDirection;
+		fireworkProjectile.GlobalTransform = HitScanComponent.GlobalTransform;
 
-		var fireworkProjectileEffect = FireworkProjectileEffect.Instantiate<ShootEffect>();
-		Globals.Instance.EffectsManager.AddEffect(fireworkProjectileEffect);
-		var hurtboxProjectile = HitScanComponent.GetCollidiingHurtBox();
-		await fireworkProjectileEffect.Shoot(HitScanComponent.GlobalPosition, GlobalPosition, 300f);
+		var distanceToTarget = HitScanComponent.GlobalPosition.DistanceTo(PlayerControllerComponent.AimingAt);
+		var lifetime = distanceToTarget / FireworkProjectileSpeed;
 
-		hurtboxProjectile?.Damage(CurrentFireworkProjectileDamage);
+		fireworkProjectile.Lifetime = lifetime;
+		_CurrentFireworkProjectile = fireworkProjectile;
+		Globals.Instance.EffectsManager.AddEffect(fireworkProjectile);
+		fireworkProjectile.LifetimeEnded += () =>
+		{
+			var fireworkEffect = FireworkEffect.Instantiate<Node2D>();
+			fireworkEffect.GlobalPosition = fireworkProjectile.GlobalPosition;
 
-		Globals.Instance.ScreenShake.PlayShake();
-		Globals.Instance.EffectsManager.AddEffect(fireworkEffect);
-		FireworkSound.Play();
+			Globals.Instance.EffectsManager.AddEffect(fireworkEffect);
 
-		ApplyDamage();
+			FireworkSound.Play();
+			Globals.Instance.ScreenShake.PlayShake();
+
+			ApplyDamage();
+			_CurrentFireworkProjectile = null;
+		};
 	}
 
 	private void SetExplosionRadius(float radius)

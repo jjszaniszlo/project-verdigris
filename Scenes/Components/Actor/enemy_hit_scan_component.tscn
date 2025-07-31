@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://dwq7mf3837q3n"]
+
+[node name="EnemyHitScanComponent" type="RayCast2D"]

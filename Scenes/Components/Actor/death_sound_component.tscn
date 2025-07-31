@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://gn3nq25awwh4"]
+
+[ext_resource type="AudioStream" uid="uid://bgd5w7egpd5o7" path="res://Resources/Sound/collect.wav" id="1_tokvu"]
+[ext_resource type="Script" uid="uid://dcnqfktxg0hql" path="res://Scenes/Components/Actor/DeathSoundComponent.cs" id="2_nn7h5"]
+
+[node name="DeathSoundComponent" type="AudioStreamPlayer2D" node_paths=PackedStringArray("DieComponent")]
+stream = ExtResource("1_tokvu")
+script = ExtResource("2_nn7h5")
+DieComponent = NodePath("")

@@ -25,10 +25,6 @@ public partial class AnimatedActorComponent : AnimatedSprite2D
 	[Export]
 	public AnimatedSpriteAnimation MoveRight { get; set; }
 
-	public override void _Ready()
-	{
-	}
-
 	public void PlayIdleTowards() => IdleTowards.Play(this);
 	public void PlayIdleAway() => IdleAway.Play(this);
 	public void PlayIdleRight() => IdleRight.Play(this);

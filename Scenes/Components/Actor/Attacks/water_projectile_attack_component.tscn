@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://d103o43f73xg1"]
+
+[ext_resource type="Script" uid="uid://b2pw1bck423ko" path="res://Scenes/Components/Actor/Attacks/WaterProjectileAttackComponent.cs" id="1_ivslk"]
+[ext_resource type="PackedScene" uid="uid://dhvlme88hw5hk" path="res://Scenes/Components/Actor/Attacks/water_projectile.tscn" id="2_f526p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jjn0s"]
+
+[node name="WaterProjectileAttackComponent" type="Area2D"]
+script = ExtResource("1_ivslk")
+WaterProjectileScene = ExtResource("2_f526p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jjn0s")
+disabled = true

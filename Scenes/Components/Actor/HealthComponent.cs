@@ -41,6 +41,7 @@ public partial class HealthComponent : Node
 	public override void _Ready()
 	{
 		CurrentHealth = CurrentMaxHealth;
+		GD.Print($"HealthComponent ready with MaxHealth: {CurrentMaxHealth}, CurrentHealth: {CurrentHealth}, HealthRatio: {CurrentHealthRatio}");
 	}
 
 	public void Damage(float amount)

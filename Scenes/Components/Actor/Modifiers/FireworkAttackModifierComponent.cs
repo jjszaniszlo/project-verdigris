@@ -24,6 +24,12 @@ public partial class FireworkAttackModifierComponent : BaseAttackModifierCompone
         GD.Print($"Adding to explosion radius: {radius}, new radius: {FireworkAttackComponent.FireworkExplosionRadius}");
 	}
 
+	public void AddToCooldownReduction(float reduction)
+	{
+		FireworkAttackComponent.CooldownReductionMultiplier += reduction;
+		GD.Print($"Adding to cooldown reduction: {reduction}, new multiplier: {FireworkAttackComponent.CooldownReductionMultiplier}");
+	}
+
 	public override void InjectAttackComponent(BaseAttackComponent attackComponent)
 	{
 		if (attackComponent is FireworkAttackComponent fireworkAttackComponent)
@@ -44,6 +50,7 @@ public partial class FireworkAttackModifierComponent : BaseAttackModifierCompone
 			AddToExplosionDamageMultiplier(fireworkUpgrade.FireworkExplosionDamageIncrease);
 			AddToProjectileDamageMultiplier(fireworkUpgrade.FireworkProjectileDamageIncrease);
 			AddToExplosionRadius(fireworkUpgrade.FireworkExplosionRadiusIncrease);
+			AddToCooldownReduction(fireworkUpgrade.FireworkCooldownReduction);
 		}
 	}
 }

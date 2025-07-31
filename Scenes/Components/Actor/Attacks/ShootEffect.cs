@@ -1,8 +1,7 @@
 using System.Threading.Tasks;
 using Godot;
-using GodotUtilities;
 
-public partial class ShootEffect : Sprite2D
+public partial class ShootEffect : Area2D 
 {
 	public async Task Shoot(Vector2 startPosition, Vector2 targetPosition, float speed)
 	{

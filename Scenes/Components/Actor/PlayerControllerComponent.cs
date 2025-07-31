@@ -11,6 +11,7 @@ public partial class PlayerControllerComponent : Node2D
 	public CharacterBody2D Player { get; private set; }
 
 	public Vector2 AimingAt => GetGlobalMousePosition();
+	public Vector2 AimingDirection => (AimingAt - GlobalPosition).Normalized();
 	public Vector2 Facing => VelocityComponent.Velocity.Normalized();
 
 	private FacingDirection _CurrentFacingDirection;

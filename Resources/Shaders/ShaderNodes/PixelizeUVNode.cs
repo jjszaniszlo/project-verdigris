@@ -75,7 +75,7 @@ public partial class PixelizeUVNode : VisualShaderNodeCustom
     {
         return port switch
         {
-            0 => PortType.Vector4D,
+            0 => PortType.Vector2D,
             _ => throw new ArgumentOutOfRangeException(nameof(port), "Invalid output port index"),
         };
     }
@@ -96,6 +96,6 @@ public partial class PixelizeUVNode : VisualShaderNodeCustom
 
     public override string _GetCode(Array<string> inputVars, Array<string> outputVars, Mode mode, VisualShader.Type type)
     {
-        return outputVars[0] + " = pixelate_uv(" + inputVars[0] + ".xy, " + inputVars[1] + ".xy);";
+        return $"{outputVars[0]} = pixelate_uv({inputVars[0]}.xy, {inputVars[1]}.xy);";
     }
 }

@@ -19,6 +19,7 @@ script = ExtResource("1_fo5ed")
 
 [node name="Ground" type="TileMapLayer" parent="Layers"]
 unique_name_in_owner = true
+position = Vector2(-7, -1)
 tile_set = ExtResource("1_a02cp")
 
 [node name="WaterAndRockLine" type="TileMapLayer" parent="Layers"]

@@ -33,6 +33,19 @@ public partial class BaseAttackComponent : Area2D
 		}
 	}
 
+	private float _CooldownReductionMultiplier = 1.0f;
+	[Export]
+	public float CooldownReductionMultiplier
+	{
+		get => _CooldownReductionMultiplier;
+		set
+		{
+			_CooldownReductionMultiplier = value;
+			AttackTimer.WaitTime = CurrentCooldown;
+		}
+	}
+	public float CurrentCooldown => Cooldown / CooldownReductionMultiplier;
+
 	public Timer AttackTimer { get; private set; } = new();
 
 	public CollisionShape2D CollisionShape2D { get; private set; }
@@ -44,7 +57,7 @@ public partial class BaseAttackComponent : Area2D
 	{
 		CollisionShape2D = GetNodeOrNull<CollisionShape2D>("CollisionShape2D");
 
-		AttackTimer.WaitTime = Cooldown;
+		AttackTimer.WaitTime = CurrentCooldown;
 		AttackTimer.ProcessCallback = Timer.TimerProcessCallback.Physics;
 		AttackTimer.OneShot = false;
 		AttackTimer.Autostart = true;

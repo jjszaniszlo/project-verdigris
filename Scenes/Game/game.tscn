@@ -1,11 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://cobj3mu47c0e0"]
+[gd_scene load_steps=12 format=3 uid="uid://cobj3mu47c0e0"]
 
 [ext_resource type="PackedScene" uid="uid://cbefq8yhbyces" path="res://Scenes/Game/world.tscn" id="1_flgk0"]
 [ext_resource type="PackedScene" uid="uid://bhy6j57tnl5cq" path="res://Scenes/Actors/player.tscn" id="2_vifcx"]
 [ext_resource type="PackedScene" uid="uid://cffjm1vcc8d5c" path="res://Scenes/Components/camera_follow_component.tscn" id="3_xfil1"]
 [ext_resource type="PackedScene" uid="uid://du3qjuad4s06e" path="res://Scenes/Game/effects_manager.tscn" id="4_huoen"]
 [ext_resource type="PackedScene" uid="uid://1v3ebl0i7aaf" path="res://Scenes/Game/player_upgrade_manager.tscn" id="5_7jvlm"]
+[ext_resource type="Script" uid="uid://c5krwdacpb54g" path="res://Scenes/Game/EnemySpawner.cs" id="6_flgk0"]
 [ext_resource type="PackedScene" uid="uid://dsb5pbed8kp11" path="res://Scenes/Actors/crab.tscn" id="6_qtymf"]
+[ext_resource type="Script" uid="uid://bhrpl6wq1p7km" path="res://Scripts/EnemySpawn.cs" id="7_xfil1"]
+[ext_resource type="PackedScene" uid="uid://dqf7t68rqwf0o" path="res://Scenes/Actors/turtle.tscn" id="9_huoen"]
+
+[sub_resource type="Resource" id="Resource_huoen"]
+script = ExtResource("7_xfil1")
+Scene = ExtResource("6_qtymf")
+Weight = 10.0
+metadata/_custom_type_script = "uid://bhrpl6wq1p7km"
+
+[sub_resource type="Resource" id="Resource_xfil1"]
+script = ExtResource("7_xfil1")
+Scene = ExtResource("9_huoen")
+Weight = 1.0
+metadata/_custom_type_script = "uid://bhrpl6wq1p7km"
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
@@ -24,38 +39,8 @@ Player = NodePath("../Player")
 [node name="PlayerUpgradeManager" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("5_7jvlm")]
 Player = NodePath("../Player")
 
-[node name="Crab" parent="." instance=ExtResource("6_qtymf")]
-position = Vector2(511, -88)
-
-[node name="Crab2" parent="." instance=ExtResource("6_qtymf")]
-position = Vector2(561, 14)
-
-[node name="Crab3" parent="." instance=ExtResource("6_qtymf")]
-position = Vector2(-608, -6)
-
-[node name="Crab4" parent="." instance=ExtResource("6_qtymf")]
-position = Vector2(-426, 61)
-
-[node name="Crab5" parent="." instance=ExtResource("6_qtymf")]
-position = Vector2(219, 118)
-
-[node name="Crab6" parent="." instance=ExtResource("6_qtymf")]
-position = Vector2(-269, 98)
-
-[node name="Crab7" parent="." instance=ExtResource("6_qtymf")]
-position = Vector2(320, 81)
-
-[node name="Crab8" parent="." instance=ExtResource("6_qtymf")]
-position = Vector2(311, -22)
-
-[node name="Crab9" parent="." instance=ExtResource("6_qtymf")]
-position = Vector2(252, -73)
-
-[node name="Crab10" parent="." instance=ExtResource("6_qtymf")]
-position = Vector2(-271, 14)
-
-[node name="Crab11" parent="." instance=ExtResource("6_qtymf")]
-position = Vector2(-257, -63)
-
-[node name="Crab12" parent="." instance=ExtResource("6_qtymf")]
-position = Vector2(-422, -48)
+[node name="EnemySpawner" type="Node2D" parent="." node_paths=PackedStringArray("CameraFollowComponent")]
+y_sort_enabled = true
+script = ExtResource("6_flgk0")
+EnemyScenes = [SubResource("Resource_huoen"), SubResource("Resource_xfil1")]
+CameraFollowComponent = NodePath("../PlayerFollowCameraComponent")

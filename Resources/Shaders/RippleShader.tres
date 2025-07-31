@@ -1,7 +1,7 @@
-[gd_resource type="VisualShader" load_steps=37 format=3 uid="uid://3dkt385m8auv"]
+[gd_resource type="VisualShader" load_steps=32 format=3 uid="uid://3dkt385m8auv"]
 
 [ext_resource type="Texture2D" uid="uid://dt0ab5uswi6lh" path="res://Resources/Images/water/faded_trail_gradient.png" id="1_31kvp"]
-[ext_resource type="Script" uid="uid://cd2l1dxsgh23j" path="res://Resources/Shaders/ShaderNodes/PixelizeUVNode.cs" id="2_8og8n"]
+[ext_resource type="Script" uid="uid://yqb5jjg7ynnk" path="res://Resources/Shaders/ShaderNodes/PixelizeUVNode.cs" id="2_8og8n"]
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_8lv5q"]
 output_port_for_preview = 0
@@ -66,18 +66,6 @@ parameter_name = "UpperCutoff"
 default_value_enabled = true
 default_value = 0.3
 
-[sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_nw8sh"]
-size = Vector2(1809.39, 1127.67)
-title = "Get sine value"
-
-[sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_ldv6u"]
-size = Vector2(572.627, 922.575)
-title = "Get Pixelized Sample"
-
-[sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_lm2iw"]
-size = Vector2(1726.84, 797.328)
-title = "Quantize the value"
-
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_73l4h"]
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_s8vcr"]
@@ -87,10 +75,6 @@ default_value = 0.46
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_gl8s8"]
 input_name = "time"
-
-[sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_2arv1"]
-size = Vector2(1289.06, 1443.64)
-title = "Subtract result from initial alpha"
 
 [sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_8are4"]
 default_input_values = [0, Quaternion(0, 0, 0, 0)]
@@ -116,12 +100,7 @@ operator = 5
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_0ivrc"]
 input_name = "texture_pixel_size"
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_6kfhb"]
-default_input_values = [1, Vector2(0.1, 0.1)]
-initialized = true
-script = ExtResource("2_8og8n")
-
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_2lchr"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_8og8n"]
 default_input_values = [1, Vector2(0.1, 0.1)]
 initialized = true
 script = ExtResource("2_8og8n")
@@ -184,16 +163,16 @@ void fragment() {
 	vec2 n_out71p0 = TEXTURE_PIXEL_SIZE;
 
 
-	vec2 n_out73p0;
-// PixelizeUV:73
+	vec2 n_out72p0;
+// PixelizeUV:72
 	{
-		n_out73p0 = pixelate_uv(n_out68p0.xy, n_out71p0.xy);
+		n_out72p0 = pixelate_uv(n_out68p0.xy, n_out71p0.xy);
 	}
 
 
 	vec4 n_out43p0;
 // Texture2D:43
-	n_out43p0 = texture(TEXTURE, n_out73p0);
+	n_out43p0 = texture(TEXTURE, n_out72p0);
 
 
 // FloatParameter:59
@@ -302,7 +281,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-2204.41, -421.448)
+graph_offset = Vector2(-2515.36, -454.5)
 mode = 1
 flags/light_only = false
 varyings/VertexColour = "0,5"
@@ -348,18 +327,10 @@ nodes/fragment/52/node = SubResource("VisualShaderNodeClamp_yrwx1")
 nodes/fragment/52/position = Vector2(4320, 540)
 nodes/fragment/53/node = SubResource("VisualShaderNodeFloatParameter_r7hog")
 nodes/fragment/53/position = Vector2(3800, 800)
-nodes/fragment/54/node = SubResource("VisualShaderNodeComment_nw8sh")
-nodes/fragment/54/position = Vector2(-2660, -780)
-nodes/fragment/55/node = SubResource("VisualShaderNodeComment_ldv6u")
-nodes/fragment/55/position = Vector2(-3740, -720)
-nodes/fragment/56/node = SubResource("VisualShaderNodeComment_lm2iw")
-nodes/fragment/56/position = Vector2(1040, -220)
 nodes/fragment/58/node = SubResource("VisualShaderNodeColorConstant_73l4h")
 nodes/fragment/58/position = Vector2(4420, 340)
 nodes/fragment/59/node = SubResource("VisualShaderNodeFloatParameter_s8vcr")
 nodes/fragment/59/position = Vector2(-520, 420)
-nodes/fragment/60/node = SubResource("VisualShaderNodeComment_2arv1")
-nodes/fragment/60/position = Vector2(-580, -580)
 nodes/fragment/64/node = SubResource("VisualShaderNodeVectorDecompose_8are4")
 nodes/fragment/64/position = Vector2(-2920, 680)
 nodes/fragment/65/node = SubResource("VisualShaderNodeFloatOp_6fwww")
@@ -372,8 +343,6 @@ nodes/fragment/70/node = SubResource("VisualShaderNodeFloatOp_40j8o")
 nodes/fragment/70/position = Vector2(-2420, 880)
 nodes/fragment/71/node = SubResource("VisualShaderNodeInput_0ivrc")
 nodes/fragment/71/position = Vector2(-5100, -500)
-nodes/fragment/72/node = SubResource("VisualShaderNodeCustom_6kfhb")
-nodes/fragment/72/position = Vector2(-2618.61, -318.112)
-nodes/fragment/73/node = SubResource("VisualShaderNodeCustom_2lchr")
-nodes/fragment/73/position = Vector2(-4320, -660)
-nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 23, 0, 24, 0, 24, 0, 25, 0, 27, 0, 7, 1, 37, 0, 12, 1, 36, 0, 34, 0, 34, 0, 35, 0, 45, 0, 12, 0, 47, 0, 46, 1, 48, 0, 23, 1, 48, 0, 25, 1, 53, 0, 52, 2, 46, 0, 52, 0, 58, 0, 0, 0, 59, 0, 45, 1, 43, 0, 36, 0, 43, 0, 45, 0, 65, 0, 46, 0, 64, 3, 70, 0, 70, 0, 65, 1, 7, 0, 34, 1, 35, 0, 37, 0, 12, 0, 23, 0, 43, 0, 64, 0, 25, 0, 65, 0, 52, 0, 0, 1, 66, 0, 43, 2, 68, 0, 73, 0, 71, 0, 73, 1, 73, 0, 43, 0)
+nodes/fragment/72/node = SubResource("VisualShaderNodeCustom_8og8n")
+nodes/fragment/72/position = Vector2(-4340, -680)
+nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 23, 0, 24, 0, 24, 0, 25, 0, 27, 0, 7, 1, 37, 0, 12, 1, 36, 0, 34, 0, 34, 0, 35, 0, 45, 0, 12, 0, 47, 0, 46, 1, 48, 0, 23, 1, 48, 0, 25, 1, 53, 0, 52, 2, 46, 0, 52, 0, 58, 0, 0, 0, 59, 0, 45, 1, 43, 0, 36, 0, 43, 0, 45, 0, 65, 0, 46, 0, 64, 3, 70, 0, 70, 0, 65, 1, 7, 0, 34, 1, 35, 0, 37, 0, 12, 0, 23, 0, 43, 0, 64, 0, 25, 0, 65, 0, 52, 0, 0, 1, 66, 0, 43, 2, 68, 0, 72, 0, 71, 0, 72, 1, 72, 0, 43, 0)

@@ -1,11 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://bhy6j57tnl5cq"]
+[gd_scene load_steps=30 format=3 uid="uid://bhy6j57tnl5cq"]
 
 [ext_resource type="PackedScene" uid="uid://coiunwvyiuvgx" path="res://Scenes/Components/Actor/velocity_component.tscn" id="1_nikbh"]
 [ext_resource type="Script" uid="uid://b1aqxwcvoie72" path="res://Scenes/Actors/Player.cs" id="1_sfcrp"]
 [ext_resource type="PackedScene" uid="uid://dlhjnaettbij" path="res://Scenes/Components/Actor/drop_shadow_component.tscn" id="2_borc1"]
 [ext_resource type="PackedScene" uid="uid://cvb7btmy0yjd1" path="res://Scenes/Components/Actor/player_controller_component.tscn" id="2_lm2ka"]
 [ext_resource type="PackedScene" uid="uid://uslquwxx1ufm" path="res://Scenes/Components/Actor/animated_actor_component.tscn" id="2_wn7ci"]
-[ext_resource type="Script" uid="uid://d2e7ixj52pq52" path="res://Scenes/Components/Actor/AnimatedActorComponent.cs" id="3_sfcrp"]
 [ext_resource type="SpriteFrames" uid="uid://btivpdcxpr2mm" path="res://Resources/SpriteFrames/player.tres" id="3_tvyim"]
 [ext_resource type="Script" uid="uid://crxwveoxoll7s" path="res://Scripts/AnimatedSpriteAnimation.cs" id="4_b2ja5"]
 [ext_resource type="PackedScene" uid="uid://7jtklok0qiqm" path="res://Scenes/Components/Actor/health_component.tscn" id="4_mqoqv"]
@@ -17,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dsqrlbmhe5in1" path="res://Scenes/Components/Actor/hurtbox_component.tscn" id="11_tbug6"]
 [ext_resource type="PackedScene" uid="uid://d08ncu7nysyjq" path="res://Scenes/Components/Actor/Modifiers/modifier_manager_component.tscn" id="11_wswtc"]
 [ext_resource type="PackedScene" uid="uid://c1b7c3abon176" path="res://Scenes/Components/Actor/die_component.tscn" id="13_8j2b5"]
-[ext_resource type="PackedScene" uid="uid://d0lcswyont3lq" path="res://Scenes/Game/shoot_effect.tscn" id="13_j4j5f"]
+[ext_resource type="PackedScene" uid="uid://d0lcswyont3lq" path="res://Scenes/Components/Actor/Attacks/shoot_effect.tscn" id="13_j4j5f"]
 [ext_resource type="PackedScene" uid="uid://c6ibryytn27vc" path="res://Scenes/Components/Actor/Modifiers/actor_stat_modifier.tscn" id="15_2d4n6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0b7ey"]
@@ -106,8 +105,7 @@ sprite_frames = ExtResource("3_tvyim")
 animation = &"idle_sideways"
 autoplay = "weapon_idle_screen"
 frame_progress = 0.590809
-offset = Vector2(0, -16)
-script = ExtResource("3_sfcrp")
+offset = Vector2(0, -13.98)
 IdleTowards = SubResource("Resource_tvyim")
 IdleAway = SubResource("Resource_4sjoo")
 IdleLeft = SubResource("Resource_borc1")

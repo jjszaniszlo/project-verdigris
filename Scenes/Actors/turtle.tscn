@@ -1,0 +1,232 @@
+[gd_scene load_steps=37 format=3 uid="uid://dqf7t68rqwf0o"]
+
+[ext_resource type="Script" uid="uid://bjap7qr0865y3" path="res://Scenes/Actors/Turtle.cs" id="1_uwred"]
+[ext_resource type="PackedScene" uid="uid://dlhjnaettbij" path="res://Scenes/Components/Actor/drop_shadow_component.tscn" id="2_qq538"]
+[ext_resource type="PackedScene" uid="uid://uslquwxx1ufm" path="res://Scenes/Components/Actor/animated_actor_component.tscn" id="2_smtc1"]
+[ext_resource type="Texture2D" uid="uid://bk5r4d2rii4ys" path="res://Resources/Atlas/turtle.png" id="3_6v6p2"]
+[ext_resource type="PackedScene" uid="uid://biuhb4u6dyk2o" path="res://Scenes/Components/Actor/in_water_component.tscn" id="3_cyx5g"]
+[ext_resource type="Script" uid="uid://crxwveoxoll7s" path="res://Scripts/AnimatedSpriteAnimation.cs" id="4_fjip5"]
+[ext_resource type="PackedScene" uid="uid://deycy24bvuegx" path="res://Scenes/Components/Actor/pathfind_component.tscn" id="6_3xyip"]
+[ext_resource type="PackedScene" uid="uid://coiunwvyiuvgx" path="res://Scenes/Components/Actor/velocity_component.tscn" id="7_0ywu1"]
+[ext_resource type="PackedScene" uid="uid://7jtklok0qiqm" path="res://Scenes/Components/Actor/health_component.tscn" id="8_0ywu1"]
+[ext_resource type="PackedScene" uid="uid://c1b7c3abon176" path="res://Scenes/Components/Actor/die_component.tscn" id="9_33nut"]
+[ext_resource type="PackedScene" uid="uid://gn3nq25awwh4" path="res://Scenes/Components/Actor/death_sound_component.tscn" id="10_1eovo"]
+[ext_resource type="PackedScene" uid="uid://dwq7mf3837q3n" path="res://Scenes/Components/Actor/enemy_hit_scan_component.tscn" id="11_uputd"]
+[ext_resource type="Script" uid="uid://nhnrcmpeil5q" path="res://Scenes/Components/Actor/EnemyHitScanComponent.cs" id="12_yyqob"]
+[ext_resource type="PackedScene" uid="uid://d103o43f73xg1" path="res://Scenes/Components/Actor/Attacks/water_projectile_attack_component.tscn" id="13_vnntk"]
+[ext_resource type="PackedScene" uid="uid://dsqrlbmhe5in1" path="res://Scenes/Components/Actor/hurtbox_component.tscn" id="14_vnntk"]
+[ext_resource type="PackedScene" uid="uid://cdo7ip5i6aukh" path="res://Scenes/Components/Actor/xp_component.tscn" id="15_st4a8"]
+[ext_resource type="PackedScene" uid="uid://b2ri2lf0a6064" path="res://Scenes/Components/Actor/damage_numbers_component.tscn" id="16_s45ij"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fjip5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uputd"]
+atlas = ExtResource("3_6v6p2")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yyqob"]
+atlas = ExtResource("3_6v6p2")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7i1xn"]
+atlas = ExtResource("3_6v6p2")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vnntk"]
+atlas = ExtResource("3_6v6p2")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjip5"]
+atlas = ExtResource("3_6v6p2")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qq538"]
+atlas = ExtResource("3_6v6p2")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8c7v"]
+atlas = ExtResource("3_6v6p2")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xyip"]
+atlas = ExtResource("3_6v6p2")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6v6p2"]
+atlas = ExtResource("3_6v6p2")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ywu1"]
+atlas = ExtResource("3_6v6p2")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33nut"]
+atlas = ExtResource("3_6v6p2")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1eovo"]
+atlas = ExtResource("3_6v6p2")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6v6p2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uputd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yyqob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7i1xn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vnntk")
+}],
+"loop": true,
+"name": &"run_away",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjip5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qq538")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8c7v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3xyip")
+}],
+"loop": true,
+"name": &"run_sideways",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6v6p2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ywu1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33nut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1eovo")
+}],
+"loop": true,
+"name": &"run_towards",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_qq538"]
+script = ExtResource("4_fjip5")
+AnimationName = "run_towards"
+FlipH = false
+FlipV = false
+metadata/_custom_type_script = "uid://crxwveoxoll7s"
+
+[sub_resource type="Resource" id="Resource_x8c7v"]
+script = ExtResource("4_fjip5")
+AnimationName = "run_away"
+FlipH = false
+FlipV = false
+metadata/_custom_type_script = "uid://crxwveoxoll7s"
+
+[sub_resource type="Resource" id="Resource_3xyip"]
+script = ExtResource("4_fjip5")
+AnimationName = "run_sideways"
+FlipH = true
+FlipV = false
+metadata/_custom_type_script = "uid://crxwveoxoll7s"
+
+[sub_resource type="Resource" id="Resource_0ywu1"]
+script = ExtResource("4_fjip5")
+AnimationName = "run_sideways"
+FlipH = false
+FlipV = false
+metadata/_custom_type_script = "uid://crxwveoxoll7s"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vnntk"]
+radius = 15.9
+
+[node name="Turtle" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_uwred")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_fjip5")
+
+[node name="DropShadowComponent" parent="." instance=ExtResource("2_qq538")]
+position = Vector2(0, -3)
+scale = Vector2(0.510782, 0.423797)
+
+[node name="InWaterComponent" parent="." node_paths=PackedStringArray("DropShadowComponent") instance=ExtResource("3_cyx5g")]
+scale = Vector2(2, 2)
+offset = Vector2(0, -4.645)
+DropShadowComponent = NodePath("../DropShadowComponent")
+
+[node name="AnimatedActorComponent" parent="InWaterComponent" instance=ExtResource("2_smtc1")]
+unique_name_in_owner = true
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_6v6p2")
+animation = &"run_towards"
+autoplay = "run_towards"
+frame_progress = 0.858332
+offset = Vector2(0, -10.75)
+MoveTowards = SubResource("Resource_qq538")
+MoveAway = SubResource("Resource_x8c7v")
+MoveLeft = SubResource("Resource_3xyip")
+MoveRight = SubResource("Resource_0ywu1")
+
+[node name="PathfindComponent" parent="." node_paths=PackedStringArray("VelocityComponent") instance=ExtResource("6_3xyip")]
+VelocityComponent = NodePath("../VelocityComponent")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("7_0ywu1")]
+MaxSpeed = 40.0
+Acceleration = 35.0
+Deceleration = 35.0
+
+[node name="HealthComponent" parent="." instance=ExtResource("8_0ywu1")]
+
+[node name="DieComponent" parent="." node_paths=PackedStringArray("HealthComponent", "DeathSprite", "ShadowSprite") instance=ExtResource("9_33nut")]
+HealthComponent = NodePath("../HealthComponent")
+DeathSprite = NodePath("../InWaterComponent/AnimatedActorComponent")
+ShadowSprite = NodePath("../DropShadowComponent")
+
+[node name="DeathSoundComponent" parent="." node_paths=PackedStringArray("DieComponent") instance=ExtResource("10_1eovo")]
+DieComponent = NodePath("../DieComponent")
+
+[node name="EnemyHitScanComponent" parent="." instance=ExtResource("11_uputd")]
+collision_mask = 8
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("12_yyqob")
+
+[node name="WaterProjectileAttackComponent" parent="." node_paths=PackedStringArray("EnemyHitScanComponent") instance=ExtResource("13_vnntk")]
+EnemyHitScanComponent = NodePath("../EnemyHitScanComponent")
+WaterProjectileDamage = 20.0
+Damage = 10.0
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("HealthComponent", "TakeDamageSprite") instance=ExtResource("14_vnntk")]
+collision_layer = 4
+HealthComponent = NodePath("../HealthComponent")
+TakeDamageSprite = NodePath("../InWaterComponent/AnimatedActorComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, -9)
+shape = SubResource("CircleShape2D_vnntk")
+
+[node name="XpComponent" parent="." node_paths=PackedStringArray("DieComponent") instance=ExtResource("15_st4a8")]
+DieComponent = NodePath("../DieComponent")
+ExperiencePoints = 5
+
+[node name="DamageNumbersComponent" parent="." node_paths=PackedStringArray("HurtboxComponent") instance=ExtResource("16_s45ij")]
+HurtboxComponent = NodePath("../HurtboxComponent")

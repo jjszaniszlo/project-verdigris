@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 using GodotUtilities;
 
@@ -5,23 +6,27 @@ using GodotUtilities;
 public partial class SpawnPointComponent : Node2D
 {
 	[Node]
-	public Node2D Top {get; private set; }
+	public Area2D Top {get; private set; }
 	[Node]
-	public Node2D Bottom {get; private set; }
+	public Area2D Bottom {get; private set; }
 	[Node]
-	public Node2D Left {get; private set; }
+	public Area2D Left {get; private set; }
 	[Node]
-	public Node2D Right {get; private set; }
+	public Area2D Right {get; private set; }
 
-	public Vector2 TopPosition => Top.GlobalPosition;
-	public Vector2 BottomPosition => Bottom.GlobalPosition;
-	public Vector2 LeftPosition => Left.GlobalPosition;
-	public Vector2 RightPosition => Right.GlobalPosition;
+	public bool PointCanSpawn(Area2D point) => point.GetOverlappingAreas().Count == 0 && point.GetOverlappingBodies().Count == 0;
 
-	public bool TopInWater => Top.GlobalPosition.Y < -1;
-	public bool BottomInWater => Bottom.GlobalPosition.Y < -1;
-	public bool LeftInWater => Left.GlobalPosition.Y < -1;
-	public bool RightInWater => Right.GlobalPosition.Y < -1;
+	public Vector2 RandomSpawnPoint()
+	{
+		var spawnPoints = new Area2D[] { Top, Bottom, Left, Right }
+			.Where(PointCanSpawn)
+			.Select(area => area.GlobalPosition)
+			.ToArray();
+
+		GD.Print($"Spawn points available: {spawnPoints.Length}");
+
+		return spawnPoints[GD.Randi() % spawnPoints.Length];
+	}
 
 	public override void _Notification(int what)
 	{
