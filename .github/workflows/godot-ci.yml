@@ -33,11 +33,13 @@ jobs:
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
           godot --headless --verbose --export-release "Windows Desktop" "$EXPORT_DIR/windows/$EXPORT_NAME.exe"
+      - name: Zip Windows artifacts
+        run: zip -r ${EXPORT_NAME}_windows.zip build/windows
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows
-          path: build/windows
+          path: ${EXPORT_NAME}_windows.zip
 
   export-linux:
     name: Linux Export
@@ -59,11 +61,13 @@ jobs:
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
           godot --headless --verbose --export-release "Linux" "$EXPORT_DIR/linux/$EXPORT_NAME.x86_64"
+      - name: Zip Linux Artifacts
+        run: zip -r ${EXPORT_NAME}_linux.zip build/linux
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: linux
-          path: build/linux
+          path: ${EXPORT_NAME}_linux.zip
   export-mac:
     name: Mac Export
     runs-on: ubuntu-24.04
@@ -84,11 +88,13 @@ jobs:
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
           godot --headless --verbose --export-release "macOS" "$EXPORT_DIR/macos/$EXPORT_NAME.zip"
+      - name: Zip MacOS Artifacts
+        run: zip -r ${EXPORT_NAME}_macos.zip build/macos
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: macos
-          path: build/macos/
+          path: ${EXPORT_NAME}_macos.zip
   release:
     needs: [ export-linux, export-windows, export-mac ]
     runs-on: ubuntu-24.04
@@ -150,7 +156,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/linux/linux.zip
+          asset_path: ${EXPORT_NAME}_linux.zip
           asset_name: ${{ env.EXPORT_NAME }}_linux_x86_64.zip
           asset_content_type: application/zip
 
@@ -161,7 +167,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/macos/macos.zip
+          asset_path: ${EXPORT_NAME}_macos.zip
           asset_name: ${{ env.EXPORT_NAME }}_macos_universal.zip
           asset_content_type: application/zip
 
@@ -172,6 +178,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/windows/windows.zip
+          asset_path: ${EXPORT_NAME}_windows.zip
           asset_name: ${{ env.EXPORT_NAME }}_windows_x86_64.zip
           asset_content_type: application/zip
