@@ -179,7 +179,7 @@ public partial class FireworkUpgrade : BaseUpgrade, IUpgradeRandom
         card.TextComponent.Text = (FireworkExplosionDamageIncrease > 0 ? $"Exp. Dmg: +{FireworkExplosionDamageIncrease * 100:F1}%\n" : "") +
                                   (FireworkExplosionRadiusIncrease > 0 ? $"Exp. Radius: +{FireworkExplosionRadiusIncrease * 100:F1}%\n" : "") +
                                   (FireworkProjectileDamageIncrease > 0 ? $"Proj. Dmg: +{FireworkProjectileDamageIncrease * 100:F1}%" : "") +
-                                  (FireworkCooldownReduction > 0 ? $"\nFirerate: -{FireworkCooldownReduction * 100:F1}%" : "");
+                                  (FireworkCooldownReduction > 0 ? $"\nFire Rate: +{FireworkCooldownReduction * 100:F1}%" : "");
         card.TextureButtonComponent.TextureNormal = CardBackground;
     }
 }
