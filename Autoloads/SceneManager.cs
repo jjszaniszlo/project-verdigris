@@ -12,6 +12,7 @@ public partial class SceneManager : Node
 
     private bool _isLoading = false;
     private Node _unloadFrom;
+    private Node _loadInto;
 
     public override void _Ready()
     {
@@ -32,15 +33,14 @@ public partial class SceneManager : Node
 
         _isLoading = true;
         _unloadFrom = unloadNode;
-
-        var loadPath = loadParent ?? GetTree().Root;
+        _loadInto = loadParent ?? GetTree().Root;
 
         var loadingScreen = LoadingScreen != null ? LoadingScreen.Instantiate<LoadingScreen>() : null;
         LoadManager.Instance.LoadDone += OnLoadDone;
-        await LoadManager.Instance.LoadScene(scenePath, loadingScreen, loadPath);
+        await LoadManager.Instance.LoadScene(scenePath, loadingScreen, _loadInto);
     }
 
-    private void OnLoadDone()
+    private async void OnLoadDone(PackedScene loadedScene)
     {
         _isLoading = false;
         LoadManager.Instance.LoadDone -= OnLoadDone;
@@ -48,6 +48,8 @@ public partial class SceneManager : Node
         if (_unloadFrom != null)
         {
             _unloadFrom.QueueFree();
+            await ToSignal(_unloadFrom, Node.SignalName.TreeExited);
         }
+        _loadInto.AddChild(loadedScene.Instantiate());
     }
 }

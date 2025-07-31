@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cg0688imk08lr"]
+[gd_scene load_steps=10 format=3 uid="uid://cg0688imk08lr"]
 
 [ext_resource type="PackedScene" uid="uid://cobj3mu47c0e0" path="res://Scenes/Game/game.tscn" id="1_sy0d1"]
 [ext_resource type="PackedScene" uid="uid://bh0nj7ybcb2bl" path="res://Scenes/UI/Effect/screen_shake.tscn" id="2_fuq2u"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://b4vpjpixnar7x" path="res://Resources/Fonts/Kreon-VariableFont_wght.ttf" id="4_q5o1p"]
 [ext_resource type="PackedScene" uid="uid://6ri4wfclvrwi" path="res://Scenes/UI/Game/game_ui.tscn" id="4_qkdyd"]
 [ext_resource type="AudioStream" uid="uid://0eaxl3jjaix3" path="res://Resources/Sound/wave_john_szaniszlo_arrangement.wav" id="7_qkdyd"]
+[ext_resource type="Script" uid="uid://pel8b5ss1y4n" path="res://Scenes/Game/AudioStreamPlayer.cs" id="8_55edr"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fuq2u"]
 font = ExtResource("4_q5o1p")
@@ -38,3 +39,4 @@ process_mode = 3
 stream = ExtResource("7_qkdyd")
 volume_db = 0.8
 autoplay = true
+script = ExtResource("8_55edr")

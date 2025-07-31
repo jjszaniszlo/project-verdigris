@@ -42,7 +42,7 @@ public partial class LoadingScreen : CanvasLayer
 		LoadingProgress.Value = newProgress * 100f;
 	}
 
-	public void LeaveTransition()
+	public void LeaveTransition(PackedScene loadedScene)
 	{
 		FadeEffectComponent.FadeOut();
 	}

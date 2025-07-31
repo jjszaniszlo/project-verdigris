@@ -24,6 +24,10 @@ public partial class Player : CharacterBody2D
 		Globals.Instance.Player = this;
 
 		HealthComponent.HealthChanged += OnHealthChanged;
+		DieComponent.Died += () =>
+		{
+			GameEventBus.Instance.EmitGameOver();
+		};
 		LevelComponent.LevelChanged += OnLevelChanged;
 
 		GameEventBus.Instance.GameUIReady += () =>

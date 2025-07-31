@@ -2,23 +2,28 @@ using Godot;
 using GodotUtilities;
 using Verdigris.Autoloads;
 
-namespace Scenes.UI.Game.PauseMenu;
-
 [Scene]
-public partial class PauseMenuOptions : Control
+public partial class GameOver : Control
 {
 	[Node]
-	public MenuButton ResumeButton { get; private set; }
+	public BaseButton RestartButton { get; private set; }
 
 	[Node]
-	public MenuButton OptionsButton { get; private set; }
-
-	[Node]
-	public MenuButton QuitButton { get; private set; }
-
+	public BaseButton QuitButton { get; private set; }
 
 	public override void _Ready()
 	{
+		RestartButton.Pressed += async () =>
+		{
+			SceneManager.Instance.LoadingScreen = GD.Load<PackedScene>("res://Scenes/UI/loading_screen.tscn");
+			Globals.Instance.ScreenShake.StopShake();
+			GetTree().Paused = false;
+			GameEventBus.Reset();
+			PlayerEventBus.Reset();
+			await SceneManager.Instance.SwapScenes("res://Scenes/Game/main_game.tscn", null, GetTree().Root.GetNode<Node>("Main"));
+			Globals.Instance.GrayscaleEffect.DisableEffect();
+		};
+
 		QuitButton.Pressed += async () =>
 		{
 			SceneManager.Instance.LoadingScreen = GD.Load<PackedScene>("res://Scenes/UI/loading_screen.tscn");

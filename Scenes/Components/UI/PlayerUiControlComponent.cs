@@ -14,8 +14,12 @@ public partial class PlayerUiControlComponent : Node
 	[Export]
 	public UpgradeCardsUI UpgradeCards { get; private set; }
 
+	[Export]
+	public Control GameOverUI { get; private set; }
+
 	private bool _IsPaused;
 	private bool _IsUpgrading;
+	private bool _IsGameOver;
 
 	public override void _Ready()
 	{
@@ -25,6 +29,13 @@ public partial class PlayerUiControlComponent : Node
 		GameEventBus.Instance.UpgradeSelected += (_) =>
 		{
 			_IsUpgrading = false;
+			TreeUpdatePause();
+			ToggleEffects();
+			UpdateUIVisibility();
+		};
+		GameEventBus.Instance.GameOver += () =>
+		{
+			_IsGameOver = true;
 			TreeUpdatePause();
 			ToggleEffects();
 			UpdateUIVisibility();
@@ -60,7 +71,7 @@ public partial class PlayerUiControlComponent : Node
 
 	private void ToggleEffects()
 	{
-		if (_IsPaused || _IsUpgrading)
+		if (_IsPaused || _IsUpgrading || _IsGameOver)
 		{
 			Globals.Instance.GrayscaleEffect.EnableEffect();
 		}
@@ -72,13 +83,14 @@ public partial class PlayerUiControlComponent : Node
 
 	private void UpdateUIVisibility()
 	{
-		InGameUI.Visible = !_IsPaused && !_IsUpgrading;
+		InGameUI.Visible = !_IsPaused && !_IsUpgrading && !_IsGameOver;
 		PauseMenu.Visible = _IsPaused;
 		UpgradeCards.Visible = _IsUpgrading;
+		GameOverUI.Visible = _IsGameOver;
 	}
 
 	private void TreeUpdatePause()
 	{
-		GetTree().Paused = _IsPaused || _IsUpgrading;
+		GetTree().Paused = _IsPaused || _IsUpgrading || _IsGameOver;
 	}
 }

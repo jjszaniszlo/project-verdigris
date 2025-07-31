@@ -18,7 +18,7 @@ public partial class LoadManager : Node
     [Signal]
     public delegate void LoadProgressChangedEventHandler(float progress);
     [Signal]
-    public delegate void LoadDoneEventHandler();
+    public delegate void LoadDoneEventHandler(PackedScene loadedScene);
 
     public override void _Ready()
     {
@@ -47,7 +47,7 @@ public partial class LoadManager : Node
 
     private void StartLoad()
     {
-        var resourceThreadRequest = ResourceLoader.LoadThreadedRequest(_scenePath, "", UseSubThreads);
+        var resourceThreadRequest = ResourceLoader.LoadThreadedRequest(_scenePath, "", UseSubThreads, ResourceLoader.CacheMode.IgnoreDeep);
         if (resourceThreadRequest == Error.Ok)
         {
             SetProcess(true);
@@ -72,10 +72,9 @@ public partial class LoadManager : Node
             case ResourceLoader.ThreadLoadStatus.Loaded:
                 var loadedResource = (PackedScene)ResourceLoader.LoadThreadedGet(_scenePath);
                 EmitSignal(SignalName.LoadProgressChanged, progress[0]);
-                EmitSignal(SignalName.LoadDone);
+                EmitSignal(SignalName.LoadDone, loadedResource);
                 LoadProgressChanged -= _loadingScreen.UpdateProgressBar;
                 LoadDone -= _loadingScreen.LeaveTransition;
-                _loadInto.AddChild(loadedResource.Instantiate());
                 break;
 
         }

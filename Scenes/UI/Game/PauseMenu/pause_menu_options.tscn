@@ -19,7 +19,6 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2vdt6"]
 shader = ExtResource("11_y55yj")
 shader_parameter/move = Vector2(2, -2)
-shader_parameter/current_time = 0.0
 shader_parameter/move_duration = 0.2
 shader_parameter/amplitude = 2.0
 shader_parameter/damping = 1.0
@@ -28,7 +27,6 @@ shader_parameter/frequency = 10.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y55yj"]
 shader = ExtResource("11_y55yj")
 shader_parameter/move = Vector2(2, -2)
-shader_parameter/current_time = 0.0
 shader_parameter/move_duration = 0.2
 shader_parameter/amplitude = 2.0
 shader_parameter/damping = 1.0
@@ -37,7 +35,6 @@ shader_parameter/frequency = 10.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8iiih"]
 shader = ExtResource("11_y55yj")
 shader_parameter/move = Vector2(2, -2)
-shader_parameter/current_time = 0.0
 shader_parameter/move_duration = 0.2
 shader_parameter/amplitude = 2.0
 shader_parameter/damping = 1.0

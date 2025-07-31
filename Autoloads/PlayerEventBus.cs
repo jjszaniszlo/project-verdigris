@@ -22,6 +22,12 @@ public partial class PlayerEventBus : Node
 		Instance = this;
 	}
 
+    public static void Reset()
+    {
+        Instance = null;
+        Instance = new PlayerEventBus();
+    }
+
 	public void EmitPlayerDied()
 	{
 		EmitSignal(SignalName.PlayerDied);

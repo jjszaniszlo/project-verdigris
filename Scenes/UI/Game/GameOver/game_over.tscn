@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://d11y0ejbhq56y"]
+
+[ext_resource type="Script" uid="uid://bsmogysg1yg3f" path="res://Scenes/UI/Game/GameOver/GameOver.cs" id="1_a57hl"]
+[ext_resource type="PackedScene" uid="uid://dmtsd86i6l48o" path="res://Scenes/Components/UI/menu_button.tscn" id="1_or4nr"]
+[ext_resource type="Texture2D" uid="uid://b7mhh18as0wbw" path="res://Resources/Images/GameUI/GameOver/restart_button.png" id="2_3jljy"]
+[ext_resource type="Texture2D" uid="uid://3jevqplin6h7" path="res://Resources/Images/GameUI/GameOver/quit_button.png" id="2_djr1y"]
+[ext_resource type="Texture2D" uid="uid://dj2kxp4vgreh1" path="res://Resources/Images/GameUI/GameOver/quit_button_hover.png" id="3_d2i6v"]
+[ext_resource type="Texture2D" uid="uid://cj1bc4x8yttup" path="res://Resources/Images/GameUI/GameOver/restart_button_hover.png" id="3_ehw5o"]
+[ext_resource type="BitMap" uid="uid://nhfi2m476k28" path="res://Resources/Images/GameUI/GameOver/restart_button_clickmask.png" id="4_ehw5o"]
+[ext_resource type="BitMap" uid="uid://yq4y6iayo47t" path="res://Resources/Images/GameUI/GameOver/quit_button_clickmask.png" id="4_ingtj"]
+[ext_resource type="Texture2D" uid="uid://cmyxrk86rpqbu" path="res://Resources/Images/GameUI/GameOver/bg_art.png" id="5_ingtj"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a57hl")
+
+[node name="RestartButton" parent="." instance=ExtResource("1_or4nr")]
+layout_mode = 0
+offset_left = 127.0
+offset_top = 127.0
+offset_right = 194.0
+offset_bottom = 145.0
+texture_normal = ExtResource("2_3jljy")
+texture_pressed = ExtResource("3_ehw5o")
+texture_hover = ExtResource("3_ehw5o")
+texture_focused = ExtResource("3_ehw5o")
+texture_click_mask = ExtResource("4_ehw5o")
+
+[node name="QuitButton" parent="." instance=ExtResource("1_or4nr")]
+layout_mode = 0
+offset_left = 137.0
+offset_top = 147.0
+offset_right = 183.0
+offset_bottom = 165.0
+texture_normal = ExtResource("2_djr1y")
+texture_pressed = ExtResource("3_d2i6v")
+texture_hover = ExtResource("3_d2i6v")
+texture_focused = ExtResource("3_d2i6v")
+texture_click_mask = ExtResource("4_ingtj")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 67.0
+offset_right = 267.0
+offset_bottom = 115.0
+texture = ExtResource("5_ingtj")

@@ -12,19 +12,23 @@ public partial class MenuButton : TextureButton
 		MouseExited += ButtonExit;
 		FocusEntered += ButtonEnter;
 		FocusExited += ButtonExit;
+		
+		PivotOffset = Size / 2;
 	}
 
 	public void ButtonEnter()
 	{
-		CreateTween().TweenProperty(this, "instance_shader_parameters/current_time", 1.0f, 0.2f);
+		CreateTween()
+			.SetProcessMode(Tween.TweenProcessMode.Physics)
+			.TweenProperty(this, "scale", new Vector2(1.2f, 1.2f), 0.2f);
 	}
 
 	public void ButtonExit()
 	{
-		if (!new Rect2(Vector2.Zero, Size).HasPoint(GetLocalMousePosition()))
-			CreateTween()
-				.TweenProperty(this, "instance_shader_parameters/current_time", 0.0f, 0.1f)
-				.From(1.0f);
+		CreateTween()
+			.SetProcessMode(Tween.TweenProcessMode.Physics)
+			.TweenProperty(this, "scale", new Vector2(1.0f, 1.0f), 0.2f)
+			.FromCurrent();
 	}
 
 	public override void _Notification(int what)

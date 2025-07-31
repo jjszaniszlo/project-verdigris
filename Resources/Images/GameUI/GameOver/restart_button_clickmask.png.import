@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://nhfi2m476k28"
+path="res://.godot/imported/restart_button_clickmask.png-fc8e7dc0d880ceb12bdddebfe3583dd2.res"
+
+[deps]
+
+source_file="res://Resources/Images/GameUI/GameOver/restart_button_clickmask.png"
+dest_files=["res://.godot/imported/restart_button_clickmask.png-fc8e7dc0d880ceb12bdddebfe3583dd2.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

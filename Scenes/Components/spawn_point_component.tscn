@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cikbi4j5a8mfp"]
+
+[ext_resource type="Script" uid="uid://t8crwpqaqnkw" path="res://Scenes/Components/SpawnPointComponent.cs" id="1_wjcmr"]
+
+[node name="SpawnPointComponent" type="Node2D"]
+script = ExtResource("1_wjcmr")
+
+[node name="Top" type="Node2D" parent="."]
+position = Vector2(0, -200)
+
+[node name="Right" type="Node2D" parent="."]
+position = Vector2(400, 0)
+
+[node name="Left" type="Node2D" parent="."]
+position = Vector2(-400, 0)
+
+[node name="Bottom" type="Node2D" parent="."]
+position = Vector2(0, 200)
