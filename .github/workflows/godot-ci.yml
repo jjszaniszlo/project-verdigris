@@ -5,7 +5,6 @@ on:
 
 env:
   GODOT_VERSION: 4.4.1
-  EXPORT_NAME: sunburnt_survivors
   PROJECT_PATH: .
   ITCH_USERNAME: jjszaniszlo
   ITCH_GAME_ID: sunburnt-survivors
@@ -21,23 +20,26 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
+
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
-          mkdir -v -p ~/.config/
-          mv /root/.config/godot ~/.config/godot
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono
+
       - name: Windows Build
         run: |
           mkdir -v -p build/windows
-          EXPORT_DIR="$(readlink -f build)"
-          cd $PROJECT_PATH
-          godot --headless --verbose --export-release "Windows Desktop" "$EXPORT_DIR/windows/$EXPORT_NAME.exe"
+          godot --headless --verbose --export-release "Windows Desktop" --path "${PROJECT_PATH}" --output "build/windows/sunburnt_survivors.exe"
+  
+      - name: Zip Windows Artifacts
+        run: |
+          zip -r sunburnt_survivors_windows.zip build/windows
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows
-          path: build/windows
+          path: sunburnt_survivors_windows.zip 
 
   export-linux:
     name: Linux Export
@@ -49,21 +51,27 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
+
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono
+
       - name: Linux Build
         run: |
           mkdir -v -p build/linux
-          EXPORT_DIR="$(readlink -f build)"
-          cd $PROJECT_PATH
-          godot --headless --verbose --export-release "Linux" "$EXPORT_DIR/linux/$EXPORT_NAME.x86_64"
+          godot --headless --verbose --export-release "Linux" --path "${PROJECT_PATH}" --output "build/linux/sunburnt_survivors.x86_64"
+
+      - name: Zip Linux Artifacts
+        run: |
+          zip -r sunburnt_survivors_linux.zip build/linux
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: linux
-          path: build/linux
+          path: sunburnt_survivors_linux.zip
+
   export-mac:
     name: Mac Export
     runs-on: ubuntu-24.04
@@ -74,21 +82,27 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
+
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono
+
       - name: Mac Build
         run: |
           mkdir -v -p build/macos
-          EXPORT_DIR="$(readlink -f build)"
-          cd $PROJECT_PATH
-          godot --headless --verbose --export-release "macOS" "$EXPORT_DIR/macos/$EXPORT_NAME.zip"
+          godot --headless --verbose --export-release "macOS" --path "${PROJECT_PATH}" --output "build/macos/sunburnt_survivors.zip"
+
+      - name: Zip MacOS Artifacts
+        run: |
+          zip -r sunburnt_survivors_macos.zip build/linux
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: macos
-          path: build/macos/
+          path: sunburnt_survivors_macos.zip
+
   release:
     needs: [ export-linux, export-windows, export-mac ]
     runs-on: ubuntu-24.04
@@ -109,24 +123,24 @@ jobs:
         uses: gittools/actions/gitversion/execute@v0.9.15
         with:
           useConfigFile: true
-          configFilePath: GitVersion.yml
+          configFilePath: GitVersion.yaml
 
       - name: Get branch name
         id: get_branch
         run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
 
       - name: Download Linux artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: linux
 
       - name: Download MacOS artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: macos
 
       - name: Download Windows artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: windows
 
@@ -150,8 +164,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: linux.zip
-          asset_name: ${{ env.EXPORT_NAME }}_linux_x86_64.zip
+          asset_path: sunburnt_survivors_linux.zip
+          asset_name: sunburnt_survivors_linux_x86_64.zip
           asset_content_type: application/zip
 
       - name: Upload MacOS Release Asset
@@ -161,8 +175,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: macos.zip
-          asset_name: ${{ env.EXPORT_NAME }}_macos_universal.zip
+          asset_path: sunburnt_survivors_macos.zip
+          asset_name: sunburnt_survivors_macos_universal.zip
           asset_content_type: application/zip
 
       - name: Upload Windows Release Asset
@@ -172,6 +186,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: windows.zip
-          asset_name: ${{ env.EXPORT_NAME }}_windows_x86_64.zip
+          asset_path: sunburnt_survivors_windows.zip
+          asset_name: sunburnt_survivors_windows_x86_64.zip
           asset_content_type: application/zip
+
