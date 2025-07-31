@@ -109,7 +109,7 @@ jobs:
         uses: gittools/actions/gitversion/execute@v0.9.15
         with:
           useConfigFile: true
-          configFilePath: GitVersion.yml
+          configFilePath: GitVersion.yaml
 
       - name: Get branch name
         id: get_branch
