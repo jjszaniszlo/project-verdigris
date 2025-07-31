@@ -10,11 +10,16 @@ config_version=5
 
 [application]
 
-config/name="verdigris"
+config/name="Sunburnt Survivors"
+config/version="0.1.0-alpha"
 run/main_scene="uid://chgdtxyegh3ld"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 run/max_fps=120
-config/icon="res://Resources/icon.svg"
+boot_splash/fullsize=false
+boot_splash/image="uid://5n1mi58pbf34"
+config/icon="uid://5n1mi58pbf34"
+config/macos_native_icon="res://Resources/Images/icon.icns"
+config/windows_native_icon="res://Resources/Images/icon.ico"
 
 [autoload]
 
