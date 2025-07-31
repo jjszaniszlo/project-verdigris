@@ -1,7 +1,7 @@
 name: "godot-ci export"
 on:
   push:
-    branches: [ "main", "alpha" ]
+    branches: [ "main" ]
 
 env:
   GODOT_VERSION: 4.4.1
@@ -193,3 +193,13 @@ jobs:
           asset_name: sunburnt_survivors_windows_x86_64.zip
           asset_content_type: application/zip
 
+      - name: Upload builds to Itch.io
+        uses: Ayowel/butler-to-itch@v1
+        with:
+          butler_key: ${{ secrets.BUTLER_CREDENTIALS }}
+          itch_user: jjszaniszlo
+          itch_game: sunburnt-survivors
+          version: ${{ env.GitVersion_MajorMinorPatch }}
+          auto_channel: true
+          files: |
+            *.zip
