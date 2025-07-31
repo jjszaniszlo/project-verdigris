@@ -95,7 +95,7 @@ jobs:
 
       - name: Zip MacOS Artifacts
         run: |
-          zip -r sunburnt_survivors_macos.zip build/linux
+          zip -r sunburnt_survivors_macos.zip build/macos
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
